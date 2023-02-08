@@ -5,7 +5,7 @@ build_home="${HOME}/android/floko"
 
 cd ${build_home}/bootable/recovery
 echo ">> [$(date)] Applying the patch to bootable/recovery"
-patch --quiet --force -p1 -i "${path_to_patches}/bootable-recovery.patch"
+git apply -p1 "${path_to_patches}/bootable-recovery.diff"
 git clean -fd
 
 cd ${build_home}/build/make
@@ -40,18 +40,18 @@ git clean -fd
 
 cd ${build_home}/packages/apps/Settings
 echo ">> [$(date)] Applying the patch to packages/apps/Settings"
-patch --quiet --force -p1 -i "${path_to_patches}/packages-apps-Settings.patch"
+git apply -p1 "${path_to_patches}/packages-apps-Settings.diff"
 git clean -fd
 
 cd ${build_home}/packages/apps/SetupWizard
 echo ">> [$(date)] Applying the patch to packages/apps/SetupWizard"
-patch --quiet --force -p1 -i "${path_to_patches}/packages-apps-SetupWizard.patch"
+git apply -p1 "${path_to_patches}/packages-apps-SetupWizard.diff"
 find res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
 git clean -fd
 
 cd ${build_home}/vendor/addons
 echo ">> [$(date)] Applying the patch to vendor/addons"
-patch --quiet --force -p1 -i "${path_to_patches}/vendor-addons.patch"
+git apply -p1 "${path_to_patches}/vendor-addons.diff"
 git clean -fd
 
 cd ${build_home}/vendor/lineage
