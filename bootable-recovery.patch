@@ -1,0 +1,118 @@
+diff --git a/recovery.cpp b/recovery.cpp
+index da0bed23..f9227268 100644
+--- a/recovery.cpp
++++ b/recovery.cpp
+@@ -813,7 +813,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
+   std::string ver = android::base::GetProperty("ro.modversion", "");
+ 
+   std::vector<std::string> title_lines = {
+-    "Version " + android::base::GetProperty("ro.crdroid.build.version", "(unknown)"),
++    "Version " + android::base::GetProperty("ro.floko.build.version", "(unknown)"),
+   };
+   if (android::base::GetBoolProperty("ro.build.ab_update", false)) {
+     std::string slot = android::base::GetProperty("ro.boot.slot_suffix", "");
+diff --git a/recovery_ui/include/recovery_ui/screen_ui.h b/recovery_ui/include/recovery_ui/screen_ui.h
+index 0e7420f6..8fb94949 100644
+--- a/recovery_ui/include/recovery_ui/screen_ui.h
++++ b/recovery_ui/include/recovery_ui/screen_ui.h
+@@ -149,7 +149,7 @@ class TextMenu : public Menu {
+   size_t MenuEnd() const;
+ 
+   // Menu example:
+-  // info:                           Lineage Recovery
++  // info:                           Floko Recovery
+   //                                 ....
+   // help messages:                  Swipe up/down to move
+   //                                 Swipe left/right to select
+diff --git a/recovery_ui/screen_ui.cpp b/recovery_ui/screen_ui.cpp
+index c7929983..3bbfa36f 100644
+--- a/recovery_ui/screen_ui.cpp
++++ b/recovery_ui/screen_ui.cpp
+@@ -574,20 +574,23 @@ void ScreenRecoveryUI::SetColor(UIElement e) const {
+       gr_color(255, 255, 255, 255);
+       break;
+     case UIElement::HEADER:
+-      gr_color(254, 39, 18, 255);
++      gr_color(95, 194, 255, 255);
+       break;
+     case UIElement::MENU:
+       gr_color(0xd8, 0xd8, 0xd8, 255);
+       break;
+     case UIElement::MENU_SEL_BG:
+     case UIElement::SCROLLBAR:
+-      gr_color(254, 39, 18, 255);
++      gr_color(95, 194, 255, 255);
+       break;
+     case UIElement::MENU_SEL_BG_ACTIVE:
+-      gr_color(254, 39, 18, 255);
++      if (fastbootd_logo_enabled_)
++        gr_color(95, 114, 255, 255);
++      else
++        gr_color(95, 194, 255, 255);
+       break;
+     case UIElement::MENU_SEL_FG:
+-      gr_color(0xd8, 0xd8, 0xd8, 255);
++      gr_color(0, 0, 0, 255);
+       break;
+     case UIElement::LOG:
+       gr_color(196, 196, 196, 255);
+diff --git a/res-hdpi/images/fastbootd.png b/res-hdpi/images/fastbootd.png
+index 88a7a1ad..6a0c0144 100644
+Binary files a/res-hdpi/images/fastbootd.png and b/res-hdpi/images/fastbootd.png differ
+diff --git a/res-hdpi/images/ic_back_sel.png b/res-hdpi/images/ic_back_sel.png
+index 4f1e9fa7..8c73e354 100644
+Binary files a/res-hdpi/images/ic_back_sel.png and b/res-hdpi/images/ic_back_sel.png differ
+diff --git a/res-hdpi/images/logo_image.png b/res-hdpi/images/logo_image.png
+index e341c07e..ce945f21 100644
+Binary files a/res-hdpi/images/logo_image.png and b/res-hdpi/images/logo_image.png differ
+diff --git a/res-hdpi/images/logo_image_switch.png b/res-hdpi/images/logo_image_switch.png
+index a6940cb3..458193a9 100644
+Binary files a/res-hdpi/images/logo_image_switch.png and b/res-hdpi/images/logo_image_switch.png differ
+diff --git a/res-mdpi/images/fastbootd.png b/res-mdpi/images/fastbootd.png
+index b1270fed..13702f48 100644
+Binary files a/res-mdpi/images/fastbootd.png and b/res-mdpi/images/fastbootd.png differ
+diff --git a/res-mdpi/images/ic_back_sel.png b/res-mdpi/images/ic_back_sel.png
+index ce755a94..41d6d652 100644
+Binary files a/res-mdpi/images/ic_back_sel.png and b/res-mdpi/images/ic_back_sel.png differ
+diff --git a/res-mdpi/images/logo_image.png b/res-mdpi/images/logo_image.png
+index 12496cb3..f4af5de7 100644
+Binary files a/res-mdpi/images/logo_image.png and b/res-mdpi/images/logo_image.png differ
+diff --git a/res-mdpi/images/logo_image_switch.png b/res-mdpi/images/logo_image_switch.png
+index 2af4ae3f..12449b4b 100644
+Binary files a/res-mdpi/images/logo_image_switch.png and b/res-mdpi/images/logo_image_switch.png differ
+diff --git a/res-xhdpi/images/fastbootd.png b/res-xhdpi/images/fastbootd.png
+index aa2b0b38..f2641de8 100644
+Binary files a/res-xhdpi/images/fastbootd.png and b/res-xhdpi/images/fastbootd.png differ
+diff --git a/res-xhdpi/images/ic_back_sel.png b/res-xhdpi/images/ic_back_sel.png
+index c6640419..642f2e97 100644
+Binary files a/res-xhdpi/images/ic_back_sel.png and b/res-xhdpi/images/ic_back_sel.png differ
+diff --git a/res-xhdpi/images/logo_image.png b/res-xhdpi/images/logo_image.png
+index 524eae62..48b4977a 100644
+Binary files a/res-xhdpi/images/logo_image.png and b/res-xhdpi/images/logo_image.png differ
+diff --git a/res-xhdpi/images/logo_image_switch.png b/res-xhdpi/images/logo_image_switch.png
+index 82362600..94d87f98 100644
+Binary files a/res-xhdpi/images/logo_image_switch.png and b/res-xhdpi/images/logo_image_switch.png differ
+diff --git a/res-xxhdpi/images/fastbootd.png b/res-xxhdpi/images/fastbootd.png
+index 45502df5..5699027a 100644
+Binary files a/res-xxhdpi/images/fastbootd.png and b/res-xxhdpi/images/fastbootd.png differ
+diff --git a/res-xxhdpi/images/ic_back_sel.png b/res-xxhdpi/images/ic_back_sel.png
+index 3322132f..61035798 100644
+Binary files a/res-xxhdpi/images/ic_back_sel.png and b/res-xxhdpi/images/ic_back_sel.png differ
+diff --git a/res-xxhdpi/images/logo_image.png b/res-xxhdpi/images/logo_image.png
+index ef450c51..01f2d2fe 100644
+Binary files a/res-xxhdpi/images/logo_image.png and b/res-xxhdpi/images/logo_image.png differ
+diff --git a/res-xxhdpi/images/logo_image_switch.png b/res-xxhdpi/images/logo_image_switch.png
+index 1ce05bcb..8b7eddbc 100644
+Binary files a/res-xxhdpi/images/logo_image_switch.png and b/res-xxhdpi/images/logo_image_switch.png differ
+diff --git a/res-xxxhdpi/images/fastbootd.png b/res-xxxhdpi/images/fastbootd.png
+index 2f269cb7..bfd95cde 100644
+Binary files a/res-xxxhdpi/images/fastbootd.png and b/res-xxxhdpi/images/fastbootd.png differ
+diff --git a/res-xxxhdpi/images/ic_back_sel.png b/res-xxxhdpi/images/ic_back_sel.png
+index c92c190c..b164e745 100644
+Binary files a/res-xxxhdpi/images/ic_back_sel.png and b/res-xxxhdpi/images/ic_back_sel.png differ
+diff --git a/res-xxxhdpi/images/logo_image.png b/res-xxxhdpi/images/logo_image.png
+index 67c6839d..ba2c23c0 100644
+Binary files a/res-xxxhdpi/images/logo_image.png and b/res-xxxhdpi/images/logo_image.png differ
+diff --git a/res-xxxhdpi/images/logo_image_switch.png b/res-xxxhdpi/images/logo_image_switch.png
+index 25184bc1..ac0c94a3 100644
+Binary files a/res-xxxhdpi/images/logo_image_switch.png and b/res-xxxhdpi/images/logo_image_switch.png differ

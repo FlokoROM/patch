@@ -1,0 +1,522 @@
+diff --git a/res/drawable/ic_netflix.xml b/res/drawable/ic_netflix.xml
+deleted file mode 100644
+index ebbd5818..00000000
+--- a/res/drawable/ic_netflix.xml
++++ /dev/null
+@@ -1,26 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!--
+-     Copyright (C) 2022 crDroid Android Project
+-
+-     Licensed under the Apache License, Version 2.0 (the "License");
+-     you may not use this file except in compliance with the License.
+-     You may obtain a copy of the License at
+-
+-          http://www.apache.org/licenses/LICENSE-2.0
+-
+-     Unless required by applicable law or agreed to in writing, software
+-     distributed under the License is distributed on an "AS IS" BASIS,
+-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-     See the License for the specific language governing permissions and
+-     limitations under the License.
+--->
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-        android:height="24dp"
+-        android:width="24dp"
+-        android:viewportWidth="24"
+-        android:viewportHeight="24"
+-        android:tint="?android:attr/colorControlNormal">
+-    <path
+-        android:fillColor="#FF000000"
+-        android:pathData="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
+-</vector>
+diff --git a/res/values-ja-rJP/cr_strings.xml b/res/values-ja-rJP/cr_strings.xml
+index b8ec9410..3dc3e288 100644
+--- a/res/values-ja-rJP/cr_strings.xml
++++ b/res/values-ja-rJP/cr_strings.xml
+@@ -15,6 +15,14 @@
+      limitations under the License.
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <!-- About FlokoROM -->
++    <string name="about_floko">FlokoROM について</string>
++    <string name="share_floko_title">FlokoROM をシェアする</string>
++    <string name="share_floko_summary">みんなにも FlokoROM について知ってもらいましょう</string>
++    <string name="share_floko_message">#FlokoROM についてもっと知る: https://floko.maud.io/</string>
++    <string name="share_floko_chooser_title">FlokoROM をシェアする...</string>
++    <string name="floko_settings_title">FlokoROM の設定</string>
++    <string name="floko_reset_settings_message">現在のユーザーのほとんどの FlokoROM 設定を初期設定に戻します。続行しますか？</string>
+     <!-- App Title -->
+     <string name="crdroid_settings_title">crDroid の設定</string>
+     <string name="crdroid_settings_summary">高度な設定</string>
+diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
+index b48a9035..fa4365b4 100644
+--- a/res/values/cr_strings.xml
++++ b/res/values/cr_strings.xml
+@@ -17,10 +17,10 @@
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+ 
+     <!-- App Title -->
+-    <string name="crdroid_settings_title">crDroid Settings</string>
++    <string name="floko_settings_title">Floko Settings</string>
+     <string name="crdroid_settings_summary">Open goodness</string>
+     <string name="reset_settings_title">Reset settings</string>
+-    <string name="reset_settings_message">This will reset most crdroid settings to their default values for the current user. Would you like to continue?</string>
++    <string name="floko_reset_settings_message">This will reset most FlokoROM settings to their default values for the current user. Would you like to continue?</string>
+ 
+     <!-- Personalization Categories -->
+     <string name="button_title">Buttons</string>
+@@ -64,8 +64,8 @@
+     <string name="changelog_crdroid_summary">View changes in the ROM installed</string>
+     <string name="changelog_crdroid_error">Unable to load changelog</string>
+ 
+-    <!-- About crDroid -->
+-    <string name="about_crdroid">About crDroid</string>
++    <!-- About FlokoROM -->
++    <string name="about_floko">About FlokoROM</string>
+     <string name="about_device_name">Device</string>
+ 
+     <!-- Share crDroid -->
+@@ -74,6 +74,12 @@
+     <string name="share_message">Check out if #crDroidAndroid is available for your device @ https://crdroid.net/</string>
+     <string name="share_chooser_title">Share crDroid</string>
+ 
++    <!-- Share FlokoROM -->
++    <string name="share_floko_title">Share FlokoROM</string>
++    <string name="share_floko_summary">Let others know about FlokoROM</string>
++    <string name="share_floko_message">Check out what #FlokoROM is / https://floko.maud.io/</string>
++    <string name="share_floko_chooser_title">Share Floko</string>
++
+     <!-- Sites crDroid -->
+     <string name="crdroid_source_title">GitHub</string>
+     <string name="crdroid_source_summary">We love open source, check us out</string>
+@@ -622,6 +628,7 @@
+ 
+     <!-- Device Info screen. crDroid legal. -->
+     <string name="crdroid_license_title">crDroid legal</string>
++    <string name="floko_license_title">FlokoROM legal</string>
+ 
+     <!-- Quick Settings brightness slider -->
+     <string name="qs_show_brightness_slider_title">Brightness slider</string>
+@@ -1146,10 +1153,6 @@
+     <string name="floating_rotation_button_title">Floating rotate button</string>
+     <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
+ 
+-    <!-- Netflix Spoof -->
+-    <string name="netflix_spoof_title">Netflix spoof</string>
+-    <string name="netflix_spoof_summary">Spoof your device as different model for Netflix</string>
+-
+     <!-- Captive portal -->
+     <string name="captive_portal_title">Connectivity check</string>
+     <string name="captive_portal_summary">Determine if the device can connect to the internet, by contacting Google. Also used to detect captive portals.</string>
+@@ -1167,11 +1170,6 @@
+     <string name="wifi_standard_icon_title">WiFi standard</string>
+     <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
+ 
+-    <!-- Google services -->
+-    <string name="gms_enabled_title">Google services</string>
+-    <string name="gms_enabled_summary">Control Google services and core apps</string>
+-    <string name="gms_enabled_footer">Before disabling Google services and core apps, you should disable "Find My Device" and 2-step verification on your Google account. It is strongly recommended to keep this setting enabled else apps dependent on Google components will be affected. If you run into any issues after changing this setting, perform a factory reset.</string>
+-
+     <!-- Lockscreen bottom shortcuts -->
+     <string name="lockscreen_shortcut_category">Bottom shortcuts</string>
+     <string name="lockscreen_shortcut_start_title">Left shortcut</string>
+diff --git a/res/xml/crdroid_settings_about.xml b/res/xml/crdroid_settings_about.xml
+index e51870f5..06e7080e 100644
+--- a/res/xml/crdroid_settings_about.xml
++++ b/res/xml/crdroid_settings_about.xml
+@@ -36,19 +36,13 @@
+         android:title="@string/crdroid_website_title"
+         android:summary="@string/crdroid_website_summary" />
+ 
+-    <!-- crDroid Translate -->
+-    <Preference
+-        android:key="crdroid_translate"
+-        android:icon="@drawable/ic_translate"
+-        android:title="@string/crdroid_translate_title"
+-        android:summary="@string/crdroid_translate_summary" />
+-
+-    <!-- crDroid Share -->
+-    <Preference
++    <!-- Floko Share -->
++    <PreferenceScreen
+         android:key="crdroid_share"
+         android:icon="@drawable/ic_share"
+-        android:title="@string/share_crdroid_title"
+-        android:summary="@string/share_crdroid_summary" />
++        android:title="@string/share_floko_title"
++        android:summary="@string/share_floko_summary"
++        settings:allowDividerAbove="false" />
+ 
+     <!-- crDroid Donate -->
+     <Preference
+@@ -64,37 +58,6 @@
+         android:title="@string/crdroid_source_title"
+         android:summary="@string/crdroid_source_summary" />
+ 
+-    <!-- crDroid Telegram -->
+-    <Preference
+-        android:key="crdroid_telegram"
+-        android:icon="@drawable/ic_telegram"
+-        android:title="@string/crdroid_telegram_title"
+-        android:summary="@string/crdroid_telegram_summary" />
+-
+-    <!-- crDroid Telegram Updates Channel -->
+-    <Preference
+-        android:key="crdroid_telegram_channel"
+-        android:icon="@drawable/ic_telegram_channel"
+-        android:title="@string/crdroid_telegram_channel_title"
+-        android:summary="@string/crdroid_telegram_channel_summary" />
+-
+-    <!-- crDroid sponsor -->
+-    <Preference
+-        android:key="crdroid_sponsor"
+-        android:icon="@drawable/ic_sponsor"
+-        android:title="@string/crdroid_sponsor_title"
+-        android:summary="@string/crdroid_sponsor_summary" />
+-
+-    <!-- crDroid OTA update -->
+-    <Preference
+-        android:key="system_update_settings"
+-        android:title="@string/crdroid_update_title"
+-        android:summary="@string/crdroid_update_summary"
+-        android:icon="@drawable/ic_update"
+-        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
+-        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
+-    </Preference>
+-
+     <!-- crDroid Drill -->
+     <Preference
+         android:key="crdroid_drill"
+diff --git a/res/xml/crdroid_settings_misc.xml b/res/xml/crdroid_settings_misc.xml
+index b31ae615..3b4e951c 100644
+--- a/res/xml/crdroid_settings_misc.xml
++++ b/res/xml/crdroid_settings_misc.xml
+@@ -31,37 +31,6 @@
+             android:targetClass="io.chaldeaprjkt.gamespace.settings.SettingsActivity" />
+     </Preference>
+ 
+-    <!-- Unlock FPS for specific games -->
+-    <com.crdroid.settings.preferences.SystemPropertySwitchPreference
+-        android:key="persist.sys.pixelprops.games"
+-        android:icon="@drawable/ic_backup"
+-        android:title="@string/use_games_spoof_title"
+-        android:summary="@string/use_games_spoof_summary" />
+-
+-    <!-- Unlimited google photos storage -->
+-    <com.crdroid.settings.preferences.SystemPropertySwitchPreference
+-        android:key="persist.sys.pixelprops.gphotos"
+-        android:icon="@drawable/ic_backup"
+-        android:title="@string/use_photos_spoof_title"
+-        android:summary="@string/use_photos_spoof_summary"
+-        android:defaultValue="true" />
+-
+-    <!-- Netflix -->
+-    <com.crdroid.settings.preferences.SystemPropertySwitchPreference
+-        android:key="persist.sys.pixelprops.netflix"
+-        android:icon="@drawable/ic_netflix"
+-        android:title="@string/netflix_spoof_title"
+-        android:summary="@string/netflix_spoof_summary"
+-        android:defaultValue="false" />
+-
+-    <!-- Google services -->
+-    <Preference
+-        android:key="gms_enabled_settings"
+-        android:icon="@drawable/ic_google"
+-        android:title="@string/gms_enabled_title"
+-        android:summary="@string/gms_enabled_summary"
+-        android:fragment="com.crdroid.settings.fragments.misc.GmsSwitch"/>
+-
+     <!-- Parallel space -->
+     <Preference
+         android:key="parallel_space"
+@@ -115,5 +84,4 @@
+             android:targetPackage="org.omnirom.omnijaws"
+             android:targetClass="org.omnirom.omnijaws.SettingsActivity" />
+     </Preference>
+-
+ </PreferenceScreen>
+diff --git a/res/xml/gms_enabled_settings.xml b/res/xml/gms_enabled_settings.xml
+deleted file mode 100644
+index 1d97bd2d..00000000
+--- a/res/xml/gms_enabled_settings.xml
++++ /dev/null
+@@ -1,32 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!--
+-     Copyright (C) 2023 crDroid Android Project
+-
+-     Licensed under the Apache License, Version 2.0 (the "License");
+-     you may not use this file except in compliance with the License.
+-     You may obtain a copy of the License at
+-
+-          http://www.apache.org/licenses/LICENSE-2.0
+-
+-     Unless required by applicable law or agreed to in writing, software
+-     distributed under the License is distributed on an "AS IS" BASIS,
+-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-     See the License for the specific language governing permissions and
+-     limitations under the License.
+--->
+-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+-    android:title="@string/gms_enabled_title">
+-
+-    <com.crdroid.settings.preferences.SecureSettingSwitchPreference
+-        android:key="gms_enabled"
+-        android:title="@string/enable"
+-        android:summary="@string/gms_enabled_summary"
+-        android:defaultValue="true" />
+-
+-    <com.android.settingslib.widget.FooterPreference
+-        android:key="gms_enabled_footer"
+-        android:selectable="false"
+-        settings:searchable="false"
+-        android:dependency="gms_enabled" />
+-</PreferenceScreen>
+diff --git a/src/com/crdroid/settings/crDroidSettingsLayout.java b/src/com/crdroid/settings/crDroidSettingsLayout.java
+index e8a0d02c..e93ffb52 100644
+--- a/src/com/crdroid/settings/crDroidSettingsLayout.java
++++ b/src/com/crdroid/settings/crDroidSettingsLayout.java
+@@ -66,7 +66,7 @@ public class crDroidSettingsLayout extends SettingsPreferenceFragment {
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        getActivity().setTitle(R.string.crdroid_settings_title);
++        getActivity().setTitle(R.string.floko_settings_title);
+     }
+ 
+     @Override
+@@ -111,7 +111,7 @@ public class crDroidSettingsLayout extends SettingsPreferenceFragment {
+     public void showResetAllDialog(Context context) {
+         new AlertDialog.Builder(context)
+                 .setTitle(R.string.reset_settings_title)
+-                .setMessage(R.string.reset_settings_message)
++                .setMessage(R.string.floko_reset_settings_message)
+                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         resetAll(context);
+@@ -204,7 +204,7 @@ public class crDroidSettingsLayout extends SettingsPreferenceFragment {
+             getString(R.string.notifications_title),
+             getString(R.string.sound_title),
+             getString(R.string.misc_title),
+-            getString(R.string.about_crdroid)
++            getString(R.string.about_floko)
+         };
+         return titleString;
+     }
+diff --git a/src/com/crdroid/settings/fragments/About.java b/src/com/crdroid/settings/fragments/About.java
+index 2c0087b1..c9a635d5 100644
+--- a/src/com/crdroid/settings/fragments/About.java
++++ b/src/com/crdroid/settings/fragments/About.java
+@@ -75,26 +75,26 @@ public class About extends SettingsPreferenceFragment {
+     @Override
+     public boolean onPreferenceTreeClick(Preference preference) {
+         if (preference == mDonate) {
+-            launchUrl("https://crdroid.net/donate.php");
++            launchUrl("https://github.com/sponsors/lindwurm");
+         } else if (preference == mSourceUrl) {
+-            launchUrl("https://github.com/crdroidandroid");
++            launchUrl("https://github.com/FlokoROM");
+         } else if (preference == mTelegramUrl) {
+-            launchUrl("https://t.me/crDroidAndroid");
++            launchUrl("https://floko.maud.io");
+         } else if (preference == mShare) {
+             Intent intent = new Intent();
+             intent.setAction(Intent.ACTION_SEND);
+             intent.setType("text/plain");
+             intent.putExtra(Intent.EXTRA_TEXT, String.format(
+-                    getActivity().getString(R.string.share_message), Build.MODEL));
+-            startActivity(Intent.createChooser(intent, getActivity().getString(R.string.share_chooser_title)));
++                    getActivity().getString(R.string.share_floko_message), Build.MODEL));
++            startActivity(Intent.createChooser(intent, getActivity().getString(R.string.share_floko_chooser_title)));
+         } else if (preference == mTranslate) {
+-            launchUrl("https://crdroid.net/translations.php");
++            launchUrl("https://floko.maud.io");
+         } else if (preference == mWebsite) {
+-            launchUrl("https://crdroid.net");
++            launchUrl("https://floko.maud.io");
+         } else if (preference == mTelegramChannelUrl) {
+-            launchUrl("https://t.me/crDroidUpdates");
++            launchUrl("https://floko.maud.io");
+         } else if (preference == mSponsor) {
+-            launchUrl("https://www.scopehosts.com");
++            launchUrl("https://floko.maud.io");
+         }
+ 
+         return super.onPreferenceTreeClick(preference);
+diff --git a/src/com/crdroid/settings/fragments/Miscellaneous.java b/src/com/crdroid/settings/fragments/Miscellaneous.java
+index f360ad93..065c8b38 100644
+--- a/src/com/crdroid/settings/fragments/Miscellaneous.java
++++ b/src/com/crdroid/settings/fragments/Miscellaneous.java
+@@ -32,7 +32,6 @@ import com.android.settings.SettingsPreferenceFragment;
+ import com.android.settings.search.BaseSearchIndexProvider;
+ import com.android.settingslib.search.SearchIndexable;
+ 
+-import com.crdroid.settings.fragments.misc.GmsSwitch;
+ import com.crdroid.settings.fragments.misc.SensorBlock;
+ import com.crdroid.settings.fragments.misc.SmartCharging;
+ 
+@@ -48,9 +47,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+ 
+     private static final String SMART_CHARGING = "smart_charging";
+     private static final String POCKET_JUDGE = "pocket_judge";
+-    private static final String SYS_GAMES_SPOOF = "persist.sys.pixelprops.games";
+-    private static final String SYS_PHOTOS_SPOOF = "persist.sys.pixelprops.gphotos";
+-    private static final String SYS_NETFLIX_SPOOF = "persist.sys.pixelprops.netflix";
+ 
+     private Preference mSmartCharging;
+     private Preference mPocketJudge;
+@@ -75,11 +71,7 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+                 com.android.internal.R.bool.config_pocketModeSupported);
+         if (!mPocketJudgeSupported)
+             prefScreen.removePreference(mPocketJudge);
+-    }
+ 
+-    @Override
+-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+-        return false;
+     }
+ 
+     public static void reset(Context mContext) {
+@@ -90,10 +82,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+                 Settings.System.THREE_FINGER_GESTURE, 0, UserHandle.USER_CURRENT);
+         LineageSettings.System.putIntForUser(resolver,
+                 LineageSettings.System.AUTO_BRIGHTNESS_ONE_SHOT, 0, UserHandle.USER_CURRENT);
+-        SystemProperties.set(SYS_GAMES_SPOOF, "false");
+-        SystemProperties.set(SYS_PHOTOS_SPOOF, "true");
+-        SystemProperties.set(SYS_NETFLIX_SPOOF, "false");
+-        GmsSwitch.reset(mContext);
+         SensorBlock.reset(mContext);
+         SmartCharging.reset(mContext);
+     }
+diff --git a/src/com/crdroid/settings/fragments/misc/GmsSwitch.java b/src/com/crdroid/settings/fragments/misc/GmsSwitch.java
+deleted file mode 100644
+index 623d4dac..00000000
+--- a/src/com/crdroid/settings/fragments/misc/GmsSwitch.java
++++ /dev/null
+@@ -1,62 +0,0 @@
+-/*
+- * Copyright (C) 2023 crDroid Android Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package com.crdroid.settings.fragments.misc;
+-
+-import android.content.Context;
+-import android.content.ContentResolver;
+-import android.content.res.Resources;
+-import android.net.Uri;
+-import android.os.Bundle;
+-import android.os.Handler;
+-import android.os.UserHandle;
+-import android.provider.Settings;
+-
+-import androidx.preference.ListPreference;
+-import androidx.preference.Preference;
+-import androidx.preference.PreferenceScreen;
+-import androidx.preference.Preference.OnPreferenceChangeListener;
+-import androidx.preference.SwitchPreference;
+-
+-import com.android.internal.logging.nano.MetricsProto;
+-import com.android.settings.R;
+-import com.android.settings.SettingsPreferenceFragment;
+-
+-public class GmsSwitch extends SettingsPreferenceFragment {
+-
+-    private static final String TAG = "GmsSwitch";
+-    private static final String GMS_ENABLED_FOOTER = "gms_enabled_footer";
+-
+-    @Override
+-    public void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-
+-        addPreferencesFromResource(R.xml.gms_enabled_settings);
+-
+-        findPreference(GMS_ENABLED_FOOTER).setTitle(R.string.gms_enabled_footer);
+-    }
+-
+-    public static void reset(Context mContext) {
+-        ContentResolver resolver = mContext.getContentResolver();
+-        Settings.Secure.putIntForUser(resolver,
+-                Settings.Secure.GMS_ENABLED, 1, UserHandle.USER_CURRENT);
+-    }
+-
+-    @Override
+-    public int getMetricsCategory() {
+-        return MetricsProto.MetricsEvent.CRDROID_SETTINGS;
+-    }
+-}
+diff --git a/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java b/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java
+deleted file mode 100644
+index 17cef4fb..00000000
+--- a/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java
++++ /dev/null
+@@ -1,56 +0,0 @@
+-/*
+- * Copyright (C) 2022 crDroid Android Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- * http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package com.crdroid.settings.preferences;
+-
+-import android.content.Context;
+-import android.os.SystemProperties;
+-import android.util.AttributeSet;
+-
+-import com.android.settingslib.development.SystemPropPoker;
+-
+-import lineageos.preference.SelfRemovingSwitchPreference;
+-
+-public class SystemPropertySwitchPreference extends SelfRemovingSwitchPreference {
+-
+-    public SystemPropertySwitchPreference(Context context, AttributeSet attrs, int defStyle) {
+-        super(context, attrs, defStyle);
+-    }
+-
+-    public SystemPropertySwitchPreference(Context context, AttributeSet attrs) {
+-        super(context, attrs);
+-    }
+-
+-    public SystemPropertySwitchPreference(Context context) {
+-        super(context);
+-    }
+-
+-    @Override
+-    protected boolean isPersisted() {
+-        return !SystemProperties.get(getKey(), "").isEmpty();
+-    }
+-
+-    @Override
+-    protected void putBoolean(String key, boolean value) {
+-        SystemProperties.set(key, Boolean.toString(value));
+-        SystemPropPoker.getInstance().poke();
+-    }
+-
+-    @Override
+-    protected boolean getBoolean(String key, boolean defaultValue) {
+-        return SystemProperties.getBoolean(key, defaultValue);
+-    }
+-}

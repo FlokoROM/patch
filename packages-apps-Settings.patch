@@ -1,0 +1,69 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 8e82451de3..932e7948eb 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -4567,7 +4567,7 @@
+ 
+         <!-- Begin crDroid Settings -->
+         <activity android:name="Settings$crDroidSettingsLayoutActivity"
+-                android:label="@string/crdroid_settings_title"
++                android:label="@string/floko_settings_title"
+                 android:icon="@drawable/ic_homepage_crdroid"
+                 android:exported="true"
+                 android:taskAffinity="com.android.settings"
+@@ -4579,7 +4579,7 @@
+             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                        android:value="com.crdroid.settings.crDroidSettingsLayout" />
+             <meta-data android:name="com.android.settings.title"
+-                       android:resource="@string/crdroid_settings_title" />
++                       android:resource="@string/floko_settings_title" />
+             <meta-data android:name="com.android.settings.summary"
+                        android:resource="@string/crdroid_settings_summary"/>
+             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+diff --git a/res/drawable-nodpi/crdroid.png b/res/drawable-nodpi/crdroid.png
+deleted file mode 100644
+index e34b045c69..0000000000
+Binary files a/res/drawable-nodpi/crdroid.png and /dev/null differ
+diff --git a/res/drawable-nodpi/floko.png b/res/drawable-nodpi/floko.png
+new file mode 100644
+index 0000000000..69f3585135
+Binary files /dev/null and b/res/drawable-nodpi/floko.png differ
+diff --git a/res/layout/crdroid_logo.xml b/res/layout/crdroid_logo.xml
+index 35ee4d15ce..a9fca02d0f 100644
+--- a/res/layout/crdroid_logo.xml
++++ b/res/layout/crdroid_logo.xml
+@@ -24,7 +24,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+-        android:src="@drawable/crdroid"
++        android:src="@drawable/floko"
+         android:adjustViewBounds="true"
+         android:scaleType="centerInside" />
+ 
+diff --git a/res/xml/about_legal.xml b/res/xml/about_legal.xml
+index df6f2aafaf..07abfe8590 100644
+--- a/res/xml/about_legal.xml
++++ b/res/xml/about_legal.xml
+@@ -38,7 +38,7 @@
+     <!-- LineageOS License information -->
+     <Preference
+         android:key="lineage_license"
+-        android:title="@string/crdroid_license_title"
++        android:title="@string/floko_license_title"
+         settings:controller="com.android.settings.deviceinfo.legal.LineageLicensePreferenceController" />
+ 
+     <!-- Terms and conditions -->
+diff --git a/res/xml/top_level_settings.xml b/res/xml/top_level_settings.xml
+index 672aac2531..a368dc9fe1 100644
+--- a/res/xml/top_level_settings.xml
++++ b/res/xml/top_level_settings.xml
+@@ -180,7 +180,7 @@
+         android:icon="@drawable/ic_settings_cogs"
+         android:key="top_level_crdroid"
+         android:order="9"
+-        android:title="@string/crdroid_settings_title"
++        android:title="@string/floko_settings_title"
+         android:summary="@string/crdroid_settings_summary"
+         settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
+ 

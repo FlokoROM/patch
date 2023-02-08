@@ -1,0 +1,73 @@
+diff --git a/envsetup.sh b/envsetup.sh
+index 03ef64e95f..3480a8a04c 100644
+--- a/envsetup.sh
++++ b/envsetup.sh
+@@ -769,17 +769,17 @@ function lunch()
+ 
+     if ! check_product $product
+     then
+-        # if we can't find a product, try to grab it off the LineageOS GitHub
+-        T=$(gettop)
+-        cd $T > /dev/null
+-        vendor/lineage/build/tools/roomservice.py $product
+-        cd - > /dev/null
+-        check_product $product
+-    else
+-        T=$(gettop)
+-        cd $T > /dev/null
+-        vendor/lineage/build/tools/roomservice.py $product true
+-        cd - > /dev/null
++        # if we can't find a product, stop build and warn
++        echo -e "\033[1;31m    ################################################################\033[m" >&2
++        echo -e "\033[1;31m                                                                    \033[m" >&2
++        echo -e "\033[1;31m                                E R R O R !                         \033[m" >&2
++        echo -e "\033[1;31m                                                                    \033[m" >&2
++        echo -e "\033[1;31m               Don't have a product spec for: '$product'.           \033[m" >&2
++        echo -e "\033[1;31m                   Please put your repo manifest like               \033[m" >&2
++        echo -e "\033[1;31m                  '.repo/local_manifests/codename.xml'              \033[m" >&2
++        echo -e "\033[1;31m                                                                    \033[m" >&2
++        echo -e "\033[1;31m    ################################################################\033[m" >&2
++        return 1
+     fi
+ 
+     TARGET_PRODUCT=$product \
+diff --git a/tools/releasetools/non_ab_ota.py b/tools/releasetools/non_ab_ota.py
+index eb9ea9f375..3cb40181cd 100644
+--- a/tools/releasetools/non_ab_ota.py
++++ b/tools/releasetools/non_ab_ota.py
+@@ -222,19 +222,13 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
+   script.Print("Target: {}".format(target_info.fingerprint))
+ 
+   # Build info
+-  script.Print("                                         ");
+-  script.Print("            _____            _     _     ");
+-  script.Print("           |  __ \          (_)   | |    ");
+-  script.Print("   ___ _ __| |  | |_ __ ___  _  __| |    ");
+-  script.Print("  / __| '__| |  | | '__/ _ \| |/ _\`|    ");
+-  script.Print(" | (__| |  | |__| | | | (_) | | (_| |    ");
+-  script.Print("  \___|_|  |_____/|_|_ \___/|_|\__,_|  _ ");
+-  script.Print("     /\             | |         (_)   | |");
+-  script.Print("    /  \   _ __   __| |_ __ ___  _  __| |");
+-  script.Print("   / /\ \ | '_ \ / _\`| '__/ _ \| |/ _\`|");
+-  script.Print("  / ____ \| | | | (_| | | | (_) | | (_| |");
+-  script.Print(" /_/    \_\_| |_|\__,_|_|  \___/|_|\__,_|");
+-  script.Print("                                         ");
++  script.Print("    ______ _       _           ");
++  script.Print("   |  ____| |     | |          ");
++  script.Print("   | |__  | | ___ | | _____    ");
++  script.Print("   |  __| | |/ _ \| |/ / _ \   ");
++  script.Print("   | |    | | (_) |   < (_) |  ");
++  script.Print("   |_|    |_|\___/|_|\_\___/   ");
++  script.Print("                               ");
+ 
+   buildid = target_info.GetBuildProp("ro.modversion")
+   androidver = target_info.GetBuildProp("ro.build.version.release")
+@@ -244,7 +238,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
+   device = target_info.GetBuildProp("ro.build.product")
+   manufacturer = target_info.GetBuildProp("ro.product.manufacturer")
+   script.Print("***********************************************");
+-  script.Print(" ROM version      : %s"%(buildid));
++  script.Print(" FlokoROM version : %s"%(buildid));
+   script.Print(" Android version  : %s"%(androidver));
+   script.Print(" Security patch   : %s"%(securep));
+   script.Print(" Build date       : %s"%(buildday));

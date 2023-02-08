@@ -1,0 +1,498 @@
+diff --git a/build/core/main_version.mk b/build/core/main_version.mk
+index d0318770..01b2f448 100644
+--- a/build/core/main_version.mk
++++ b/build/core/main_version.mk
+@@ -6,11 +6,11 @@ endif
+ 
+ # crDroid System Version
+ ADDITIONAL_SYSTEM_PROPERTIES += \
+-    ro.crdroid.build.version=$(LINEAGE_VERSION) \
+-    ro.crdroid.display.version=$(LINEAGE_DISPLAY_VERSION) \
+-    ro.crdroid.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
+-    ro.modversion=$(CR_VERSION) \
+-    ro.crdroidlegal.url=https://crdroid.net/legal.php
++    ro.floko.build.version=$(LINEAGE_VERSION) \
++    ro.floko.display.version=$(LINEAGE_DISPLAY_VERSION) \
++    ro.floko.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
++    ro.modversion=$(FLOKO_VERSION) \
++    ro.flokolegal.url=https://wiki.maud.io/floko/legal
+ 
+ # LineageOS Platform SDK Version
+ ADDITIONAL_SYSTEM_PROPERTIES += \
+diff --git a/build/tools/changelog.sh b/build/tools/changelog.sh
+index 888f5a05..ff5b07bd 100755
+--- a/build/tools/changelog.sh
++++ b/build/tools/changelog.sh
+@@ -37,7 +37,7 @@ else
+ 	fi
+ fi
+ 
+-REPO_LIST="$(repo list --path | sed 's|^vendor/crDroidOTA$||')"
++REPO_LIST="$(repo list --path)"
+ for i in $(seq $changelog_days); do
+     After_Date=`date --date="$i days ago" +%m-%d-%Y`
+     k=$(expr $i - 1)
+diff --git a/build/tools/roomservice.py b/build/tools/roomservice.py
+deleted file mode 100755
+index 2b3cdd7b..00000000
+--- a/build/tools/roomservice.py
++++ /dev/null
+@@ -1,311 +0,0 @@
+-#!/usr/bin/env python
+-# Copyright (C) 2012-2013, The CyanogenMod Project
+-# Copyright (C) 2012-2015, SlimRoms Project
+-# Copyright (C) 2016-2017, AOSiP
+-# Copyright (C) 2022, crDroid Android
+-#
+-# Licensed under the Apache License, Version 2.0 (the "License");
+-# you may not use this file except in compliance with the License.
+-# You may obtain a copy of the License at
+-#
+-#      http://www.apache.org/licenses/LICENSE-2.0
+-#
+-# Unless required by applicable law or agreed to in writing, software
+-# distributed under the License is distributed on an "AS IS" BASIS,
+-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-# See the License for the specific language governing permissions and
+-# limitations under the License.
+-
+-from __future__ import print_function
+-
+-import base64
+-import json
+-import netrc
+-import os
+-import sys
+-
+-from xml.etree import ElementTree
+-
+-try:
+-    # For python3
+-    import urllib.error
+-    import urllib.parse
+-    import urllib.request
+-except ImportError:
+-    # For python2
+-    import imp
+-    import urllib2
+-    import urlparse
+-    urllib = imp.new_module('urllib')
+-    urllib.error = urllib2
+-    urllib.parse = urlparse
+-    urllib.request = urllib2
+-
+-DEBUG = False
+-
+-custom_local_manifest = ".repo/local_manifests/roomservice.xml"
+-custom_default_revision =  "13.0"
+-custom_dependencies = "crdroid.dependencies"
+-org_manifest = "crdroidandroid"  # leave empty if org is provided in manifest
+-org_display = "crDroid Android"  # needed for displaying
+-
+-github_auth = None
+-
+-
+-local_manifests = '.repo/local_manifests'
+-if not os.path.exists(local_manifests):
+-    os.makedirs(local_manifests)
+-
+-
+-def debug(*args, **kwargs):
+-    if DEBUG:
+-        print(*args, **kwargs)
+-
+-
+-def add_auth(g_req):
+-    global github_auth
+-    if github_auth is None:
+-        try:
+-            auth = netrc.netrc().authenticators("api.github.com")
+-        except (netrc.NetrcParseError, IOError):
+-            auth = None
+-        if auth:
+-            github_auth = base64.b64encode(
+-                ('%s:%s' % (auth[0], auth[2])).encode()
+-            )
+-        else:
+-            github_auth = ""
+-    if github_auth:
+-        g_req.add_header("Authorization", "Basic %s" % github_auth)
+-
+-
+-def indent(elem, level=0):
+-    # in-place prettyprint formatter
+-    i = "\n" + "  " * level
+-    if len(elem):
+-        if not elem.text or not elem.text.strip():
+-            elem.text = i + "  "
+-        if not elem.tail or not elem.tail.strip():
+-            elem.tail = i
+-        for elem in elem:
+-            indent(elem, level+1)
+-        if not elem.tail or not elem.tail.strip():
+-            elem.tail = i
+-    else:
+-        if level and (not elem.tail or not elem.tail.strip()):
+-            elem.tail = i
+-
+-def load_manifest(manifest):
+-    try:
+-        man = ElementTree.parse(manifest).getroot()
+-    except (IOError, ElementTree.ParseError):
+-        man = ElementTree.Element("manifest")
+-    return man
+-
+-def get_from_manifest(device_name):
+-    if os.path.exists(custom_local_manifest):
+-        man = load_manifest(custom_local_manifest)
+-        for local_path in man.findall("project"):
+-            lp = local_path.get("path").strip('/')
+-            if lp.startswith("device/") and lp.endswith("/" + device_name):
+-                return lp
+-    return None
+-
+-
+-def is_in_manifest(project_path):
+-    man = load_manifest(custom_local_manifest)
+-    for local_path in man.findall("project"):
+-        if local_path.get("path") == project_path:
+-            return True
+-    return False
+-
+-
+-def add_to_manifest(repos, fallback_branch=None):
+-    lm = load_manifest(custom_local_manifest)
+-
+-    for repo in repos:
+-        repo_name = repo['repository']
+-        repo_path = repo['target_path']
+-        if 'branch' in repo:
+-            repo_branch=repo['branch']
+-        else:
+-            repo_branch=custom_default_revision
+-        if 'remote' in repo:
+-            repo_remote=repo['remote']
+-        elif "/" not in repo_name:
+-            repo_remote=org_manifest
+-        elif "/" in repo_name:
+-            repo_remote="github"
+-
+-        if is_in_manifest(repo_path):
+-            print('already exists: %s' % repo_path)
+-            continue
+-
+-        print('Adding dependency:\nRepository: %s\nBranch: %s\nRemote: %s\nPath: %s\n' % (repo_name, repo_branch,repo_remote, repo_path))
+-
+-        project = ElementTree.Element(
+-            "project",
+-            attrib={"path": repo_path,
+-                    "remote": repo_remote,
+-                    "name": "%s" % repo_name}
+-        )
+-
+-        if repo_branch is not None:
+-            project.set('revision', repo_branch)
+-        elif fallback_branch:
+-            print("Using branch %s for %s" %
+-                  (fallback_branch, repo_name))
+-            project.set('revision', fallback_branch)
+-        else:
+-            print("Using default branch for %s" % repo_name)
+-        lm.append(project)
+-
+-    indent(lm)
+-    raw_xml = "\n".join(('<?xml version="1.0" encoding="UTF-8"?>',
+-                         ElementTree.tostring(lm).decode()))
+-
+-    f = open(custom_local_manifest, 'w')
+-    f.write(raw_xml)
+-    f.close()
+-
+-_fetch_dep_cache = []
+-
+-
+-def fetch_dependencies(repo_path, fallback_branch=None):
+-    global _fetch_dep_cache
+-    if repo_path in _fetch_dep_cache:
+-        return
+-    _fetch_dep_cache.append(repo_path)
+-
+-    print('Looking for dependencies')
+-
+-    dep_p = '/'.join((repo_path, custom_dependencies))
+-    if os.path.exists(dep_p):
+-        with open(dep_p) as dep_f:
+-            dependencies = json.load(dep_f)
+-    else:
+-        dependencies = {}
+-        print('%s has no additional dependencies.' % repo_path)
+-
+-    fetch_list = []
+-    syncable_repos = []
+-
+-    for dependency in dependencies:
+-        if not is_in_manifest(dependency['target_path']):
+-            if not dependency.get('branch'):
+-                dependency['branch'] = custom_default_revision
+-
+-            fetch_list.append(dependency)
+-            syncable_repos.append(dependency['target_path'])
+-        else:
+-            print("Dependency already present in manifest: %s => %s" % (dependency['repository'], dependency['target_path']))
+-
+-    if fetch_list:
+-        print('Adding dependencies to manifest\n')
+-        add_to_manifest(fetch_list, fallback_branch)
+-
+-    if syncable_repos:
+-        print('Syncing dependencies')
+-        os.system('repo sync --force-sync --no-tags --current-branch --no-clone-bundle %s' % ' '.join(syncable_repos))
+-
+-    for deprepo in syncable_repos:
+-        fetch_dependencies(deprepo)
+-
+-
+-def has_branch(branches, revision):
+-    return revision in (branch['name'] for branch in branches)
+-
+-
+-def detect_revision(repo):
+-    """
+-    returns None if using the default revision, else return
+-    the branch name if using a different revision
+-    """
+-    print("Checking branch info")
+-    githubreq = urllib.request.Request(
+-        repo['branches_url'].replace('{/branch}', ''))
+-    add_auth(githubreq)
+-    result = json.loads(urllib.request.urlopen(githubreq).read().decode())
+-
+-    print("Calculated revision: %s" % custom_default_revision)
+-
+-    if has_branch(result, custom_default_revision):
+-        return custom_default_revision
+-
+-    print("Branch %s not found" % custom_default_revision)
+-    sys.exit()
+-
+-
+-def main():
+-    global DEBUG
+-    try:
+-        depsonly = bool(sys.argv[2] in ['true', 1])
+-    except IndexError:
+-        depsonly = False
+-
+-    if os.getenv('ROOMSERVICE_DEBUG'):
+-        DEBUG = True
+-
+-    product = sys.argv[1]
+-    device = product[product.find("_") + 1:] or product
+-
+-    if depsonly:
+-        repo_path = get_from_manifest(device)
+-        if repo_path:
+-            fetch_dependencies(repo_path)
+-        else:
+-            print("Trying dependencies-only mode on a "
+-                  "non-existing device tree?")
+-        sys.exit()
+-
+-    print("Device {0} not found. Attempting to retrieve device repository from "
+-          "{1} Github (http://github.com/{2}).".format(device, org_display, org_manifest))
+-
+-    githubreq = urllib.request.Request(
+-        "https://api.github.com/search/repositories?"
+-        "q={0}+user:{1}+in:name+fork:true".format(device, org_manifest))
+-    add_auth(githubreq)
+-
+-    repositories = []
+-
+-    try:
+-        result = json.loads(urllib.request.urlopen(githubreq).read().decode())
+-    except urllib.error.URLError:
+-        print("Failed to search GitHub")
+-        sys.exit(1)
+-    except ValueError:
+-        print("Failed to parse return data from GitHub")
+-        sys.exit(1)
+-    for res in result.get('items', []):
+-        repositories.append(res)
+-
+-    for repository in repositories:
+-        repo_name = repository['name']
+-
+-        if not (repo_name.startswith("android_device_") and
+-                repo_name.endswith("_" + device)):
+-            continue
+-        print("Found repository: %s" % repository['name'])
+-
+-        fallback_branch = detect_revision(repository)
+-        manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
+-        repo_path = "device/%s/%s" % (manufacturer, device)
+-        adding = [{'repository': "crdroidandroid/" + repo_name, 'target_path': repo_path}]
+-
+-        add_to_manifest(adding, fallback_branch)
+-
+-        print("Syncing repository to retrieve project.")
+-        os.system('repo sync --force-sync --no-tags --current-branch --no-clone-bundle %s' % repo_path)
+-        print("Repository synced!")
+-
+-        fetch_dependencies(repo_path, fallback_branch)
+-        print("Done")
+-        sys.exit()
+-
+-    print("Repository for %s not found in the %s Github repository list."
+-          % (device, org_display))
+-    print("If this is in error, you may need to manually add it to your "
+-          "%s" % custom_local_manifest)
+-
+-if __name__ == "__main__":
+-    main()
+diff --git a/config/common.mk b/config/common.mk
+index c566fe1a..24412448 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -4,7 +4,7 @@ $(call inherit-product-if-exists, vendor/lineage/config/crdroid.mk)
+ $(call inherit-product-if-exists, vendor/addons/config.mk)
+ $(call inherit-product-if-exists, external/faceunlock/config.mk)
+ 
+-PRODUCT_BRAND ?= crDroidAndroid
++PRODUCT_BRAND ?= Floko
+ 
+ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+ 
+@@ -16,7 +16,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+     ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+ endif
+ 
+-ifeq ($(TARGET_BUILD_VARIANT),eng)
++ifneq ($(TARGET_BUILD_VARIANT),user)
+ # Disable ADB authentication
+ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
+ else
+@@ -122,8 +122,7 @@ PRODUCT_PACKAGES += \
+ PRODUCT_PACKAGES += \
+     LineageParts \
+     LineageSettingsProvider \
+-    LineageSetupWizard \
+-    Updater
++    LineageSetupWizard
+ 
+ PRODUCT_COPY_FILES += \
+     vendor/lineage/prebuilt/common/etc/init/init.lineage-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.lineage-updater.rc
+@@ -226,7 +225,5 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
+ 
+ include vendor/lineage/config/version.mk
+ 
+--include vendor/lineage-priv/keys/keys.mk
+-
+ -include $(WORKSPACE)/build_env/image-auto-bits.mk
+ -include vendor/lineage/config/partner_gms.mk
+diff --git a/config/crdroid.mk b/config/crdroid.mk
+index 21324451..662e2d72 100644
+--- a/config/crdroid.mk
++++ b/config/crdroid.mk
+@@ -14,7 +14,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+     ro.setupwizard.esim_cid_ignore=00000001 \
+     ro.setupwizard.rotation_locked=true \
+     setupwizard.feature.baseline_setupwizard_enabled=true \
+-    setupwizard.feature.day_night_mode_enabled=true \
++    setupwizard.feature.day_night_mode_enabled=false \
+     setupwizard.feature.lifecycle_refactoring=true \
+     setupwizard.feature.notification_refactoring=true \
+     setupwizard.feature.portal_notification=true \
+diff --git a/config/version.mk b/config/version.mk
+index 2788afa8..78cd3d77 100644
+--- a/config/version.mk
++++ b/config/version.mk
+@@ -1,11 +1,11 @@
+ PRODUCT_VERSION_MAJOR = 13
+ PRODUCT_VERSION_MINOR = 0
+ 
+-# Increase CR Version with each major release.
+-CR_VERSION := 9.1
++FLOKO_VERSON := 7.0
++CR_VERSION := $(FLOKO_VERSION)
+ 
+ # Internal version
+-LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
++LINEAGE_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)-$(shell date -u +%Y%m%d)
+ 
+ # Display version
+-LINEAGE_DISPLAY_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(LINEAGE_BUILD)-v$(CR_VERSION)
++LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
+diff --git a/prebuilt/common/bin/backuptool.sh b/prebuilt/common/bin/backuptool.sh
+index 9c3dbbbe..9b86b623 100755
+--- a/prebuilt/common/bin/backuptool.sh
++++ b/prebuilt/common/bin/backuptool.sh
+@@ -47,7 +47,7 @@ if [ ! -r $S/build.prop ]; then
+   echo "Backup/restore is not possible. Partition is probably empty"
+   return 1
+ fi
+-if ! grep -q "^ro.crdroid.version=$V.*" $S/build.prop; then
++if ! grep -q "^ro.floko.version=$V.*" $S/build.prop; then
+   echo "Backup/restore is not possible. Incompatible ROM version: $V"
+   return 2
+ fi
+diff --git a/prebuilt/common/bin/backuptool_ab.sh b/prebuilt/common/bin/backuptool_ab.sh
+index 16ceab39..bb3f894a 100755
+--- a/prebuilt/common/bin/backuptool_ab.sh
++++ b/prebuilt/common/bin/backuptool_ab.sh
+@@ -56,7 +56,7 @@ if [ ! -r /system/build.prop ]; then
+   echo "Backup/restore is not possible. Partition is probably empty"
+   return 1
+ fi
+-if ! grep -q "^ro.crdroid.version=$V.*" /system/build.prop; then
++if ! grep -q "^ro.floko.version=$V.*" /system/build.prop; then
+   echo "Backup/restore is not possible. Incompatible ROM version: $V"
+   return 2
+ fi
+diff --git a/prebuilt/common/etc/apns-conf.xml b/prebuilt/common/etc/apns-conf.xml
+index bb1d34bb..ec5017d0 100644
+--- a/prebuilt/common/etc/apns-conf.xml
++++ b/prebuilt/common/etc/apns-conf.xml
+@@ -2892,6 +2892,9 @@
+   <apn carrier="NifMo LTE" mcc="440" mnc="10" apn="mda.nifty.com" user="mda@nifty" password="nifty" authtype="3" type="default,supl" />
+   <apn carrier="OCN 3G" mcc="440" mnc="10" apn="3g-d-2.ocn.ne.jp" user="mobileid@ocn" password="mobile" authtype="2" type="default,supl" />
+   <apn carrier="OCN LTE" mcc="440" mnc="10" apn="lte-d.ocn.ne.jp" user="mobileid@ocn" password="mobile" authtype="2" type="default,supl" />
++  <apn carrier="OCN LTE (新プラン)" mcc="440" mnc="10" apn="lte.ocn.ne.jp" user="mobileid@ocn" password="mobile" authtype="2" type="default,supl" />
++  <apn carrier="LINE MOBILE" mcc="440" mnc="10" apn="line.me" user="line@line" password="line" authtype="3" type="default,supl" protocol="IPV4" />
++  <apn carrier="LINE MOBILE（ベーシックプラン）" mcc="440" mnc="10" apn="linemobile.jp" user="line@line" password="line" authtype="3" type="default,supl" protocol="IPV4" />
+   <apn carrier="So-net" mcc="440" mnc="10" apn="so-net.jp" user="nuro" password="nuro" authtype="2" type="default,supl" />
+   <apn carrier="U-mobile" mcc="440" mnc="10" apn="umobile.jp" user="umobile@umobile.jp" password="umobile" authtype="3" type="default,supl" />
+   <apn carrier="U-mobile Max" mcc="440" mnc="10" apn="dm.jplat.net" user="umobile@umobile.jp" password="umobile" authtype="3" type="default,supl" />
+@@ -2920,6 +2923,7 @@
+   <apn carrier="楽天モバイル" mcc="440" mnc="10" apn="rmobile.jp" user="rm" password="0000" authtype="3" type="default,supl" />
+   <apn carrier="楽天モバイル" mcc="440" mnc="10" apn="vdm.jp" user="rakuten@vdm" password="vrkt" authtype="3" type="default,supl" />
+   <apn carrier="IMS" mcc="440" mnc="10" apn="ims" type="ims" protocol="IPV6" />
++  <apn carrier="楽天モバイル" mcc="440" mnc="11" apn="rakuten.jp" type="default,supl" protocol="IPV4V6" roaming_protocol="IPV4V6" />
+   <apn carrier="Y!mobile" mcc="440" mnc="20" apn="plus.acs.jp" user="ym" password="ym" mmsc="http://mms-s" mmsproxy="andmms.plusacs.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
+   <apn carrier="andoworld" mcc="440" mnc="20" apn="andoworld.softbank.ne.jp" mmsc="http://mms/" mmsproxy="andmms.softbank.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
+   <apn carrier="fourgsmartphone" mcc="440" mnc="20" apn="fourgsmartphone" user="" password="" mmsc="http://mms/" mmsproxy="andmms.softbank.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
+@@ -2932,8 +2936,15 @@
+   <apn carrier="smile.world" mcc="440" mnc="20" apn="smile.world" user="dna1trop" password="so2t3k3m2a" mmsc="http://mms/" mmsproxy="smilemms.softbank.ne.jp" mmsport="8080" authtype="1" type="default,supl,mms" />
+   <apn carrier="IMS" mcc="440" mnc="20" apn="IMS" type="ims" protocol="IPV6" />
+   <apn carrier="U-mobile Super" mcc="440" mnc="20" apn="plus.acs.jp" user="ym" password="ym" authtype="2" type="default,supl" />
++  <apn carrier="LINE MOBILE (Softbank)" mcc="440" mnc="20" apn="line.me" user="line@line" password="line" authtype="3" type="default,supl" protocol="IPV4" />
+   <apn carrier="LTE NET" mcc="440" mnc="50" apn="uno.au-net.ne.jp" user="685840734641020@uno.au-net.ne.jp" password="KpyrR6BP" authtype="2" type="default,mms,supl,hipri" protocol="IPV4V6" roaming_protocol="IP" />
+   <apn carrier="LTE NET for DATA" mcc="440" mnc="50" apn="au.au-net.ne.jp" user="user@au.au-net.ne.jp" password="au" authtype="2" type="default,mms,supl,hipri" protocol="IPV4V6" roaming_protocol="IP" />
++  <apn carrier="KDDI IA" mcc="440" mnc="51" apn="" type="ia" protocol="IPV4V6" roaming_protocol="IP" />
++  <apn carrier="KDDI IMS" mcc="440" mnc="51" apn="ims" type="ims" protocol="IPV4V6" />
++  <apn carrier="LTE NET" mcc="440" mnc="51" apn="uno.au-net.ne.jp" user="685840734641020@uno.au-net.ne.jp" password="KpyrR6BP" authtype="2" type="default,mms,supl,hipri" protocol="IPV4V6" roaming_protocol="IP" />
++  <apn carrier="LTE NET for DATA" mcc="440" mnc="51" apn="au.au-net.ne.jp" user="user@au.au-net.ne.jp" password="au" authtype="2" type="default,mms,supl,hipri" protocol="IPV4V6" roaming_protocol="IP" />
++  <apn carrier="LINE MOBILE (au)" mcc="440" mnc="51" apn="line.me" user="line@line" password="line" authtype="3" type="default,supl" protocol="IPV4" />
++  <apn carrier="povo2.0" mcc="440" mnc="51" apn="povo.jp" user="user@povo.jp" password="povo" authtype="2" type="default,mms,supl,dun,hipri" protocol="IPV4V6" />
+   <apn carrier="UQ mobile" mcc="440" mnc="50" apn="uqmobile.jp" user="uq@uqmobile.jp" password="uq" mmsc="http://mms.ezweb.ne.jp/MMS" mmsport="80" authtype="2" type="default,supl,hipri,dun" />
+   <apn carrier="mineo A" mcc="440" mnc="50" apn="mineo.jp" user="mineo@k-opti.com" password="mineo" authtype="2" type="default,supl,hipri" />
+   <apn carrier="SKT IA" mcc="450" mnc="05" apn="" type="ia" protocol="IPV4V6" roaming_protocol="IP" />
+diff --git a/prebuilt/common/etc/init/init.lineage-updater.rc b/prebuilt/common/etc/init/init.lineage-updater.rc
+index 4307e185..9d2cd5ce 100644
+--- a/prebuilt/common/etc/init/init.lineage-updater.rc
++++ b/prebuilt/common/etc/init/init.lineage-updater.rc
+@@ -1,4 +1,4 @@
+ on post-fs-data
+     # Create an additional OTA package directory that unlike /data/ota_package
+     # will not be touched by GmsCore.
+-    mkdir /data/crdroid_updates 0770 system cache encryption=Require
++    mkdir /data/floko_updates 0770 system cache encryption=Require
