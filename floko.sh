@@ -22,6 +22,8 @@ cd ${build_home}/frameworks/base
 echo ">> [$(date)] Applying the patch to frameworks/base"
 patch --quiet --force -p1 -i "${path_to_patches}/frameworks-base.patch"
 git clean -fd
+# This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
+git rm core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 
 cd ${build_home}/lineage-sdk
 echo ">> [$(date)] Applying the patch to lineage-sdk"

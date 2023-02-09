@@ -2,9 +2,11 @@
 
 ## Usage
 
-普通に [crDroidAndroid/android](https://github.com/crdroidandroid/android/tree/13.0) を引っ張ってきたら、後は `floko.sh` の通りにすればパッチが当たります。
+- 普通に [crDroidAndroid/android](https://github.com/crdroidandroid/android/tree/13.0) を引っ張ってきます
+- `remove.xml` を `.repo/local_manifests` 以下にコピーしてください
+- 後は `floko.sh` を適切に実行するとパッチが当たります
 
-ロゴ画像を含むリポジトリについてのみ `patch` ではなく `git diff/apply` でやっていますが、後者に統一しても良い気はします。
+ロゴ画像などのバイナリを含むリポジトリについてのみ `patch` ではなく `git diff/apply` でやっていますが、後者に統一しても良い気はします。
 
 ## License
 
