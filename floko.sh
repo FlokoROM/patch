@@ -25,6 +25,7 @@ git clean -fd
 
 cd ${build_home}/lineage-sdk
 echo ">> [$(date)] Applying the patch to lineage-sdk"
+patch --quiet --force -p1 -i "${path_to_patches}/lineage-sdk.patch"
 find lineage/res/res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
 git clean -fd
 
@@ -35,6 +36,7 @@ git clean -fd
 
 cd ${build_home}/packages/apps/LineageParts
 echo ">> [$(date)] Applying the patch to packages/apps/LineageParts"
+patch --quiet --force -p1 -i "${path_to_patches}/packages-apps-LineageParts.patch"
 find res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
 git clean -fd
 

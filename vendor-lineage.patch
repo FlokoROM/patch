@@ -412,7 +412,7 @@ index 2788afa8..78cd3d77 100644
  
 -# Increase CR Version with each major release.
 -CR_VERSION := 9.1
-+FLOKO_VERSON := 7.0
++FLOKO_VERSION := 7.0
 +CR_VERSION := $(FLOKO_VERSION)
  
  # Internal version

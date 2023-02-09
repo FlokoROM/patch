@@ -1,0 +1,17 @@
+diff --git a/sdk/src/java/lineageos/os/Build.java b/sdk/src/java/lineageos/os/Build.java
+index bd738db9..13b2668f 100644
+--- a/sdk/src/java/lineageos/os/Build.java
++++ b/sdk/src/java/lineageos/os/Build.java
+@@ -28,10 +28,10 @@ public class Build {
+     public static final String UNKNOWN = "unknown";
+ 
+     /** A build ID utilized to distinguish lineageos versions */
+-    public static final String CRDROID_VERSION = getString("ro.crdroid.version");
++    public static final String FLOKO_VERSION = getString("ro.floko.version");
+ 
+     /** A build ID string meant for displaying to the user */
+-    public static final String CRDROID_DISPLAY_VERSION = getString("ro.crdroid.display.version");
++    public static final String FLOKO_DISPLAY_VERSION = getString("ro.floko.display.version");
+ 
+     private static final SparseArray<String> sdkMap;
+     static

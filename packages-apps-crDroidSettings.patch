@@ -346,7 +346,7 @@ index 2c0087b1..c9a635d5 100644
  
          return super.onPreferenceTreeClick(preference);
 diff --git a/src/com/crdroid/settings/fragments/Miscellaneous.java b/src/com/crdroid/settings/fragments/Miscellaneous.java
-index f360ad93..065c8b38 100644
+index f360ad93..eda83742 100644
 --- a/src/com/crdroid/settings/fragments/Miscellaneous.java
 +++ b/src/com/crdroid/settings/fragments/Miscellaneous.java
 @@ -32,7 +32,6 @@ import com.android.settings.SettingsPreferenceFragment;
@@ -367,19 +367,7 @@ index f360ad93..065c8b38 100644
  
      private Preference mSmartCharging;
      private Preference mPocketJudge;
-@@ -75,11 +71,7 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
-                 com.android.internal.R.bool.config_pocketModeSupported);
-         if (!mPocketJudgeSupported)
-             prefScreen.removePreference(mPocketJudge);
--    }
- 
--    @Override
--    public boolean onPreferenceChange(Preference preference, Object newValue) {
--        return false;
-     }
- 
-     public static void reset(Context mContext) {
-@@ -90,10 +82,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+@@ -90,10 +86,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
                  Settings.System.THREE_FINGER_GESTURE, 0, UserHandle.USER_CURRENT);
          LineageSettings.System.putIntForUser(resolver,
                  LineageSettings.System.AUTO_BRIGHTNESS_ONE_SHOT, 0, UserHandle.USER_CURRENT);
