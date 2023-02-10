@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 path_to_patches="$(pwd)"
 build_home="${HOME}/android/floko"
