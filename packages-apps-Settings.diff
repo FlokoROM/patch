@@ -2967,6 +2967,31 @@ index 1ae637b9d8..0000000000
 -        mToken = token;
 -    }
 -}
+diff --git a/src/com/android/settings/deviceinfo/firmwareversion/AboutDeviceNamePreferenceController.java b/src/com/android/settings/deviceinfo/firmwareversion/AboutDeviceNamePreferenceController.java
+index 688c29af81..72ed3c698f 100644
+--- a/src/com/android/settings/deviceinfo/firmwareversion/AboutDeviceNamePreferenceController.java
++++ b/src/com/android/settings/deviceinfo/firmwareversion/AboutDeviceNamePreferenceController.java
+@@ -53,6 +53,6 @@ public class AboutDeviceNamePreferenceController extends BasePreferenceControlle
+         String deviceCodename = SystemProperties.get(KEY_DEVICE_NAME_PROP,
+                 mContext.getString(R.string.device_info_default));
+         String deviceModel = Build.MODEL;
+-        return deviceBrand + " " + deviceModel + " | " + deviceCodename;
++        return deviceBrand + " | " + deviceModel + " | " + deviceCodename;
+     }
+ }
+diff --git a/src/com/android/settings/deviceinfo/firmwareversion/LineageVersionDetailPreferenceController.java b/src/com/android/settings/deviceinfo/firmwareversion/LineageVersionDetailPreferenceController.java
+index 0e9175d8d2..59b0e29aab 100644
+--- a/src/com/android/settings/deviceinfo/firmwareversion/LineageVersionDetailPreferenceController.java
++++ b/src/com/android/settings/deviceinfo/firmwareversion/LineageVersionDetailPreferenceController.java
+@@ -28,7 +28,7 @@ public class LineageVersionDetailPreferenceController extends BasePreferenceCont
+ 
+     private static final String TAG = "lineageVersionDialogCtrl";
+ 
+-    private static final String KEY_LINEAGE_VERSION_PROP = "ro.modversion";
++    private static final String KEY_LINEAGE_VERSION_PROP = "ro.floko.build.version";
+ 
+     public LineageVersionDetailPreferenceController(Context context, String key) {
+         super(context, key);
 diff --git a/src/com/android/settings/homepage/contextualcards/FaceReEnrollDialog.java b/src/com/android/settings/homepage/contextualcards/FaceReEnrollDialog.java
 index f558d70540..a8239241bf 100644
 --- a/src/com/android/settings/homepage/contextualcards/FaceReEnrollDialog.java
