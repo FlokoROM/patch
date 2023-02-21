@@ -1,5 +1,5 @@
 diff --git a/envsetup.sh b/envsetup.sh
-index 03ef64e95f..3480a8a04c 100644
+index 03ef64e95f..b189c50772 100644
 --- a/envsetup.sh
 +++ b/envsetup.sh
 @@ -769,17 +769,17 @@ function lunch()
@@ -31,6 +31,29 @@ index 03ef64e95f..3480a8a04c 100644
      fi
  
      TARGET_PRODUCT=$product \
+@@ -2002,22 +2002,6 @@ validate_current_shell
+ source_vendorsetup
+ addcompletions
+ 
+-# check and set ccache path on envsetup
+-if [ -z ${CCACHE_EXEC} ]; then
+-    ccache_path=$(which ccache)
+-    if [ ! -z "$ccache_path" ]; then
+-        export USE_CCACHE=1
+-        export CCACHE_EXEC="$ccache_path"
+-        if [ -z ${CCACHE_DIR} ]; then
+-            export CCACHE_DIR=${HOME}/.ccache
+-        fi
+-        $ccache_path -o compression=true
+-        echo -e "ccache enabled and CCACHE_EXEC has been set to : $ccache_path"
+-    else
+-        echo -e "ccache not found installed!"
+-    fi
+-fi
+-
+ export ANDROID_BUILD_TOP=$(gettop)
+ 
+ . $ANDROID_BUILD_TOP/vendor/lineage/build/envsetup.sh
 diff --git a/tools/releasetools/non_ab_ota.py b/tools/releasetools/non_ab_ota.py
 index eb9ea9f375..3cb40181cd 100644
 --- a/tools/releasetools/non_ab_ota.py
