@@ -20,6 +20,7 @@ cd ${build_home}/frameworks/base
 echo ">> [$(date)] Applying the patch to frameworks/base"
 patch --quiet --force -p1 -i "${path_to_patches}/frameworks-base.patch"
 # This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
+echo ">> [$(date)] Removing PixelPropsUtils.java"
 git rm core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 
 cd ${build_home}/lineage-sdk
@@ -52,3 +53,6 @@ git apply -p1 "${path_to_patches}/vendor-addons.diff"
 cd ${build_home}/vendor/lineage
 echo ">> [$(date)] Applying the patch to vendor/lineage"
 patch --quiet --force -p1 -i "${path_to_patches}/vendor-lineage.patch"
+# This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
+echo ">> [$(date)] Removing version.mk"
+git rm config/version.mk

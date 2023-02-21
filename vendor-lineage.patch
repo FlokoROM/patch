@@ -350,7 +350,7 @@ index 2b3cdd7b..00000000
 -if __name__ == "__main__":
 -    main()
 diff --git a/config/common.mk b/config/common.mk
-index c566fe1a..a2342410 100644
+index c566fe1a..f015c7e1 100644
 --- a/config/common.mk
 +++ b/config/common.mk
 @@ -2,9 +2,8 @@
@@ -383,47 +383,72 @@ index c566fe1a..a2342410 100644
  
  PRODUCT_COPY_FILES += \
      vendor/lineage/prebuilt/common/etc/init/init.lineage-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.lineage-updater.rc
-@@ -226,7 +224,5 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
+@@ -224,9 +222,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
+ PRODUCT_EXTRA_RECOVERY_KEYS += \
+     vendor/lineage/build/target/product/security/lineage
  
- include vendor/lineage/config/version.mk
- 
---include vendor/lineage-priv/keys/keys.mk
+-include vendor/lineage/config/version.mk
 -
+--include vendor/lineage-priv/keys/keys.mk
++include vendor/lineage/config/floko.mk
+ 
  -include $(WORKSPACE)/build_env/image-auto-bits.mk
  -include vendor/lineage/config/partner_gms.mk
 diff --git a/config/crdroid.mk b/config/crdroid.mk
-index 21324451..662e2d72 100644
+index 21324451..4e6db133 100644
 --- a/config/crdroid.mk
 +++ b/config/crdroid.mk
-@@ -14,7 +14,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-     ro.setupwizard.esim_cid_ignore=00000001 \
-     ro.setupwizard.rotation_locked=true \
-     setupwizard.feature.baseline_setupwizard_enabled=true \
--    setupwizard.feature.day_night_mode_enabled=true \
-+    setupwizard.feature.day_night_mode_enabled=false \
-     setupwizard.feature.lifecycle_refactoring=true \
-     setupwizard.feature.notification_refactoring=true \
-     setupwizard.feature.portal_notification=true \
-diff --git a/config/version.mk b/config/version.mk
-index 2788afa8..06bfe263 100644
---- a/config/version.mk
-+++ b/config/version.mk
-@@ -1,11 +1,11 @@
- PRODUCT_VERSION_MAJOR = 13
- PRODUCT_VERSION_MINOR = 0
+@@ -30,13 +30,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
+     ro.input.video_enabled=false
  
+ # Blurs
+-ifeq ($(TARGET_ENABLE_BLUR), true)
++ifeq ($(TARGET_DISABLE_BLUR), true)
+ PRODUCT_SYSTEM_EXT_PROPERTIES += \
+-    ro.sf.blurs_are_expensive=1 \
+-    ro.surface_flinger.supports_background_blur=1
++    ro.launcher.blur.appLaunch=0
+ else
+ PRODUCT_PRODUCT_PROPERTIES += \
+-    ro.launcher.blur.appLaunch=0
++    ro.sf.blurs_are_expensive=1 \
++    ro.surface_flinger.supports_background_blur=1
+ endif
+ 
+ # Disable async MTE on system_server
+diff --git a/config/floko.mk b/config/floko.mk
+new file mode 100644
+index 00000000..66221945
+--- /dev/null
++++ b/config/floko.mk
+@@ -0,0 +1,10 @@
++PRODUCT_VERSION_MAJOR = 13
++PRODUCT_VERSION_MINOR = 0
++
++FLOKO_VERSION := 7.0
++
++# Internal version
++LINEAGE_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)-$(shell date -u +%Y%m%d)
++
++# Display version
++LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
+diff --git a/config/version.mk b/config/version.mk
+deleted file mode 100644
+index 2788afa8..00000000
+--- a/config/version.mk
++++ /dev/null
+@@ -1,11 +0,0 @@
+-PRODUCT_VERSION_MAJOR = 13
+-PRODUCT_VERSION_MINOR = 0
+-
 -# Increase CR Version with each major release.
 -CR_VERSION := 9.1
-+FLOKO_VERSION := 7.0
-+CR_VERSION := $(FLOKO_VERSION)
- 
- # Internal version
+-
+-# Internal version
 -LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
-+LINEAGE_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)-$(shell date -u +%Y%m%d)
- 
- # Display version
+-
+-# Display version
 -LINEAGE_DISPLAY_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(LINEAGE_BUILD)-v$(CR_VERSION)
-+LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
 diff --git a/prebuilt/common/bin/backuptool.sh b/prebuilt/common/bin/backuptool.sh
 index 9c3dbbbe..9b86b623 100755
 --- a/prebuilt/common/bin/backuptool.sh
