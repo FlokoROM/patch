@@ -1,17 +1,17 @@
 diff --git a/Android.bp b/Android.bp
-index 186bf70003..ff55eef790 100644
+index b890a9830f..c283463c11 100644
 --- a/Android.bp
 +++ b/Android.bp
-@@ -107,7 +107,6 @@ android_library {
+@@ -110,7 +110,6 @@ android_library {
          "LineagePreferenceLib",
          "vendor.lineage.fastcharge-V1.0-java",
          "SystemUISharedLib",
 -        "faceunlock_framework",
-     ],
- 
-     libs: [
+         "kotlin-stdlib",
+         "kotlinx_coroutines_android",
+         "kotlinx_coroutines",
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 8e82451de3..b1d81368a8 100644
+index 0a12691730..25e737e4fc 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
 @@ -123,10 +123,6 @@
@@ -22,10 +22,10 @@ index 8e82451de3..b1d81368a8 100644
 -    <uses-permission android:name="com.android.settings.FACE_UNLOCK"/>
 -    <permission android:name="com.android.settings.FACE_UNLOCK" android:protectionLevel="signatureOrSystem"/>
 -
-     <application
-             android:name=".SettingsApplication"
-             android:label="@string/settings_label"
-@@ -4567,7 +4563,7 @@
+     <!-- App lock -->
+     <uses-permission android:name="android.permission.MANAGE_APP_LOCK" />
+ 
+@@ -4570,7 +4566,7 @@
  
          <!-- Begin crDroid Settings -->
          <activity android:name="Settings$crDroidSettingsLayoutActivity"
@@ -34,7 +34,7 @@ index 8e82451de3..b1d81368a8 100644
                  android:icon="@drawable/ic_homepage_crdroid"
                  android:exported="true"
                  android:taskAffinity="com.android.settings"
-@@ -4579,7 +4575,7 @@
+@@ -4582,7 +4578,7 @@
              <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                         android:value="com.crdroid.settings.crDroidSettingsLayout" />
              <meta-data android:name="com.android.settings.title"
@@ -43,7 +43,7 @@ index 8e82451de3..b1d81368a8 100644
              <meta-data android:name="com.android.settings.summary"
                         android:resource="@string/crdroid_settings_summary"/>
              <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-@@ -4652,15 +4648,5 @@
+@@ -4655,16 +4651,6 @@
                  android:exported="true"
                  android:permission="crDroidDozeService">
          </service>
@@ -57,8 +57,9 @@ index 8e82451de3..b1d81368a8 100644
 -                <category android:name="android.intent.category.DEFAULT"/>
 -            </intent-filter>
 -        </activity>
-     </application>
- </manifest>
+ 
+         <!-- App lock -->
+         <activity android:name=".security.applock.AppLockCredentialActivity"
 diff --git a/res/drawable-nodpi/crdroid.png b/res/drawable-nodpi/crdroid.png
 index e34b045c6920ccdbceae203be2ece188363bbf2d..69f3585135f342736888d910683d2351a2160ac8 100644
 GIT binary patch
