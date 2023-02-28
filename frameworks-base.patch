@@ -110,10 +110,10 @@ index a8efdc447808..c9f2777db330 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index 0f79856c71b8..000000000000
+index 3505804b7c27..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,411 +0,0 @@
+@@ -1,410 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2022 crDroid Android Project
@@ -151,7 +151,6 @@ index 0f79856c71b8..000000000000
 -    private static final String DEVICE = "ro.product.device";
 -    private static final boolean DEBUG = false;
 -
--    private static final Map<String, Object> propsToChange;
 -    private static final Map<String, Object> propsToChangePixel5;
 -    private static final Map<String, Object> propsToChangePixel7Pro;
 -    private static final Map<String, Object> propsToChangePixelXL;
@@ -294,7 +293,6 @@ index 0f79856c71b8..000000000000
 -
 -    static {
 -        propsToKeep = new HashMap<>();
--        propsToChange = new HashMap<>();
 -        propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<>(Collections.singletonList("FINGERPRINT")));
 -        propsToChangePixel7Pro = new HashMap<>();
 -        propsToChangePixel7Pro.put("BRAND", "google");
@@ -302,14 +300,14 @@ index 0f79856c71b8..000000000000
 -        propsToChangePixel7Pro.put("DEVICE", "cheetah");
 -        propsToChangePixel7Pro.put("PRODUCT", "cheetah");
 -        propsToChangePixel7Pro.put("MODEL", "Pixel 7 Pro");
--        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ1A.230105.001.A2/9325679:user/release-keys");
+-        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ1A.230205.002/9471150:user/release-keys");
 -        propsToChangePixel5 = new HashMap<>();
 -        propsToChangePixel5.put("BRAND", "google");
 -        propsToChangePixel5.put("MANUFACTURER", "Google");
 -        propsToChangePixel5.put("DEVICE", "redfin");
 -        propsToChangePixel5.put("PRODUCT", "redfin");
 -        propsToChangePixel5.put("MODEL", "Pixel 5");
--        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ1A.230105.001/9292298:user/release-keys");
+-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ1A.230205.002/9471150:user/release-keys");
 -        propsToChangePixelXL = new HashMap<>();
 -        propsToChangePixelXL.put("BRAND", "google");
 -        propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -350,6 +348,7 @@ index 0f79856c71b8..000000000000
 -        if (packageName.startsWith("com.google.")
 -                || Arrays.asList(extraPackagesToChange).contains(packageName)) {
 -
+-            Map<String, Object> propsToChange = new HashMap<>();
 -            boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
 -
 -            if (packageName.equals("com.google.android.apps.photos")) {
@@ -526,7 +525,7 @@ index 0f79856c71b8..000000000000
 -    }
 -}
 diff --git a/core/res/res/values/cr_config.xml b/core/res/res/values/cr_config.xml
-index 6960b2d1057b..83d1001c9d19 100644
+index 1762ec555f6c..34a55ed53e44 100644
 --- a/core/res/res/values/cr_config.xml
 +++ b/core/res/res/values/cr_config.xml
 @@ -103,9 +103,6 @@
@@ -540,7 +539,7 @@ index 6960b2d1057b..83d1001c9d19 100644
         from using specific sensors in order to stop battery drain -->
      <string-array name="config_blockPackagesSensorDrain">
 diff --git a/core/res/res/values/cr_symbols.xml b/core/res/res/values/cr_symbols.xml
-index ba76c6249314..1b21163a7fa4 100644
+index 8fe2e1f1c09c..14b94d1a522e 100644
 --- a/core/res/res/values/cr_symbols.xml
 +++ b/core/res/res/values/cr_symbols.xml
 @@ -101,9 +101,6 @@
@@ -588,7 +587,7 @@ index 81cae9dc1c15..ab1b3af5c521 100644
      manifest: "AndroidManifest.xml",
      additional_manifests: ["LineageManifest.xml"],
 diff --git a/packages/SystemUI/res/values/cr_strings.xml b/packages/SystemUI/res/values/cr_strings.xml
-index 0f0dce507c03..6cccb5677193 100644
+index 900f702245b7..903f9319b324 100644
 --- a/packages/SystemUI/res/values/cr_strings.xml
 +++ b/packages/SystemUI/res/values/cr_strings.xml
 @@ -157,9 +157,6 @@
@@ -1131,17 +1130,17 @@ index e324a403b35a..ec7b8204b864 100644
      public void setKeyguardMessage(String message, ColorStateList colorState) {
          if (isShowingAlternateAuth()) {
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index 8781f902d4ea..f6ba92a94cde 100644
+index cf208bb0527b..6bf3a24750b1 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -175,7 +175,6 @@ java_library_static {
+@@ -178,7 +178,6 @@ java_library_static {
          "overlayable_policy_aidl-java",
          "SurfaceFlingerProperties",
          "com.android.sysprop.watchdog",
 -        "faceunlock_framework",
-     ],
-     javac_shard_size: 50,
- }
+         "kotlin-stdlib",
+         "kotlinx_coroutines_android",
+         "kotlinx_coroutines",
 diff --git a/services/core/java/com/android/server/biometrics/AuthSession.java b/services/core/java/com/android/server/biometrics/AuthSession.java
 index 2af0af945d3c..41ca13f5d5f5 100644
 --- a/services/core/java/com/android/server/biometrics/AuthSession.java
