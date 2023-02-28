@@ -2,54 +2,36 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 build_home="${HOME}/android/floko"
-path_to_patches="$(pwd)"
+patch_dir="$(pwd)"
 
 apply_patch() {
-    echo ">> [$(date)] Applying the patch to $(pwd | sed 's@.*floko/@@g')"
-    git apply -p1 "${path_to_patches}/${1}.diff"
+    cd ${build_home}/${1}
+    echo ">> [$(date)] Applying the patch to ${1}"
+    patch_file=$(echo ${1} | sed 's@/@_@g')
+    git apply -p1 "${patch_dir}/${patch_file}.diff"
 }
 
-cd ${build_home}/bootable/recovery
-apply_patch bootable_recovery
+patch_dest_array=(bootable/recovery build/make build/soong frameworks/base lineage-sdk packages/apps/crDroidSettings packages/apps/LineageParts packages/apps/Settings packages/apps/SetupWizard vendor/addons vendor/lineage)
 
-cd ${build_home}/build/make
-apply_patch build
+for patch_dest in ${patch_dest_array[@]}; do
+    apply_patch ${patch_dest}
 
-cd ${build_home}/build/soong
-apply_patch build_soong
+    if [ "${patch_dest}" = "frameworks/base" ]; then
+        # This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
+        echo ">> [$(date)] -- Removing PixelPropsUtils.java"
+        git rm core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 
-cd ${build_home}/frameworks/base
-apply_patch frameworks_base
-# This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
-echo ">> [$(date)] -- Removing PixelPropsUtils.java"
-git rm core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
+    elif [ "${patch_dest}" = "lineage-sdk" ]; then
+        echo ">> [$(date)] -- Rebranding crDroid to FlokoROM"
+        find lineage/res/res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
 
-cd ${build_home}/lineage-sdk
-apply_patch lineage-sdk
-echo ">> [$(date)] -- Rebranding crDroid to FlokoROM"
-find lineage/res/res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
+    elif [ "${patch_dest}" = "packages/apps/LineageParts" ] || [ "${patch_dest}" = "packages/apps/SetupWizard" ]; then
+        echo ">> [$(date)] -- Rebranding crDroid to FlokoROM"
+        find res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
 
-cd ${build_home}/packages/apps/crDroidSettings
-apply_patch packages_apps_crDroidSettings
-
-cd ${build_home}/packages/apps/LineageParts
-apply_patch packages_apps_LineageParts
-echo ">> [$(date)] -- Rebranding crDroid to FlokoROM"
-find res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
-
-cd ${build_home}/packages/apps/Settings
-apply_patch packages_apps_Settings
-
-cd ${build_home}/packages/apps/SetupWizard
-apply_patch packages_apps_SetupWizard
-echo ">> [$(date)] -- Rebranding crDroid to FlokoROM"
-find res/values*/strings.xml -type f | xargs sed -i -e "s/crDroid/FlokoROM/g"
-
-cd ${build_home}/vendor/addons
-apply_patch vendor_addons
-
-cd ${build_home}/vendor/lineage
-apply_patch vendor_lineage
-# This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
-echo ">> [$(date)] -- Removing version.mk"
-git rm config/version.mk
+    elif [ "${patch_dest}" = "vendor/lineage" ]; then
+        # This is workaround; If the patch failed because something changed in upstream, remove this file anyway.
+        echo ">> [$(date)] -- Removing version.mk"
+        git rm config/version.mk
+    fi
+done
