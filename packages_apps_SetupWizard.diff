@@ -1270,8 +1270,21 @@ index 5d206e4..467c03a 100644
  
                      <!-- Checkbox for using on-screen nav keys -->
                      <LinearLayout
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 508712e..056c13c 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -68,7 +68,7 @@
+     <string name="setup_services">crDroid features</string>
+     <string name="services_pp_explanation">These services work for you to extend the capabilities of your device. Data will be used in accordance with <xliff:g id="name" example="crDroid">%1$s</xliff:g>\'s privacy policy.</string>
+     <string name="services_find_privacy_policy">You can read the privacy policy on another device by visiting <xliff:g id="uri" example="https://lineageos.org/legal">%1$s</xliff:g></string>
+-    <string name="services_privacy_policy_uri" translatable="false">https://crdroid.net/legal</string>
++    <string name="services_privacy_policy_uri" translatable="false">https://wiki.maud.io/floko/legal</string>
+     <string name="services_help_improve_cm">Help improve <xliff:g id="name" example="crDroid">%s</xliff:g></string>
+     <string name="services_metrics_label"><xliff:g id="name" example="Help improve crDroid">%1$s</xliff:g> by automatically sending diagnostic and usage data to <xliff:g id="name" example="crDroid">%2$s</xliff:g>. This information can’t be used to identify you and lends a hand to teams working on things like battery life, app performance, and new <xliff:g id="name" example="crDroid">%3$s</xliff:g> features.</string>
+     <string name="services_os_nav_keys_label"><b>Use on screen navigation keys</b> instead of hardware keys.</string>
 diff --git a/src/org/lineageos/setupwizard/LineageSettingsActivity.java b/src/org/lineageos/setupwizard/LineageSettingsActivity.java
-index defa0a0..3aa49ce 100644
+index 9d1055c..d0c3aca 100644
 --- a/src/org/lineageos/setupwizard/LineageSettingsActivity.java
 +++ b/src/org/lineageos/setupwizard/LineageSettingsActivity.java
 @@ -18,7 +18,6 @@
@@ -1282,12 +1295,7 @@ index defa0a0..3aa49ce 100644
  
  import android.app.Activity;
  import android.content.Context;
-@@ -46,21 +45,14 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
- 
-     public static final String TAG = LineageSettingsActivity.class.getSimpleName();
- 
--    public static final String PRIVACY_POLICY_URI = "https://crdroid.net/legal";
-+    public static final String PRIVACY_POLICY_URI = "https://wiki.maud.io/floko/legal";
+@@ -48,17 +47,10 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
  
      private SetupWizardApp mSetupWizardApp;
  
@@ -1305,7 +1313,7 @@ index defa0a0..3aa49ce 100644
      private final View.OnClickListener mNavKeysClickListener = view -> {
          boolean checked = !mNavKeys.isChecked();
          mNavKeys.setChecked(checked);
-@@ -80,20 +72,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
+@@ -79,20 +71,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
                  privacyPolicy, policySummary);
          getGlifLayout().setDescriptionText(servicesFullDescription);
  
@@ -1326,7 +1334,7 @@ index defa0a0..3aa49ce 100644
          View navKeysRow = findViewById(R.id.nav_keys);
          navKeysRow.setOnClickListener(mNavKeysClickListener);
          mNavKeys = (CheckBox) findViewById(R.id.nav_keys_checkbox);
-@@ -110,7 +88,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
+@@ -109,7 +87,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
      public void onResume() {
          super.onResume();
          updateDisableNavkeysOption();
@@ -1334,7 +1342,7 @@ index defa0a0..3aa49ce 100644
      }
  
      @Override
-@@ -134,15 +111,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
+@@ -133,15 +110,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
          return R.drawable.ic_features;
      }
  
