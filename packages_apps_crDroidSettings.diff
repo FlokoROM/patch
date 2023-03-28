@@ -31,7 +31,7 @@ index ebbd5818..00000000
 -        android:pathData="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
 -</vector>
 diff --git a/res/values-ja-rJP/cr_strings.xml b/res/values-ja-rJP/cr_strings.xml
-index b8ec9410..3dc3e288 100644
+index 0d76848a..1b2a2824 100644
 --- a/res/values-ja-rJP/cr_strings.xml
 +++ b/res/values-ja-rJP/cr_strings.xml
 @@ -15,6 +15,14 @@
@@ -50,7 +50,7 @@ index b8ec9410..3dc3e288 100644
      <string name="crdroid_settings_title">crDroid の設定</string>
      <string name="crdroid_settings_summary">高度な設定</string>
 diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
-index b48a9035..fa4365b4 100644
+index b1b91635..e71d8f0a 100644
 --- a/res/values/cr_strings.xml
 +++ b/res/values/cr_strings.xml
 @@ -17,10 +17,10 @@
@@ -66,7 +66,7 @@ index b48a9035..fa4365b4 100644
  
      <!-- Personalization Categories -->
      <string name="button_title">Buttons</string>
-@@ -64,8 +64,8 @@
+@@ -68,8 +68,8 @@
      <string name="changelog_crdroid_summary">View changes in the ROM installed</string>
      <string name="changelog_crdroid_error">Unable to load changelog</string>
  
@@ -77,7 +77,7 @@ index b48a9035..fa4365b4 100644
      <string name="about_device_name">Device</string>
  
      <!-- Share crDroid -->
-@@ -74,6 +74,12 @@
+@@ -78,6 +78,12 @@
      <string name="share_message">Check out if #crDroidAndroid is available for your device @ https://crdroid.net/</string>
      <string name="share_chooser_title">Share crDroid</string>
  
@@ -90,7 +90,7 @@ index b48a9035..fa4365b4 100644
      <!-- Sites crDroid -->
      <string name="crdroid_source_title">GitHub</string>
      <string name="crdroid_source_summary">We love open source, check us out</string>
-@@ -622,6 +628,7 @@
+@@ -626,6 +632,7 @@
  
      <!-- Device Info screen. crDroid legal. -->
      <string name="crdroid_license_title">crDroid legal</string>
@@ -98,7 +98,7 @@ index b48a9035..fa4365b4 100644
  
      <!-- Quick Settings brightness slider -->
      <string name="qs_show_brightness_slider_title">Brightness slider</string>
-@@ -1146,10 +1153,6 @@
+@@ -1185,10 +1192,6 @@
      <string name="floating_rotation_button_title">Floating rotate button</string>
      <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
  
@@ -109,7 +109,7 @@ index b48a9035..fa4365b4 100644
      <!-- Captive portal -->
      <string name="captive_portal_title">Connectivity check</string>
      <string name="captive_portal_summary">Determine if the device can connect to the internet, by contacting Google. Also used to detect captive portals.</string>
-@@ -1167,11 +1170,6 @@
+@@ -1206,11 +1209,6 @@
      <string name="wifi_standard_icon_title">WiFi standard</string>
      <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
  
