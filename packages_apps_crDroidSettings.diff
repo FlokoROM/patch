@@ -50,7 +50,7 @@ index 0d76848a..1b2a2824 100644
      <string name="crdroid_settings_title">crDroid の設定</string>
      <string name="crdroid_settings_summary">高度な設定</string>
 diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
-index b1b91635..e71d8f0a 100644
+index 6968802f..07691dd9 100644
 --- a/res/values/cr_strings.xml
 +++ b/res/values/cr_strings.xml
 @@ -17,10 +17,10 @@

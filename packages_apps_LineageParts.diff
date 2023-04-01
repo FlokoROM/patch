@@ -1,8 +1,8 @@
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 2573102..bc4f0a6 100644
+index 2d51611..cb1b5dc 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -226,7 +226,7 @@
+@@ -225,7 +225,7 @@
                  android:resource="@string/summary_empty" />
          </activity-alias> -->
  
@@ -11,7 +11,7 @@ index 2573102..bc4f0a6 100644
          <receiver android:name=".lineagestats.ReportingServiceManager"
              android:enabled="true"
              android:exported="false"
-@@ -235,7 +235,7 @@
+@@ -234,7 +234,7 @@
                  <action android:name="android.intent.action.BOOT_COMPLETED" />
                  <action android:name="org.lineageos.lineageparts.action.TRIGGER_REPORT_METRICS" />
              </intent-filter>

@@ -1,8 +1,8 @@
 diff --git a/recovery.cpp b/recovery.cpp
-index da0bed23..f9227268 100644
+index 79ff35d5..a96e4c09 100644
 --- a/recovery.cpp
 +++ b/recovery.cpp
-@@ -813,7 +813,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
+@@ -880,7 +880,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
    std::string ver = android::base::GetProperty("ro.modversion", "");
  
    std::vector<std::string> title_lines = {

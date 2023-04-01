@@ -92,10 +92,10 @@ index be258caa1fb1..556058b567f9 100644
      }
  
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 510fdf7de200..9de0ca48b2af 100644
+index 2d45ed829ef0..6a5c5fc878db 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -12031,12 +12031,6 @@ public final class Settings {
+@@ -11976,12 +11976,6 @@ public final class Settings {
           */
          public static final String SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
  
@@ -2808,7 +2808,7 @@ index 57fe32f8f8d6..de34cd6b23ca 100644
          return PrivacyItem(type, app, appOpItem.timeStartedElapsed, appOpItem.isDisabled)
      }
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
-index d1ba2135bf6f..82db419ec06e 100644
+index 5f58816d1d01..733600aab2c8 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
 @@ -41,7 +41,6 @@ import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewCont
@@ -2865,7 +2865,7 @@ index d1ba2135bf6f..82db419ec06e 100644
                  }
              }
          };
-@@ -832,47 +813,6 @@ public class KeyguardIndicationController {
+@@ -834,47 +815,6 @@ public class KeyguardIndicationController {
          }
      }
  
@@ -2913,7 +2913,7 @@ index d1ba2135bf6f..82db419ec06e 100644
      /**
       * Hides transient indication.
       */
-@@ -1375,17 +1315,11 @@ public class KeyguardIndicationController {
+@@ -1377,17 +1317,11 @@ public class KeyguardIndicationController {
          @Override
          public void onBiometricRunningStateChanged(boolean running,
                  BiometricSourceType biometricSourceType) {

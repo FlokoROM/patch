@@ -11,7 +11,7 @@ index d90aeabe5f..bbfca8bc38 100644
          "kotlinx_coroutines_android",
          "kotlinx_coroutines",
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index bd69f30d66..35158c033e 100644
+index e9211ea5f9..be8bd4271b 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
 @@ -124,10 +124,6 @@
@@ -25,7 +25,7 @@ index bd69f30d66..35158c033e 100644
      <!-- App lock -->
      <uses-permission android:name="android.permission.MANAGE_APP_LOCK" />
  
-@@ -4608,7 +4604,7 @@
+@@ -4624,7 +4620,7 @@
  
          <!-- Begin crDroid Settings -->
          <activity android:name="Settings$crDroidSettingsLayoutActivity"
@@ -34,7 +34,7 @@ index bd69f30d66..35158c033e 100644
                  android:icon="@drawable/ic_homepage_crdroid"
                  android:exported="true"
                  android:taskAffinity="com.android.settings"
-@@ -4620,7 +4616,7 @@
+@@ -4636,7 +4632,7 @@
              <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                         android:value="com.crdroid.settings.crDroidSettingsLayout" />
              <meta-data android:name="com.android.settings.title"
@@ -43,7 +43,7 @@ index bd69f30d66..35158c033e 100644
              <meta-data android:name="com.android.settings.summary"
                         android:resource="@string/crdroid_settings_summary"/>
              <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-@@ -4673,16 +4669,6 @@
+@@ -4689,16 +4685,6 @@
                  android:exported="true"
                  android:permission="crDroidDozeService">
          </service>
