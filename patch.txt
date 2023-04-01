@@ -1,0 +1,11 @@
+bootable/recovery
+build/make
+build/soong
+frameworks/base
+lineage-sdk
+packages/apps/crDroidSettings
+packages/apps/LineageParts
+packages/apps/Settings
+packages/apps/SetupWizard
+vendor/addons
+vendor/lineage

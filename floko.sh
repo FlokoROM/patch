@@ -11,9 +11,7 @@ apply_patch() {
     git apply -p1 "${patch_dir}/${patch_file}.diff"
 }
 
-patch_dest_array=(bootable/recovery build/make build/soong frameworks/base lineage-sdk packages/apps/crDroidSettings packages/apps/LineageParts packages/apps/Settings packages/apps/SetupWizard vendor/addons vendor/lineage)
-
-for patch_dest in ${patch_dest_array[@]}; do
+for patch_dest in $(cat patch.txt); do
     apply_patch ${patch_dest}
 
     if [ "${patch_dest}" = "frameworks/base" ]; then
