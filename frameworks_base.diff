@@ -110,10 +110,10 @@ index 2d45ed829ef0..6a5c5fc878db 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index 97aa26beee02..000000000000
+index c5ff4e79a4cf..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,409 +0,0 @@
+@@ -1,410 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2023 crDroid Android Project
@@ -225,7 +225,8 @@ index 97aa26beee02..000000000000
 -    // Packages to Spoof as ROG Phone 3
 -    private static final String[] packagesToChangeROG3 = {
 -            "com.pearlabyss.blackdesertm",
--            "com.pearlabyss.blackdesertm.gl"
+-            "com.pearlabyss.blackdesertm.gl",
+-            "com.gameloft.android.ANMP.GloftA9HM"
 -    };
 -
 -    // Packages to Spoof as Xperia 5
@@ -2455,17 +2456,18 @@ index 82b6155f8c48..33411e1ec5b9 100644
  
          if (response == null || response.metadata.certificate == null) {
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
-index 5536b7b8c3ac..5f0f034e1711 100644
+index 49a9cbc31c24..cd4c555b844c 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
-@@ -180,7 +180,6 @@ android_library {
+@@ -178,7 +178,6 @@ android_library {
+         "LowLightDreamLib",
+         "motion_tool_lib",
          "vendor.lineage.powershare-V1.0-java",
-         "colorkt",
-         "themelib",
 -        "faceunlock_framework",
      ],
      manifest: "AndroidManifest.xml",
      additional_manifests: ["LineageManifest.xml"],
+
 diff --git a/packages/SystemUI/res/drawable/ic_lock_face.xml b/packages/SystemUI/res/drawable/ic_lock_face.xml
 deleted file mode 100644
 index 78e4896bfefa..000000000000
