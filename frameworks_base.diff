@@ -110,10 +110,10 @@ index 2d45ed829ef0..6a5c5fc878db 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index c5ff4e79a4cf..000000000000
+index 85df8834fff9..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,410 +0,0 @@
+@@ -1,412 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2023 crDroid Android Project
@@ -151,6 +151,7 @@ index c5ff4e79a4cf..000000000000
 -    private static final String DEVICE = "ro.product.device";
 -    private static final boolean DEBUG = false;
 -
+-    private static final Map<String, Object> propsToChangeGeneric;
 -    private static final Map<String, Object> propsToChangePixel5;
 -    private static final Map<String, Object> propsToChangePixel7Pro;
 -    private static final Map<String, Object> propsToChangePixelXL;
@@ -195,15 +196,6 @@ index c5ff4e79a4cf..000000000000
 -
 -    // Packages to Keep with original device
 -    private static final String[] packagesToKeep = {
--            "com.google.android.GoogleCamera",
--            "com.google.android.GoogleCamera.Cameight",
--            "com.google.android.GoogleCamera.Go",
--            "com.google.android.GoogleCamera.Urnyx",
--            "com.google.android.GoogleCameraAsp",
--            "com.google.android.GoogleCameraCVM",
--            "com.google.android.GoogleCameraEng",
--            "com.google.android.GoogleCameraEng2",
--            "com.google.android.GoogleCameraGood",
 -            "com.google.android.MTCL83",
 -            "com.google.android.UltraCVM",
 -            "com.google.android.apps.cameralite",
@@ -214,7 +206,10 @@ index c5ff4e79a4cf..000000000000
 -            "com.google.android.apps.youtube.kids",
 -            "com.google.android.apps.youtube.music",
 -            "com.google.android.apps.recorder",
--            "com.google.android.apps.wearables.maestro.companion"
+-            "com.google.android.apps.wearables.maestro.companion",
+-            "com.google.android.apps.subscriptions.red",
+-            "com.google.android.apps.tachyon",
+-            "com.google.android.apps.tycho"
 -    };
 -
 -    // Packages to Spoof as ROG Phone 1
@@ -294,20 +289,23 @@ index c5ff4e79a4cf..000000000000
 -    static {
 -        propsToKeep = new HashMap<>();
 -        propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<>(Collections.singletonList("FINGERPRINT")));
+-        propsToChangeGeneric = new HashMap<>();
+-        propsToChangeGeneric.put("TYPE", "user");
+-        propsToChangeGeneric.put("TAGS", "release-keys");
 -        propsToChangePixel7Pro = new HashMap<>();
 -        propsToChangePixel7Pro.put("BRAND", "google");
 -        propsToChangePixel7Pro.put("MANUFACTURER", "Google");
 -        propsToChangePixel7Pro.put("DEVICE", "cheetah");
 -        propsToChangePixel7Pro.put("PRODUCT", "cheetah");
 -        propsToChangePixel7Pro.put("MODEL", "Pixel 7 Pro");
--        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ2A.230305.008.C1/9619669:user/release-keys");
+-        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ2A.230405.003.E1/9802792:user/release-keys");
 -        propsToChangePixel5 = new HashMap<>();
 -        propsToChangePixel5.put("BRAND", "google");
 -        propsToChangePixel5.put("MANUFACTURER", "Google");
 -        propsToChangePixel5.put("DEVICE", "redfin");
 -        propsToChangePixel5.put("PRODUCT", "redfin");
 -        propsToChangePixel5.put("MODEL", "Pixel 5");
--        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ2A.230305.008.C1/9619669:user/release-keys");
+-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ2A.230405.003/9719927:user/release-keys");
 -        propsToChangePixelXL = new HashMap<>();
 -        propsToChangePixelXL.put("BRAND", "google");
 -        propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -339,14 +337,18 @@ index c5ff4e79a4cf..000000000000
 -    }
 -
 -    public static void setProps(String packageName) {
+-        propsToChangeGeneric.forEach((k, v) -> setPropValue(k, v));
+-
 -        if (packageName == null || packageName.isEmpty()) {
--            return;
--        }
--        if (Arrays.asList(packagesToKeep).contains(packageName)) {
 -            return;
 -        }
 -        if (packageName.startsWith("com.google.")
 -                || Arrays.asList(extraPackagesToChange).contains(packageName)) {
+-
+-            if (Arrays.asList(packagesToKeep).contains(packageName) ||
+-                    packageName.startsWith("com.google.android.GoogleCamera")) {
+-                return;
+-            }
 -
 -            Map<String, Object> propsToChange = new HashMap<>();
 -            boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
