@@ -92,10 +92,10 @@ index be258caa1fb1..556058b567f9 100644
      }
  
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 2d45ed829ef0..6a5c5fc878db 100644
+index dbbe2fc2337e..8166e51791b2 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -11976,12 +11976,6 @@ public final class Settings {
+@@ -12004,12 +12004,6 @@ public final class Settings {
           */
          public static final String SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
  
@@ -110,10 +110,10 @@ index 2d45ed829ef0..6a5c5fc878db 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index 85df8834fff9..000000000000
+index cd209564a37a..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,412 +0,0 @@
+@@ -1,413 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2023 crDroid Android Project
@@ -221,6 +221,7 @@ index 85df8834fff9..000000000000
 -    private static final String[] packagesToChangeROG3 = {
 -            "com.pearlabyss.blackdesertm",
 -            "com.pearlabyss.blackdesertm.gl",
+-            "com.ea.gp.fifamobile",
 -            "com.gameloft.android.ANMP.GloftA9HM"
 -    };
 -
@@ -2375,7 +2376,7 @@ index f31b85920838..d40fd0a19787 100644
      <string name="face_icon_content_description" msgid="465030547475916280">"Isithonjana sobuso"</string>
      <string name="permlab_readSyncSettings" msgid="6250532864893156277">"funda izilungiselelo zokuvumelanisa"</string>
 diff --git a/core/res/res/values/cr_config.xml b/core/res/res/values/cr_config.xml
-index 1762ec555f6c..4f7224b1d4f8 100644
+index 5c49bdd7dab1..8c2aaea767a6 100644
 --- a/core/res/res/values/cr_config.xml
 +++ b/core/res/res/values/cr_config.xml
 @@ -98,14 +98,6 @@
@@ -2394,7 +2395,7 @@ index 1762ec555f6c..4f7224b1d4f8 100644
         from using specific sensors in order to stop battery drain -->
      <string-array name="config_blockPackagesSensorDrain">
 diff --git a/core/res/res/values/cr_strings.xml b/core/res/res/values/cr_strings.xml
-index 1ead66cabb2d..9b7bac245953 100644
+index 034964cec5f3..7c8d0d68eb21 100644
 --- a/core/res/res/values/cr_strings.xml
 +++ b/core/res/res/values/cr_strings.xml
 @@ -46,9 +46,6 @@
@@ -2408,7 +2409,7 @@ index 1ead66cabb2d..9b7bac245953 100644
      <string name="parallel_space_badge_label" translatable="false">%1$s</string>
  
 diff --git a/core/res/res/values/cr_symbols.xml b/core/res/res/values/cr_symbols.xml
-index 8fe2e1f1c09c..14b94d1a522e 100644
+index e2665bc854f9..f542ff05e301 100644
 --- a/core/res/res/values/cr_symbols.xml
 +++ b/core/res/res/values/cr_symbols.xml
 @@ -101,9 +101,6 @@
@@ -2469,7 +2470,6 @@ index 49a9cbc31c24..cd4c555b844c 100644
      ],
      manifest: "AndroidManifest.xml",
      additional_manifests: ["LineageManifest.xml"],
-
 diff --git a/packages/SystemUI/res/drawable/ic_lock_face.xml b/packages/SystemUI/res/drawable/ic_lock_face.xml
 deleted file mode 100644
 index 78e4896bfefa..000000000000
@@ -2941,10 +2941,10 @@ index 5f58816d1d01..733600aab2c8 100644
          }
  
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BiometricUnlockController.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BiometricUnlockController.java
-index b597e2624c79..895a2934ec1b 100644
+index dfb76f4b9fba..a2cba1a5dd4e 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BiometricUnlockController.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BiometricUnlockController.java
-@@ -584,7 +584,7 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
+@@ -590,7 +590,7 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
          final boolean unlockingAllowed =
                  mUpdateMonitor.isUnlockingWithBiometricAllowed(isStrongBiometric);
          final boolean deviceDreaming = mUpdateMonitor.isDreaming();
@@ -5598,7 +5598,7 @@ index 5b8a9eb24629..000000000000
 -    }
 -}
 diff --git a/services/core/java/com/android/server/policy/PermissionPolicyService.java b/services/core/java/com/android/server/policy/PermissionPolicyService.java
-index f0d764fe716f..b56e1120f16a 100644
+index f3f815017f48..d0068bfa45b3 100644
 --- a/services/core/java/com/android/server/policy/PermissionPolicyService.java
 +++ b/services/core/java/com/android/server/policy/PermissionPolicyService.java
 @@ -103,8 +103,6 @@ import com.android.server.wm.ActivityInterceptorCallback;
