@@ -1,7 +1,11 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-build_home="${HOME}/android/floko"
+if [ $# = 1 ]; then
+	build_home=$1
+else
+	build_home="${HOME}/android/floko"
+fi
 patch_dir="$(pwd)"
 
 apply_patch() {
