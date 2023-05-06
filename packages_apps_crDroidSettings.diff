@@ -1,6 +1,6 @@
 diff --git a/res/drawable/ic_netflix.xml b/res/drawable/ic_netflix.xml
 deleted file mode 100644
-index ebbd5818..00000000
+index ebbd581..0000000
 --- a/res/drawable/ic_netflix.xml
 +++ /dev/null
 @@ -1,26 +0,0 @@
@@ -31,7 +31,7 @@ index ebbd5818..00000000
 -        android:pathData="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
 -</vector>
 diff --git a/res/values-ja-rJP/cr_strings.xml b/res/values-ja-rJP/cr_strings.xml
-index 0d76848a..1b2a2824 100644
+index 36459f0..2524fde 100644
 --- a/res/values-ja-rJP/cr_strings.xml
 +++ b/res/values-ja-rJP/cr_strings.xml
 @@ -15,6 +15,14 @@
@@ -50,7 +50,7 @@ index 0d76848a..1b2a2824 100644
      <string name="crdroid_settings_title">crDroid の設定</string>
      <string name="crdroid_settings_summary">高度な設定</string>
 diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
-index 6968802f..07691dd9 100644
+index 9f1d6d9..32ccd35 100644
 --- a/res/values/cr_strings.xml
 +++ b/res/values/cr_strings.xml
 @@ -17,10 +17,10 @@
@@ -90,7 +90,16 @@ index 6968802f..07691dd9 100644
      <!-- Sites crDroid -->
      <string name="crdroid_source_title">GitHub</string>
      <string name="crdroid_source_summary">We love open source, check us out</string>
-@@ -626,6 +632,7 @@
+@@ -91,8 +97,6 @@
+     <string name="crdroid_translate_summary">Help with localisation of ROM in your language!</string>
+     <string name="crdroid_sponsor_title" translatable="false">ScopeHosts</string>
+     <string name="crdroid_sponsor_summary">Visit our website host partner</string>
+-    <string name="crdroid_buildserversponsor_title" translatable="false">InterServer</string>
+-    <string name="crdroid_buildserversponsor_summary">We recommend their servers if interested in one</string>
+ 
+     <!-- Donate crDroid -->
+     <string name="donate_crdroid_title">Support us</string>
+@@ -632,6 +636,7 @@
  
      <!-- Device Info screen. crDroid legal. -->
      <string name="crdroid_license_title">crDroid legal</string>
@@ -98,7 +107,7 @@ index 6968802f..07691dd9 100644
  
      <!-- Quick Settings brightness slider -->
      <string name="qs_show_brightness_slider_title">Brightness slider</string>
-@@ -1185,10 +1192,6 @@
+@@ -1193,10 +1198,6 @@
      <string name="floating_rotation_button_title">Floating rotate button</string>
      <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
  
@@ -109,7 +118,7 @@ index 6968802f..07691dd9 100644
      <!-- Captive portal -->
      <string name="captive_portal_title">Connectivity check</string>
      <string name="captive_portal_summary">Determine if the device can connect to the internet, by contacting Google. Also used to detect captive portals.</string>
-@@ -1206,11 +1209,6 @@
+@@ -1214,11 +1215,6 @@
      <string name="wifi_standard_icon_title">WiFi standard</string>
      <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
  
@@ -122,74 +131,25 @@ index 6968802f..07691dd9 100644
      <string name="lockscreen_shortcut_category">Bottom shortcuts</string>
      <string name="lockscreen_shortcut_start_title">Left shortcut</string>
 diff --git a/res/xml/crdroid_settings_about.xml b/res/xml/crdroid_settings_about.xml
-index e51870f5..06e7080e 100644
+index 5c05d6c..e51870f 100644
 --- a/res/xml/crdroid_settings_about.xml
 +++ b/res/xml/crdroid_settings_about.xml
-@@ -36,19 +36,13 @@
-         android:title="@string/crdroid_website_title"
-         android:summary="@string/crdroid_website_summary" />
+@@ -78,13 +78,6 @@
+         android:title="@string/crdroid_telegram_channel_title"
+         android:summary="@string/crdroid_telegram_channel_summary" />
  
--    <!-- crDroid Translate -->
+-    <!-- crDroid buildserver sponsor -->
 -    <Preference
--        android:key="crdroid_translate"
--        android:icon="@drawable/ic_translate"
--        android:title="@string/crdroid_translate_title"
--        android:summary="@string/crdroid_translate_summary" />
--
--    <!-- crDroid Share -->
--    <Preference
-+    <!-- Floko Share -->
-+    <PreferenceScreen
-         android:key="crdroid_share"
-         android:icon="@drawable/ic_share"
--        android:title="@string/share_crdroid_title"
--        android:summary="@string/share_crdroid_summary" />
-+        android:title="@string/share_floko_title"
-+        android:summary="@string/share_floko_summary"
-+        settings:allowDividerAbove="false" />
- 
-     <!-- crDroid Donate -->
-     <Preference
-@@ -64,37 +58,6 @@
-         android:title="@string/crdroid_source_title"
-         android:summary="@string/crdroid_source_summary" />
- 
--    <!-- crDroid Telegram -->
--    <Preference
--        android:key="crdroid_telegram"
--        android:icon="@drawable/ic_telegram"
--        android:title="@string/crdroid_telegram_title"
--        android:summary="@string/crdroid_telegram_summary" />
--
--    <!-- crDroid Telegram Updates Channel -->
--    <Preference
--        android:key="crdroid_telegram_channel"
--        android:icon="@drawable/ic_telegram_channel"
--        android:title="@string/crdroid_telegram_channel_title"
--        android:summary="@string/crdroid_telegram_channel_summary" />
--
--    <!-- crDroid sponsor -->
--    <Preference
--        android:key="crdroid_sponsor"
+-        android:key="crdroid_buildserversponsor"
 -        android:icon="@drawable/ic_sponsor"
--        android:title="@string/crdroid_sponsor_title"
--        android:summary="@string/crdroid_sponsor_summary" />
+-        android:title="@string/crdroid_buildserversponsor_title"
+-        android:summary="@string/crdroid_buildserversponsor_summary" />
 -
--    <!-- crDroid OTA update -->
--    <Preference
--        android:key="system_update_settings"
--        android:title="@string/crdroid_update_title"
--        android:summary="@string/crdroid_update_summary"
--        android:icon="@drawable/ic_update"
--        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
--        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
--    </Preference>
--
-     <!-- crDroid Drill -->
+     <!-- crDroid sponsor -->
      <Preference
-         android:key="crdroid_drill"
+         android:key="crdroid_sponsor"
 diff --git a/res/xml/crdroid_settings_misc.xml b/res/xml/crdroid_settings_misc.xml
-index b31ae615..3b4e951c 100644
+index b31ae61..3b4e951 100644
 --- a/res/xml/crdroid_settings_misc.xml
 +++ b/res/xml/crdroid_settings_misc.xml
 @@ -31,37 +31,6 @@
@@ -238,7 +198,7 @@ index b31ae615..3b4e951c 100644
  </PreferenceScreen>
 diff --git a/res/xml/gms_enabled_settings.xml b/res/xml/gms_enabled_settings.xml
 deleted file mode 100644
-index 1d97bd2d..00000000
+index 1d97bd2..0000000
 --- a/res/xml/gms_enabled_settings.xml
 +++ /dev/null
 @@ -1,32 +0,0 @@
@@ -275,7 +235,7 @@ index 1d97bd2d..00000000
 -        android:dependency="gms_enabled" />
 -</PreferenceScreen>
 diff --git a/src/com/crdroid/settings/crDroidSettingsLayout.java b/src/com/crdroid/settings/crDroidSettingsLayout.java
-index e8a0d02c..e93ffb52 100644
+index e8a0d02..e93ffb5 100644
 --- a/src/com/crdroid/settings/crDroidSettingsLayout.java
 +++ b/src/com/crdroid/settings/crDroidSettingsLayout.java
 @@ -66,7 +66,7 @@ public class crDroidSettingsLayout extends SettingsPreferenceFragment {
@@ -306,10 +266,32 @@ index e8a0d02c..e93ffb52 100644
          return titleString;
      }
 diff --git a/src/com/crdroid/settings/fragments/About.java b/src/com/crdroid/settings/fragments/About.java
-index 2c0087b1..c9a635d5 100644
+index 44a9ca5..c9a635d 100644
 --- a/src/com/crdroid/settings/fragments/About.java
 +++ b/src/com/crdroid/settings/fragments/About.java
-@@ -75,26 +75,26 @@ public class About extends SettingsPreferenceFragment {
+@@ -47,7 +47,6 @@ public class About extends SettingsPreferenceFragment {
+     private String KEY_CRDROID_WEBSITE = "crdroid_website";
+     private String KEY_CRDROID_TELEGRAM_CHANNEL = "crdroid_telegram_channel";
+     private String KEY_CRDROID_SPONSOR = "crdroid_sponsor";
+-    private String KEY_CRDROID_BUILDSERVERSPONSOR = "crdroid_buildserversponsor";
+ 
+     private Preference mDonate;
+     private Preference mSourceUrl;
+@@ -57,7 +56,6 @@ public class About extends SettingsPreferenceFragment {
+     private Preference mWebsite;
+     private Preference mTelegramChannelUrl;
+     private Preference mSponsor;
+-    private Preference mBuildServerSponsor;
+ 
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+@@ -72,34 +70,31 @@ public class About extends SettingsPreferenceFragment {
+         mWebsite = findPreference(KEY_CRDROID_WEBSITE);
+         mTelegramChannelUrl = findPreference(KEY_CRDROID_TELEGRAM_CHANNEL);
+         mSponsor = findPreference(KEY_CRDROID_SPONSOR);
+-        mBuildServerSponsor = findPreference(KEY_CRDROID_BUILDSERVERSPONSOR);
+     }
+ 
      @Override
      public boolean onPreferenceTreeClick(Preference preference) {
          if (preference == mDonate) {
@@ -341,12 +323,14 @@ index 2c0087b1..c9a635d5 100644
 +            launchUrl("https://floko.maud.io");
          } else if (preference == mSponsor) {
 -            launchUrl("https://www.scopehosts.com");
+-        } else if (preference == mBuildServerSponsor){
+-            launchUrl("https://www.interserver.net/r/836686");
 +            launchUrl("https://floko.maud.io");
          }
  
          return super.onPreferenceTreeClick(preference);
 diff --git a/src/com/crdroid/settings/fragments/Miscellaneous.java b/src/com/crdroid/settings/fragments/Miscellaneous.java
-index f360ad93..eda83742 100644
+index f360ad9..eda8374 100644
 --- a/src/com/crdroid/settings/fragments/Miscellaneous.java
 +++ b/src/com/crdroid/settings/fragments/Miscellaneous.java
 @@ -32,7 +32,6 @@ import com.android.settings.SettingsPreferenceFragment;
@@ -380,7 +364,7 @@ index f360ad93..eda83742 100644
      }
 diff --git a/src/com/crdroid/settings/fragments/misc/GmsSwitch.java b/src/com/crdroid/settings/fragments/misc/GmsSwitch.java
 deleted file mode 100644
-index 623d4dac..00000000
+index 623d4da..0000000
 --- a/src/com/crdroid/settings/fragments/misc/GmsSwitch.java
 +++ /dev/null
 @@ -1,62 +0,0 @@
@@ -448,7 +432,7 @@ index 623d4dac..00000000
 -}
 diff --git a/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java b/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java
 deleted file mode 100644
-index 17cef4fb..00000000
+index 17cef4f..0000000
 --- a/src/com/crdroid/settings/preferences/SystemPropertySwitchPreference.java
 +++ /dev/null
 @@ -1,56 +0,0 @@
