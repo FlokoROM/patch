@@ -110,7 +110,7 @@ index dbbe2fc2337e..8166e51791b2 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index cd209564a37a..000000000000
+index aa9b9d81ba91..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
 @@ -1,413 +0,0 @@
@@ -219,10 +219,10 @@ index cd209564a37a..000000000000
 -
 -    // Packages to Spoof as ROG Phone 3
 -    private static final String[] packagesToChangeROG3 = {
--            "com.pearlabyss.blackdesertm",
--            "com.pearlabyss.blackdesertm.gl",
 -            "com.ea.gp.fifamobile",
--            "com.gameloft.android.ANMP.GloftA9HM"
+-            "com.gameloft.android.ANMP.GloftA9HM",
+-            "com.pearlabyss.blackdesertm",
+-            "com.pearlabyss.blackdesertm.gl"
 -    };
 -
 -    // Packages to Spoof as Xperia 5
@@ -235,6 +235,7 @@ index cd209564a37a..000000000000
 -
 -    // Packages to Spoof as OnePlus 8 Pro
 -    private static final String[] packagesToChangeOP8P = {
+-            "com.mobile.legends",
 -            "com.netease.lztgglobal",
 -            "com.pubg.imobile",
 -            "com.pubg.krmobile",
@@ -257,7 +258,6 @@ index cd209564a37a..000000000000
 -    private static final String[] packagesToChange11T = {
 -            "com.ea.gp.apexlegendsmobilefps",
 -            "com.levelinfinite.hotta.gp",
--            "com.mobile.legends",
 -            "com.supercell.clashofclans",
 -            "com.tencent.tmgp.sgame",
 -            "com.vng.mlbbvn"
@@ -299,14 +299,14 @@ index cd209564a37a..000000000000
 -        propsToChangePixel7Pro.put("DEVICE", "cheetah");
 -        propsToChangePixel7Pro.put("PRODUCT", "cheetah");
 -        propsToChangePixel7Pro.put("MODEL", "Pixel 7 Pro");
--        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ2A.230405.003.E1/9802792:user/release-keys");
+-        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ2A.230505.002/9891397:user/release-keys");
 -        propsToChangePixel5 = new HashMap<>();
 -        propsToChangePixel5.put("BRAND", "google");
 -        propsToChangePixel5.put("MANUFACTURER", "Google");
 -        propsToChangePixel5.put("DEVICE", "redfin");
 -        propsToChangePixel5.put("PRODUCT", "redfin");
 -        propsToChangePixel5.put("MODEL", "Pixel 5");
--        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ2A.230405.003/9719927:user/release-keys");
+-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ2A.230505.002/9891397:user/release-keys");
 -        propsToChangePixelXL = new HashMap<>();
 -        propsToChangePixelXL.put("BRAND", "google");
 -        propsToChangePixelXL.put("MANUFACTURER", "Google");
