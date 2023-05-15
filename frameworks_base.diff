@@ -110,10 +110,10 @@ index dbbe2fc2337e..8166e51791b2 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index aa9b9d81ba91..000000000000
+index 64f277ca57c6..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,413 +0,0 @@
+@@ -1,412 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2023 crDroid Android Project
@@ -271,6 +271,7 @@ index aa9b9d81ba91..000000000000
 -
 -    // Codenames for currently supported Pixels by Google
 -    private static final String[] pixelCodenames = {
+-            "lynx",
 -            "cheetah",
 -            "panther",
 -            "bluejay",
@@ -279,9 +280,7 @@ index aa9b9d81ba91..000000000000
 -            "barbet",
 -            "redfin",
 -            "bramble",
--            "sunfish",
--            "coral",
--            "flame"
+-            "sunfish"
 -    };
 -
 -    private static volatile boolean sIsGms = false;
@@ -2514,7 +2513,7 @@ index 4d7a321514ef..bb91fd855cf1 100644
      <string name="refresh_rate_tile_label">Refresh rate</string>
      <string name="auto_mode_label">Auto</string>
 diff --git a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
-index 6c1c0dff2275..0ab98360a10c 100644
+index 67a77e7ab628..b0087a25d134 100644
 --- a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
 +++ b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
 @@ -353,7 +353,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
@@ -2570,7 +2569,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
      }
  
      /**
-@@ -2158,8 +2147,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2160,8 +2149,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          mActiveUnlockConfig.setKeyguardUpdateMonitor(this);
          mWakeOnFingerprintAcquiredStart = context.getResources()
                          .getBoolean(com.android.internal.R.bool.kg_wake_on_acquire_start);
@@ -2579,7 +2578,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
          mFaceAcquiredInfoIgnoreList = Arrays.stream(
                  mContext.getResources().getIntArray(
                          R.array.config_face_acquire_device_entry_ignorelist))
-@@ -2411,21 +2398,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2413,21 +2400,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                  false,
                  mSfpsRequireScreenOnToAuthPrefObserver,
                  getCurrentUser());
@@ -2601,7 +2600,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
      }
  
      protected void updateSfpsRequireScreenOnToAuthPref() {
-@@ -2438,16 +2410,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2440,16 +2412,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                  getCurrentUser()) != 0;
      }
  
@@ -2618,7 +2617,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
      private void initializeSimState() {
          // Set initial sim states values.
          for (int slot = 0; slot < mTelephonyManager.getActiveModemCount(); slot++) {
-@@ -2756,7 +2718,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2758,7 +2720,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          // Don't trigger active unlock if primary auth is required
          final boolean primaryAuthRequired = !isUnlockingWithBiometricAllowed(true);
  
@@ -2627,7 +2626,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
                  (mAuthInterruptActive || triggerActiveUnlockForAssistant || awakeKeyguard)
                          && !mSwitchingUser
                          && !userCanDismissLockScreen
-@@ -2765,10 +2727,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2767,10 +2729,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                          && !mKeyguardGoingAway
                          && !mSecureCameraLaunched;
  
@@ -2638,7 +2637,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
          // Aggregate relevant fields for debug logging.
          logListenerModelData(
                  new KeyguardActiveUnlockModel(
-@@ -2967,10 +2925,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -2969,10 +2927,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          return shouldListen;
      }
  
@@ -2649,7 +2648,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
      private void logListenerModelData(@NonNull KeyguardListenModel model) {
          mLogger.logKeyguardListenerModel(model);
          if (model instanceof KeyguardFingerprintListenModel) {
-@@ -3102,7 +3056,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -3104,7 +3058,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          return mIsUnlockWithFingerprintPossible.getOrDefault(userId, false);
      }
  
@@ -2658,7 +2657,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
          return isFaceAuthEnabledForUser(userId) && !isFaceDisabled(userId);
      }
  
-@@ -3458,7 +3412,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -3460,7 +3414,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          mLogger.d("handleKeyguardReset");
          updateBiometricListeningState(BIOMETRIC_ACTION_UPDATE,
                  FACE_AUTH_UPDATED_KEYGUARD_RESET);
@@ -2666,7 +2665,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
          mNeedsSlowUnlockTransition = resolveNeedsSlowUnlockTransition();
      }
  
-@@ -3531,15 +3484,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -3533,15 +3486,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
          }
      }
  
@@ -2682,7 +2681,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
      /**
       * Handle {@link #MSG_REQUIRE_NFC_UNLOCK}
       */
-@@ -3570,7 +3514,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -3572,7 +3516,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
       * Handle {@link #MSG_REPORT_EMERGENCY_CALL_ACTION}
       */
      private void handleReportEmergencyCallAction() {
@@ -2690,7 +2689,7 @@ index 6c1c0dff2275..0ab98360a10c 100644
          Assert.isMainThread();
          for (int i = 0; i < mCallbacks.size(); i++) {
              KeyguardUpdateMonitorCallback cb = mCallbacks.get(i).get();
-@@ -4011,11 +3954,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+@@ -4013,11 +3956,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                      mSfpsRequireScreenOnToAuthPrefObserver);
          }
  
