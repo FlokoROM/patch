@@ -92,10 +92,10 @@ index be258caa1fb1..556058b567f9 100644
      }
  
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index fdab79a4d94e..56a7178dcaa4 100644
+index 6c968297a048..7e40d9a3e6ad 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -12019,12 +12019,6 @@ public final class Settings {
+@@ -11999,12 +11999,6 @@ public final class Settings {
           */
          public static final String SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
  
@@ -2396,10 +2396,10 @@ index f31b85920838..d40fd0a19787 100644
      <string name="face_icon_content_description" msgid="465030547475916280">"Isithonjana sobuso"</string>
      <string name="permlab_readSyncSettings" msgid="6250532864893156277">"funda izilungiselelo zokuvumelanisa"</string>
 diff --git a/core/res/res/values/cr_config.xml b/core/res/res/values/cr_config.xml
-index 5c49bdd7dab1..8c2aaea767a6 100644
+index 3f7e63eccf79..b0a14373d0e7 100644
 --- a/core/res/res/values/cr_config.xml
 +++ b/core/res/res/values/cr_config.xml
-@@ -98,14 +98,6 @@
+@@ -90,14 +90,6 @@
      <!-- Whether to cancel fingerprint operation if not idle -->
      <bool name="config_fpCancelIfNotIdle">false</bool>
  
@@ -2429,10 +2429,10 @@ index 034964cec5f3..7c8d0d68eb21 100644
      <string name="parallel_space_badge_label" translatable="false">%1$s</string>
  
 diff --git a/core/res/res/values/cr_symbols.xml b/core/res/res/values/cr_symbols.xml
-index e2665bc854f9..f542ff05e301 100644
+index 61aa38aa2788..31d960976ca1 100644
 --- a/core/res/res/values/cr_symbols.xml
 +++ b/core/res/res/values/cr_symbols.xml
-@@ -101,9 +101,6 @@
+@@ -93,9 +93,6 @@
      <!-- Whether to cancel fingerprint operation if not idle -->
      <java-symbol type="bool" name="config_fpCancelIfNotIdle" />
  
@@ -3300,12 +3300,12 @@ index 83def7645c13..d03148cee335 100644
  
      @Override
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index cf208bb0527b..6bf3a24750b1 100644
+index a29865214e6d..9d5ebef691b4 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -178,7 +178,6 @@ java_library_static {
+@@ -177,7 +177,6 @@ java_library_static {
+         "motorola.hardware.health-V1.0-java",
          "overlayable_policy_aidl-java",
-         "SurfaceFlingerProperties",
          "com.android.sysprop.watchdog",
 -        "faceunlock_framework",
          "kotlin-stdlib",

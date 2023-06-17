@@ -31,7 +31,7 @@ index ebbd5818..00000000
 -        android:pathData="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
 -</vector>
 diff --git a/res/values-ja-rJP/cr_strings.xml b/res/values-ja-rJP/cr_strings.xml
-index a5c0a4e6..2174fbe6 100644
+index f78775a6..a4b17b4b 100644
 --- a/res/values-ja-rJP/cr_strings.xml
 +++ b/res/values-ja-rJP/cr_strings.xml
 @@ -15,6 +15,14 @@
@@ -50,7 +50,7 @@ index a5c0a4e6..2174fbe6 100644
      <string name="crdroid_settings_title">crDroid の設定</string>
      <string name="crdroid_settings_summary">高度な設定</string>
 diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
-index 9f1d6d97..c7cc0d6f 100644
+index e83cb0c2..63c0acb1 100644
 --- a/res/values/cr_strings.xml
 +++ b/res/values/cr_strings.xml
 @@ -17,10 +17,10 @@
@@ -90,7 +90,7 @@ index 9f1d6d97..c7cc0d6f 100644
      <!-- Sites crDroid -->
      <string name="crdroid_source_title">GitHub</string>
      <string name="crdroid_source_summary">We love open source, check us out</string>
-@@ -632,6 +638,7 @@
+@@ -634,6 +640,7 @@
  
      <!-- Device Info screen. crDroid legal. -->
      <string name="crdroid_license_title">crDroid legal</string>
@@ -98,7 +98,7 @@ index 9f1d6d97..c7cc0d6f 100644
  
      <!-- Quick Settings brightness slider -->
      <string name="qs_show_brightness_slider_title">Brightness slider</string>
-@@ -1193,10 +1200,6 @@
+@@ -1194,10 +1201,6 @@
      <string name="floating_rotation_button_title">Floating rotate button</string>
      <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
  
@@ -109,7 +109,7 @@ index 9f1d6d97..c7cc0d6f 100644
      <!-- Captive portal -->
      <string name="captive_portal_title">Connectivity check</string>
      <string name="captive_portal_summary">Determine if the device can connect to the internet, by contacting Google. Also used to detect captive portals.</string>
-@@ -1214,11 +1217,6 @@
+@@ -1215,11 +1218,6 @@
      <string name="wifi_standard_icon_title">WiFi standard</string>
      <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
  
@@ -195,7 +195,7 @@ index 5c05d6c3..c199e52f 100644
      <Preference
          android:key="crdroid_drill"
 diff --git a/res/xml/crdroid_settings_misc.xml b/res/xml/crdroid_settings_misc.xml
-index b31ae615..3b4e951c 100644
+index 05d32444..4b7d6238 100644
 --- a/res/xml/crdroid_settings_misc.xml
 +++ b/res/xml/crdroid_settings_misc.xml
 @@ -31,37 +31,6 @@
@@ -236,7 +236,7 @@ index b31ae615..3b4e951c 100644
      <!-- Parallel space -->
      <Preference
          android:key="parallel_space"
-@@ -115,5 +84,4 @@
+@@ -107,5 +76,4 @@
              android:targetPackage="org.omnirom.omnijaws"
              android:targetClass="org.omnirom.omnijaws.SettingsActivity" />
      </Preference>
@@ -354,7 +354,7 @@ index 44a9ca55..13f0a595 100644
  
          return super.onPreferenceTreeClick(preference);
 diff --git a/src/com/crdroid/settings/fragments/Miscellaneous.java b/src/com/crdroid/settings/fragments/Miscellaneous.java
-index f360ad93..eda83742 100644
+index 014eb7c7..00ff6634 100644
 --- a/src/com/crdroid/settings/fragments/Miscellaneous.java
 +++ b/src/com/crdroid/settings/fragments/Miscellaneous.java
 @@ -32,7 +32,6 @@ import com.android.settings.SettingsPreferenceFragment;
@@ -363,19 +363,19 @@ index f360ad93..eda83742 100644
  
 -import com.crdroid.settings.fragments.misc.GmsSwitch;
  import com.crdroid.settings.fragments.misc.SensorBlock;
- import com.crdroid.settings.fragments.misc.SmartCharging;
  
-@@ -48,9 +47,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+ import java.util.List;
+@@ -46,9 +45,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+     public static final String TAG = "Miscellaneous";
  
-     private static final String SMART_CHARGING = "smart_charging";
      private static final String POCKET_JUDGE = "pocket_judge";
 -    private static final String SYS_GAMES_SPOOF = "persist.sys.pixelprops.games";
 -    private static final String SYS_PHOTOS_SPOOF = "persist.sys.pixelprops.gphotos";
 -    private static final String SYS_NETFLIX_SPOOF = "persist.sys.pixelprops.netflix";
  
-     private Preference mSmartCharging;
      private Preference mPocketJudge;
-@@ -90,10 +86,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
+ 
+@@ -81,10 +77,6 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
                  Settings.System.THREE_FINGER_GESTURE, 0, UserHandle.USER_CURRENT);
          LineageSettings.System.putIntForUser(resolver,
                  LineageSettings.System.AUTO_BRIGHTNESS_ONE_SHOT, 0, UserHandle.USER_CURRENT);
@@ -384,8 +384,8 @@ index f360ad93..eda83742 100644
 -        SystemProperties.set(SYS_NETFLIX_SPOOF, "false");
 -        GmsSwitch.reset(mContext);
          SensorBlock.reset(mContext);
-         SmartCharging.reset(mContext);
      }
+ 
 diff --git a/src/com/crdroid/settings/fragments/misc/GmsSwitch.java b/src/com/crdroid/settings/fragments/misc/GmsSwitch.java
 deleted file mode 100644
 index 623d4dac..00000000
