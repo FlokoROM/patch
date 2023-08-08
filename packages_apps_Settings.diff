@@ -1,5 +1,5 @@
 diff --git a/Android.bp b/Android.bp
-index d90aeabe5f..bbfca8bc38 100644
+index 8d9cce99fb..cdb2c3b1f5 100644
 --- a/Android.bp
 +++ b/Android.bp
 @@ -111,7 +111,6 @@ android_library {
@@ -11,7 +11,7 @@ index d90aeabe5f..bbfca8bc38 100644
          "kotlinx_coroutines_android",
          "kotlinx_coroutines",
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index e9211ea5f9..be8bd4271b 100644
+index 31dd3e3e17..e73b951767 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
 @@ -124,10 +124,6 @@
@@ -25,7 +25,7 @@ index e9211ea5f9..be8bd4271b 100644
      <!-- App lock -->
      <uses-permission android:name="android.permission.MANAGE_APP_LOCK" />
  
-@@ -4624,7 +4620,7 @@
+@@ -4633,7 +4629,7 @@
  
          <!-- Begin crDroid Settings -->
          <activity android:name="Settings$crDroidSettingsLayoutActivity"
@@ -34,7 +34,7 @@ index e9211ea5f9..be8bd4271b 100644
                  android:icon="@drawable/ic_homepage_crdroid"
                  android:exported="true"
                  android:taskAffinity="com.android.settings"
-@@ -4636,7 +4632,7 @@
+@@ -4645,7 +4641,7 @@
              <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                         android:value="com.crdroid.settings.crDroidSettingsLayout" />
              <meta-data android:name="com.android.settings.title"
@@ -43,7 +43,7 @@ index e9211ea5f9..be8bd4271b 100644
              <meta-data android:name="com.android.settings.summary"
                         android:resource="@string/crdroid_settings_summary"/>
              <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-@@ -4689,16 +4685,6 @@
+@@ -4698,16 +4694,6 @@
                  android:exported="true"
                  android:permission="crDroidDozeService">
          </service>
@@ -1494,46 +1494,6 @@ zE}xM$RD1abAmg`>nMj)#1YT;QtkrtL^j_9-?d9(xZGzV34AhSw<$dvO#{SBe=+kqI
 z8+VSn;%a%2TvX;F%mV^}1cH#3L9R|gZb~izZom&nR$At!g!FX@8EG>aS*7c8N^;kM
 nze>{5xAP&d{ttnVpR1Sq<Nu$)aOf2iKmgK38Y1d69HajS#e(J@
 
-diff --git a/res/layout/face_enroll_button.xml b/res/layout/face_enroll_button.xml
-new file mode 100644
-index 0000000000..6266650349
---- /dev/null
-+++ b/res/layout/face_enroll_button.xml
-@@ -0,0 +1,33 @@
-+<?xml version="1.0" encoding="utf-8"?>
-+<!--
-+  ~ Copyright (C) 2019 The Android Open Source Project
-+  ~
-+  ~ Licensed under the Apache License, Version 2.0 (the "License");
-+  ~ you may not use this file except in compliance with the License.
-+  ~ You may obtain a copy of the License at
-+  ~
-+  ~      http://www.apache.org/licenses/LICENSE-2.0
-+  ~
-+  ~ Unless required by applicable law or agreed to in writing, software
-+  ~ distributed under the License is distributed on an "AS IS" BASIS,
-+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-+  ~ See the License for the specific language governing permissions and
-+  ~ limitations under the License
-+  -->
-+<LinearLayout
-+    xmlns:android="http://schemas.android.com/apk/res/android"
-+    android:layout_width="match_parent"
-+    android:layout_height="wrap_content"
-+    android:minHeight="?android:attr/listPreferredItemHeight"
-+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-+    android:paddingStart="?android:attr/listPreferredItemPaddingStart">
-+
-+    <Button
-+        android:id="@+id/security_settings_face_settings_enroll_button"
-+        style="@style/SudGlifButton.Primary"
-+        android:layout_width="wrap_content"
-+        android:layout_height="wrap_content"
-+        android:layout_gravity="start"
-+        android:text="@string/security_settings_face_settings_enroll"/>
-+
-+</LinearLayout>
-\ No newline at end of file
 diff --git a/res/layout/face_enroll_introduction_invisible.xml b/res/layout/face_enroll_introduction_invisible.xml
 deleted file mode 100644
 index 217cacd97c..0000000000
@@ -1705,48 +1665,8 @@ index 217cacd97c..0000000000
 -
 -</com.google.android.setupdesign.GlifLayout>
 \ No newline at end of file
-diff --git a/res/layout/face_remove_button.xml b/res/layout/face_remove_button.xml
-new file mode 100644
-index 0000000000..2c2497ab1c
---- /dev/null
-+++ b/res/layout/face_remove_button.xml
-@@ -0,0 +1,33 @@
-+<?xml version="1.0" encoding="utf-8"?>
-+<!--
-+  ~ Copyright (C) 2018 The Android Open Source Project
-+  ~
-+  ~ Licensed under the Apache License, Version 2.0 (the "License");
-+  ~ you may not use this file except in compliance with the License.
-+  ~ You may obtain a copy of the License at
-+  ~
-+  ~      http://www.apache.org/licenses/LICENSE-2.0
-+  ~
-+  ~ Unless required by applicable law or agreed to in writing, software
-+  ~ distributed under the License is distributed on an "AS IS" BASIS,
-+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-+  ~ See the License for the specific language governing permissions and
-+  ~ limitations under the License.
-+  -->
-+<LinearLayout
-+    xmlns:android="http://schemas.android.com/apk/res/android"
-+    android:layout_width="match_parent"
-+    android:layout_height="wrap_content"
-+    android:minHeight="?android:attr/listPreferredItemHeight"
-+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-+    android:paddingStart="?android:attr/listPreferredItemPaddingStart">
-+
-+    <Button
-+        android:id="@+id/security_settings_face_settings_remove_button"
-+        style="@style/SudGlifButton.Primary"
-+        android:layout_width="wrap_content"
-+        android:layout_height="wrap_content"
-+        android:layout_gravity="start"
-+        android:text="@string/security_settings_face_settings_remove_face_model"/>
-+
-+</LinearLayout>
-\ No newline at end of file
 diff --git a/res/xml/configure_notification_settings.xml b/res/xml/configure_notification_settings.xml
-index 06aa2ed17c..da4d1ddff8 100644
+index 32f697ca9c..b0a6e8fbe5 100644
 --- a/res/xml/configure_notification_settings.xml
 +++ b/res/xml/configure_notification_settings.xml
 @@ -98,21 +98,9 @@
@@ -1810,10 +1730,10 @@ index f7d732bbb4..ef3a3fd1ff 100644
              android:key="biometric_settings_biometric_keyguard"
              android:title="@string/biometric_settings_use_biometric_unlock_phone"
 diff --git a/res/xml/security_settings_face.xml b/res/xml/security_settings_face.xml
-index a982dfe78b..f0d03507aa 100644
+index 5eed5ac4f0..6fb9202217 100644
 --- a/res/xml/security_settings_face.xml
 +++ b/res/xml/security_settings_face.xml
-@@ -33,6 +33,12 @@
+@@ -39,6 +39,12 @@
              android:title="@string/biometric_settings_use_biometric_for_apps"
              settings:keywords="@string/keywords_face_unlock"
              settings:controller="com.android.settings.biometrics.face.FaceSettingsAppPreferenceController"/>
@@ -1826,7 +1746,7 @@ index a982dfe78b..f0d03507aa 100644
      </PreferenceCategory>
  
      <PreferenceCategory
-@@ -52,41 +58,25 @@
+@@ -58,41 +64,25 @@
              settings:keywords="@string/keywords_face_unlock"
              settings:controller="com.android.settings.biometrics.face.FaceSettingsConfirmPreferenceController"/>
  
@@ -1879,7 +1799,7 @@ index a982dfe78b..f0d03507aa 100644
      <com.android.settingslib.widget.FooterPreference
          android:key="security_face_footer"
 diff --git a/res/xml/top_level_settings.xml b/res/xml/top_level_settings.xml
-index 587507abee..6d418bf177 100644
+index fec8cdbbe7..9e400fd7ff 100644
 --- a/res/xml/top_level_settings.xml
 +++ b/res/xml/top_level_settings.xml
 @@ -190,7 +190,7 @@
@@ -1892,10 +1812,10 @@ index 587507abee..6d418bf177 100644
          settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
  
 diff --git a/src/com/android/settings/biometrics/BiometricEnrollActivity.java b/src/com/android/settings/biometrics/BiometricEnrollActivity.java
-index b5843822c0..932c41073e 100644
+index 6f1007a911..bb16f0bb9b 100644
 --- a/src/com/android/settings/biometrics/BiometricEnrollActivity.java
 +++ b/src/com/android/settings/biometrics/BiometricEnrollActivity.java
-@@ -56,8 +56,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
+@@ -57,8 +57,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
  
  import java.util.List;
  
@@ -1904,8 +1824,8 @@ index b5843822c0..932c41073e 100644
  /**
   * Trampoline activity launched by the {@code android.settings.BIOMETRIC_ENROLL} action which
   * shows the user an appropriate enrollment flow depending on the device's biometric hardware.
-@@ -224,9 +222,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
-                         && !WizardManagerHelper.isUserSetupComplete(this));
+@@ -230,9 +228,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
+                 }
              }
          }
 -        if (FaceUtils.isFaceUnlockSupported() && isSetupWizard){
@@ -1915,7 +1835,7 @@ index b5843822c0..932c41073e 100644
              final FingerprintManager fpManager = getSystemService(FingerprintManager.class);
              final List<FingerprintSensorPropertiesInternal> fpProperties =
 diff --git a/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java b/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
-index 3ec1f297d1..acfe5a1025 100644
+index 204e1eb1e1..cdd2d8b88d 100644
 --- a/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
 +++ b/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
 @@ -59,7 +59,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
@@ -1927,6 +1847,29 @@ index 3ec1f297d1..acfe5a1025 100644
      private boolean mBiometricUnlockDisabledByAdmin;
      private TextView mErrorText;
      protected boolean mConfirmingCredentials;
+diff --git a/src/com/android/settings/biometrics/BiometricStatusPreferenceController.java b/src/com/android/settings/biometrics/BiometricStatusPreferenceController.java
+index 518e02fe52..f61f99c93f 100644
+--- a/src/com/android/settings/biometrics/BiometricStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/BiometricStatusPreferenceController.java
+@@ -54,17 +54,12 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
+     protected abstract String getSettingsClassName();
+ 
+     public BiometricStatusPreferenceController(Context context, String key) {
+-        this(context, key, UserHandle.USER_NULL /* profileChallengeUserId */);
+-    }
+-
+-    public BiometricStatusPreferenceController(
+-            Context context, String key, int profileChallengeUserId) {
+         super(context, key);
+         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+         mLockPatternUtils = FeatureFactory.getFactory(context)
+                 .getSecurityFeatureProvider()
+                 .getLockPatternUtils(context);
+-        mProfileChallengeUserId = profileChallengeUserId;
++        mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+         mBiometricNavigationUtils = new BiometricNavigationUtils(getUserId());
+     }
+ 
 diff --git a/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java b/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java
 index 29618f2018..a46ae7a728 100644
 --- a/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java
@@ -2012,28 +1955,99 @@ index 99105be43f..0000000000
 -        return FaceUtils.isFaceUnlockSupported() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
 -    }
 -}
+diff --git a/src/com/android/settings/biometrics/combination/CombinedBiometricProfileStatusPreferenceController.java b/src/com/android/settings/biometrics/combination/CombinedBiometricProfileStatusPreferenceController.java
+index 65169ab53c..b8706a553d 100644
+--- a/src/com/android/settings/biometrics/combination/CombinedBiometricProfileStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/combination/CombinedBiometricProfileStatusPreferenceController.java
+@@ -29,24 +29,22 @@ public class CombinedBiometricProfileStatusPreferenceController extends
+ 
+     private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings_profile";
+ 
+-    public CombinedBiometricProfileStatusPreferenceController(
+-            Context context, int profileChallengeUserId) {
+-        super(context, KEY_BIOMETRIC_SETTINGS, null /* lifecycle */, profileChallengeUserId);
++    public CombinedBiometricProfileStatusPreferenceController(Context context) {
++        super(context, KEY_BIOMETRIC_SETTINGS);
+     }
+ 
+-    public CombinedBiometricProfileStatusPreferenceController(
+-            Context context, String key, int profileChallengeUserId) {
+-        super(context, key, null /* lifecycle */, profileChallengeUserId);
++    public CombinedBiometricProfileStatusPreferenceController(Context context, String key) {
++        super(context, key);
+     }
+ 
+     public CombinedBiometricProfileStatusPreferenceController(
+-            Context context, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, KEY_BIOMETRIC_SETTINGS, lifecycle, profileChallengeUserId);
++            Context context, Lifecycle lifecycle) {
++        super(context, KEY_BIOMETRIC_SETTINGS, lifecycle);
+     }
+ 
+     public CombinedBiometricProfileStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, lifecycle, profileChallengeUserId);
++            Context context, String key, Lifecycle lifecycle) {
++        super(context, key, lifecycle);
+     }
+ 
+     @Override
+diff --git a/src/com/android/settings/biometrics/combination/CombinedBiometricStatusPreferenceController.java b/src/com/android/settings/biometrics/combination/CombinedBiometricStatusPreferenceController.java
+index da0ab393c9..50eb43d654 100644
+--- a/src/com/android/settings/biometrics/combination/CombinedBiometricStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/combination/CombinedBiometricStatusPreferenceController.java
+@@ -16,7 +16,6 @@
+ package com.android.settings.biometrics.combination;
+ 
+ import android.content.Context;
+-import android.os.UserHandle;
+ 
+ import androidx.annotation.Nullable;
+ import androidx.lifecycle.Lifecycle;
+@@ -57,12 +56,7 @@ public class CombinedBiometricStatusPreferenceController extends
+ 
+     public CombinedBiometricStatusPreferenceController(
+             Context context, String key, Lifecycle lifecycle) {
+-        this(context, key, lifecycle, UserHandle.USER_NULL /* profileChallengeUserId */);
+-    }
+-
+-    public CombinedBiometricStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, profileChallengeUserId);
++        super(context, key);
+         mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context, getUserId());
+ 
+         if (lifecycle != null) {
 diff --git a/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java b/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
-index 40622c6ea1..ed74d2a550 100644
+index ac8c6f0423..66ed56afc9 100644
 --- a/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
 +++ b/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
-@@ -20,7 +20,6 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLO
+@@ -22,13 +22,11 @@ import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentia
  
  import android.app.admin.DevicePolicyManager;
  import android.app.settings.SettingsEnums;
 -import android.content.ComponentName;
  import android.content.Intent;
+ import android.content.res.Configuration;
  import android.hardware.SensorPrivacyManager;
  import android.hardware.biometrics.BiometricAuthenticator;
-@@ -54,8 +53,6 @@ import com.google.android.setupcompat.template.FooterButton;
+ import android.hardware.face.FaceManager;
+-import android.hardware.face.FaceSensorPropertiesInternal;
+ import android.os.Bundle;
+ import android.os.UserHandle;
+ import android.text.Html;
+@@ -62,10 +60,6 @@ import com.google.android.setupcompat.template.FooterButton;
  import com.google.android.setupcompat.util.WizardManagerHelper;
  import com.google.android.setupdesign.span.LinkSpan;
  
+-import java.util.List;
+-
 -import com.android.settings.custom.biometrics.FaceUtils;
 -
  /**
   * Provides introductory info about face unlock and prompts the user to agree before starting face
   * enrollment.
-@@ -69,8 +66,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+@@ -78,8 +72,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
      @Nullable private FooterButton mSecondaryFooterButton;
      @Nullable private SensorPrivacyManager mSensorPrivacyManager;
  
@@ -2042,37 +2056,73 @@ index 40622c6ea1..ed74d2a550 100644
      @Override
      protected void onCancelButtonClick(View view) {
          if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
-@@ -103,7 +98,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
-         }
+@@ -118,7 +110,28 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+                 mDevicePostureState, mLaunchedPostureGuidance);
      }
  
 -    private void initDefaultLayout(){
 +    @Override
 +    protected void onCreate(Bundle savedInstanceState) {
++        mFaceManager = getFaceManager();
++
++        if (savedInstanceState == null
++                && !WizardManagerHelper.isAnySetupWizard(getIntent())
++                && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
++                && maxFacesEnrolled()) {
++            // from tips && maxEnrolled
++            Log.d(TAG, "launch face settings");
++            launchFaceSettingsActivity();
++            finish();
++        }
++
 +        super.onCreate(savedInstanceState);
++
++        // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
++        // if we don't wait for it.
++        if (isFinishing()) {
++            return;
++        }
 +
          // Apply extracted theme color to icons.
          final ImageView iconGlasses = findViewById(R.id.icon_glasses);
          final ImageView iconLooking = findViewById(R.id.icon_looking);
-@@ -143,17 +141,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
-             iconRequireEyes.getBackground().setColorFilter(getIconColorFilter());
+@@ -159,35 +172,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
              infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
          }
+ 
 -    }
 -
 -    @Override
 -    protected void onCreate(Bundle savedInstanceState) {
+-        mFaceManager = getFaceManager();
+-
+-        if (savedInstanceState == null
+-                && !WizardManagerHelper.isAnySetupWizard(getIntent())
+-                && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
+-                && maxFacesEnrolled()) {
+-            // from tips && maxEnrolled
+-            Log.d(TAG, "launch face settings");
+-            launchFaceSettingsActivity();
+-            finish();
+-        }
+-
 -        super.onCreate(savedInstanceState);
+-
+-        // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
+-        // if we don't wait for it.
+-        if (isFinishing()) {
+-            return;
+-        }
 -
 -        if (!FaceUtils.isFaceUnlockSupported()) {
 -            initDefaultLayout();
 -        }
- 
+-
 -        mForRedo = getIntent().getBooleanExtra("for_redo", false);
-         mFaceManager = Utils.getFaceManagerOrNull(this);
-         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
-                 .getFaceFeatureProvider();
-@@ -182,19 +170,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+         // This path is an entry point for SetNewPasswordController, e.g.
+         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
+         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+@@ -223,10 +207,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
          final boolean cameraPrivacyEnabled = helper
                  .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
          Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
@@ -2082,17 +2132,20 @@ index 40622c6ea1..ed74d2a550 100644
 -        }
      }
  
+     private void launchFaceSettingsActivity() {
+@@ -324,11 +304,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+ 
      @Override
      protected void onActivityResult(int requestCode, int resultCode, Intent data) {
--        if (FaceUtils.isFaceUnlockSupported()) {
+-	    if (FaceUtils.isFaceUnlockSupported()) {
 -            onActivityResultCustom(requestCode, resultCode, data);
 -            return;
 -        }
 -
-         // If user has skipped or finished enrolling, don't restart enrollment.
-         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
-                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
-@@ -217,66 +196,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+         if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+             mLaunchedPostureGuidance = false;
+             if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+@@ -361,66 +336,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
          super.onActivityResult(requestCode, resultCode, data);
      }
  
@@ -2159,7 +2212,7 @@ index 40622c6ea1..ed74d2a550 100644
      protected boolean generateChallengeOnCreate() {
          return true;
      }
-@@ -324,9 +243,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+@@ -468,9 +383,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
  
      @Override
      protected int getLayoutResource() {
@@ -2169,11 +2222,34 @@ index 40622c6ea1..ed74d2a550 100644
          return R.layout.face_enroll_introduction;
      }
  
+@@ -514,20 +426,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+     }
+ 
+     private boolean maxFacesEnrolled() {
+-        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+         if (mFaceManager != null) {
+-            final List<FaceSensorPropertiesInternal> props =
+-                    mFaceManager.getSensorPropertiesInternal();
+             // This will need to be updated for devices with multiple face sensors.
+-            final int max = props.get(0).maxEnrollmentsPerUser;
+             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
+-            final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
++            final int maxFacesEnrollable = getApplicationContext().getResources()
+                     .getInteger(R.integer.suw_max_faces_enrollable);
+-            if (isSetupWizard) {
+-                return numEnrolledFaces >= maxFacesEnrollableIfSUW;
+-            } else {
+-                return numEnrolledFaces >= max;
+-            }
++            return numEnrolledFaces >= maxFacesEnrollable;
+         } else {
+             return false;
+         }
 diff --git a/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java b/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
-index 248dde36f6..a2e11afb7e 100644
+index a65beeab9c..a2e11afb7e 100644
 --- a/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
 +++ b/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
-@@ -27,8 +27,6 @@ import androidx.preference.Preference;
+@@ -27,41 +27,33 @@ import androidx.preference.Preference;
  
  import com.android.settings.R;
  
@@ -2182,7 +2258,38 @@ index 248dde36f6..a2e11afb7e 100644
  public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceController {
  
      private static final String KEY_FACE_SETTINGS = "face_settings_profile";
-@@ -56,9 +54,6 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
+     private final DevicePolicyManager mDevicePolicyManager;
+ 
+-    public FaceProfileStatusPreferenceController(Context context, int profileChallengeUserId) {
+-        super(context, KEY_FACE_SETTINGS, null /* lifecycle */, profileChallengeUserId);
++    public FaceProfileStatusPreferenceController(Context context) {
++        super(context, KEY_FACE_SETTINGS);
+         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
+     }
+ 
+-    public FaceProfileStatusPreferenceController(
+-            Context context, String key, int profileChallengeUserId) {
+-        super(context, key, null /* lifecycle */, profileChallengeUserId);
++    public FaceProfileStatusPreferenceController(Context context, String key) {
++        super(context, key);
+         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
+     }
+ 
+-    public FaceProfileStatusPreferenceController(
+-            Context context, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, KEY_FACE_SETTINGS, lifecycle, profileChallengeUserId);
++    public FaceProfileStatusPreferenceController(Context context, Lifecycle lifecycle) {
++        super(context, KEY_FACE_SETTINGS, lifecycle);
+         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
+     }
+ 
+-    public FaceProfileStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, lifecycle, profileChallengeUserId);
++    public FaceProfileStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
++        super(context, key, lifecycle);
+         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
+     }
  
      @Override
      public int getAvailabilityStatus() {
@@ -2660,14 +2767,14 @@ index 01f5196b47..7db5958489 100644
  
      public void setListener(Listener listener) {
 diff --git a/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java b/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
-index 4d809d22a3..f18a74fa19 100644
+index 38bcdcbb9e..f18a74fa19 100644
 --- a/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
 +++ b/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
 @@ -18,7 +18,6 @@ package com.android.settings.biometrics.face;
  
  import android.content.Context;
  import android.hardware.face.FaceManager;
--import androidx.preference.Preference;
+-import android.os.UserHandle;
  
  import androidx.annotation.Nullable;
  import androidx.lifecycle.Lifecycle;
@@ -2680,7 +2787,24 @@ index 4d809d22a3..f18a74fa19 100644
  public class FaceStatusPreferenceController extends BiometricStatusPreferenceController
          implements LifecycleObserver {
  
-@@ -93,9 +90,6 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
+@@ -59,14 +56,8 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
+         this(context, KEY_FACE_SETTINGS, lifecycle);
+     }
+ 
+-    public FaceStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle) {
+-        this(context, key, lifecycle, UserHandle.USER_NULL /* profileChallengeUserId */);
+-    }
+-
+-    public FaceStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, profileChallengeUserId);
++    public FaceStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
++        super(context, key);
+         mFaceManager = Utils.getFaceManagerOrNull(context);
+         mFaceStatusUtils = new FaceStatusUtils(context, mFaceManager, getUserId());
+ 
+@@ -99,9 +90,6 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
      public void updateState(Preference preference) {
          super.updateState(preference);
          updateStateInternal();
@@ -2734,6 +2858,69 @@ index 870756ef29..d0debdfe59 100644
 +        return Utils.isMultipleBiometricsSupported(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
      }
  }
+diff --git a/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceController.java b/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceController.java
+index f303758ebe..d6d0b8f8ac 100644
+--- a/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceController.java
+@@ -26,24 +26,21 @@ public class FingerprintProfileStatusPreferenceController
+ 
+     public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings_profile";
+ 
+-    public FingerprintProfileStatusPreferenceController(
+-            Context context, int profileChallengeUserId) {
+-        super(context, KEY_FINGERPRINT_SETTINGS, null /* lifecycle */, profileChallengeUserId);
++    public FingerprintProfileStatusPreferenceController(Context context) {
++        super(context, KEY_FINGERPRINT_SETTINGS);
+     }
+ 
+-    public FingerprintProfileStatusPreferenceController(
+-            Context context, String key, int profileChallengeUserId) {
+-        super(context, key, null /* lifecycle */, profileChallengeUserId);
++    public FingerprintProfileStatusPreferenceController(Context context, String key) {
++        super(context, key);
+     }
+ 
+-    public FingerprintProfileStatusPreferenceController(
+-            Context context, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, KEY_FINGERPRINT_SETTINGS, lifecycle, profileChallengeUserId);
++    public FingerprintProfileStatusPreferenceController(Context context, Lifecycle lifecycle) {
++        super(context, KEY_FINGERPRINT_SETTINGS, lifecycle);
+     }
+ 
+     public FingerprintProfileStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, lifecycle, profileChallengeUserId);
++            Context context, String key, Lifecycle lifecycle) {
++        super(context, key, lifecycle);
+     }
+ 
+     @Override
+diff --git a/src/com/android/settings/biometrics/fingerprint/FingerprintStatusPreferenceController.java b/src/com/android/settings/biometrics/fingerprint/FingerprintStatusPreferenceController.java
+index 7a33706e91..347fec7287 100644
+--- a/src/com/android/settings/biometrics/fingerprint/FingerprintStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/fingerprint/FingerprintStatusPreferenceController.java
+@@ -18,7 +18,6 @@ package com.android.settings.biometrics.fingerprint;
+ 
+ import android.content.Context;
+ import android.hardware.fingerprint.FingerprintManager;
+-import android.os.UserHandle;
+ 
+ import androidx.annotation.Nullable;
+ import androidx.lifecycle.Lifecycle;
+@@ -57,12 +56,7 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
+     }
+ 
+     public FingerprintStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
+-        this(context, key, lifecycle, UserHandle.USER_NULL /* profileChallengeUserId */);
+-    }
+-
+-    public FingerprintStatusPreferenceController(
+-            Context context, String key, Lifecycle lifecycle, int profileChallengeUserId) {
+-        super(context, key, profileChallengeUserId);
++        super(context, key);
+         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
+         mFingerprintStatusUtils =
+                 new FingerprintStatusUtils(context, mFingerprintManager, getUserId());
 diff --git a/src/com/android/settings/custom/biometrics/FaceUtils.java b/src/com/android/settings/custom/biometrics/FaceUtils.java
 deleted file mode 100644
 index b83aec83a9..0000000000
@@ -3000,3 +3187,275 @@ index f558d70540..a8239241bf 100644
                  final Context context = getApplicationContext();
  
                  try {
+diff --git a/src/com/android/settings/security/ChangeProfileScreenLockPreferenceController.java b/src/com/android/settings/security/ChangeProfileScreenLockPreferenceController.java
+index aa3f56ccf8..7c946c3c3e 100644
+--- a/src/com/android/settings/security/ChangeProfileScreenLockPreferenceController.java
++++ b/src/com/android/settings/security/ChangeProfileScreenLockPreferenceController.java
+@@ -40,13 +40,13 @@ public class ChangeProfileScreenLockPreferenceController extends
+     private final String mPreferenceKey;
+ 
+     public ChangeProfileScreenLockPreferenceController(Context context,
+-            SettingsPreferenceFragment host, int profileChallengeUserId) {
+-        this(context, host, KEY_UNLOCK_SET_OR_CHANGE_PROFILE, profileChallengeUserId);
++            SettingsPreferenceFragment host) {
++        this(context, host, KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
+     }
+ 
+     public ChangeProfileScreenLockPreferenceController(Context context,
+-            SettingsPreferenceFragment host, String key, int profileChallengeUserId) {
+-        super(context, host, profileChallengeUserId);
++            SettingsPreferenceFragment host, String key) {
++        super(context, host);
+         this.mPreferenceKey = key;
+     }
+ 
+diff --git a/src/com/android/settings/security/ChangeScreenLockPreferenceController.java b/src/com/android/settings/security/ChangeScreenLockPreferenceController.java
+index 13c9882096..3870634f66 100644
+--- a/src/com/android/settings/security/ChangeScreenLockPreferenceController.java
++++ b/src/com/android/settings/security/ChangeScreenLockPreferenceController.java
+@@ -54,18 +54,13 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
+     protected RestrictedPreference mPreference;
+ 
+     public ChangeScreenLockPreferenceController(Context context, SettingsPreferenceFragment host) {
+-        this(context, host, UserHandle.USER_NULL /* profileChallengeUserId */);
+-    }
+-
+-    public ChangeScreenLockPreferenceController(
+-            Context context, SettingsPreferenceFragment host, int profileChallengeUserId) {
+         super(context);
+         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+         mLockPatternUtils = FeatureFactory.getFactory(context)
+                 .getSecurityFeatureProvider()
+                 .getLockPatternUtils(context);
+         mHost = host;
+-        mProfileChallengeUserId = profileChallengeUserId;
++        mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+         mScreenLockPreferenceDetailUtils = new ScreenLockPreferenceDetailsUtils(context);
+     }
+diff --git a/src/com/android/settings/security/LockUnificationPreferenceController.java b/src/com/android/settings/security/LockUnificationPreferenceController.java
+index defeffbfba..d85d65b386 100644
+--- a/src/com/android/settings/security/LockUnificationPreferenceController.java
++++ b/src/com/android/settings/security/LockUnificationPreferenceController.java
+@@ -25,7 +25,6 @@ import android.app.Activity;
+ import android.app.admin.DevicePolicyManager;
+ import android.content.Context;
+ import android.content.Intent;
+-import android.content.pm.UserInfo;
+ import android.os.Bundle;
+ import android.os.UserHandle;
+ import android.os.UserManager;
+@@ -88,13 +87,12 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
+         mUnifyProfile = screen.findPreference(mPreferenceKey);
+     }
+ 
+-    public LockUnificationPreferenceController(
+-            Context context, SettingsPreferenceFragment host, int profileUserId) {
+-        this(context, host, KEY_UNIFICATION, profileUserId);
++    public LockUnificationPreferenceController(Context context, SettingsPreferenceFragment host) {
++        this(context, host, KEY_UNIFICATION);
+     }
+ 
+     public LockUnificationPreferenceController(
+-            Context context, SettingsPreferenceFragment host, String key, int profileUserId) {
++            Context context, SettingsPreferenceFragment host, String key) {
+         super(context);
+         mHost = host;
+         mUm = context.getSystemService(UserManager.class);
+@@ -102,7 +100,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
+         mLockPatternUtils = FeatureFactory.getFactory(context)
+                 .getSecurityFeatureProvider()
+                 .getLockPatternUtils(context);
+-        mProfileUserId = profileUserId;
++        mProfileUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);
+         mCurrentDevicePassword = LockscreenCredential.createNone();
+         mCurrentProfilePassword = LockscreenCredential.createNone();
+         this.mPreferenceKey = key;
+@@ -126,10 +124,8 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
+         }
+         final boolean useOneLock = (Boolean) value;
+         if (useOneLock) {
+-            final UserInfo parentUser = mUm.getProfileParent(mProfileUserId);
+-            final int parentUserId = parentUser != null ? parentUser.id : MY_USER_ID;
+             mRequireNewDevicePassword = !mDpm.isPasswordSufficientAfterProfileUnification(
+-                    parentUserId, mProfileUserId);
++                    UserHandle.myUserId(), mProfileUserId);
+             startUnification();
+         } else {
+             final String title = mContext.getString(R.string.unlock_set_unlock_launch_picker_title);
+diff --git a/src/com/android/settings/security/SecurityAdvancedSettings.java b/src/com/android/settings/security/SecurityAdvancedSettings.java
+index ca10f6df57..f716064a6a 100644
+--- a/src/com/android/settings/security/SecurityAdvancedSettings.java
++++ b/src/com/android/settings/security/SecurityAdvancedSettings.java
+@@ -27,8 +27,6 @@ import android.app.settings.SettingsEnums;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.os.Bundle;
+-import android.os.UserHandle;
+-import android.os.UserManager;
+ 
+ import com.android.settings.R;
+ import com.android.settings.biometrics.combination.CombinedBiometricProfileStatusPreferenceController;
+@@ -40,7 +38,6 @@ import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+ import com.android.settings.search.BaseSearchIndexProvider;
+ import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
+ import com.android.settings.widget.PreferenceCategoryController;
+-import com.android.settings.Utils;
+ import com.android.settingslib.core.AbstractPreferenceController;
+ import com.android.settingslib.core.lifecycle.Lifecycle;
+ import com.android.settingslib.drawer.CategoryKey;
+@@ -146,31 +143,18 @@ public class SecurityAdvancedSettings extends DashboardFragment {
+         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
+ 
+-        // TODO: Add preferences for every managed profile.
+-        // This may require substantial reworking, so for now, we simply show the
+-        // first managed profile as usual, unless the Settings activity is accessed
+-        // via a specific profile, in which case its preferences will be shown.
+-        final UserManager userManager =
+-                (UserManager) context.getSystemService(Context.USER_SERVICE);
+-        int profileId = UserHandle.myUserId();
+-        if (!userManager.isManagedProfile(profileId)) {
+-            profileId = Utils.getManagedProfileId(userManager, profileId);
+-        }
+-
+         final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();
+         profileSecurityControllers.add(new ChangeProfileScreenLockPreferenceController(
+-                context, host, profileId));
+-        profileSecurityControllers.add(new LockUnificationPreferenceController(
+-                context, host, profileId));
++                context, host));
++        profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
+         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
+-                context, lifecycle, profileId));
++                context, lifecycle));
+         profileSecurityControllers.add(new FaceProfileStatusPreferenceController(
+-                context, lifecycle, profileId));
++                context, lifecycle));
+         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(
+-                context, lifecycle, profileId));
++                context, lifecycle));
+         profileSecurityControllers
+-                .add(new CombinedBiometricProfileStatusPreferenceController(
+-                        context, lifecycle, profileId));
++                .add(new CombinedBiometricProfileStatusPreferenceController(context, lifecycle));
+         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
+                 .setChildren(profileSecurityControllers));
+         controllers.addAll(profileSecurityControllers);
+diff --git a/src/com/android/settings/security/VisiblePatternProfilePreferenceController.java b/src/com/android/settings/security/VisiblePatternProfilePreferenceController.java
+index 4c823a32c1..4d65ae75fe 100644
+--- a/src/com/android/settings/security/VisiblePatternProfilePreferenceController.java
++++ b/src/com/android/settings/security/VisiblePatternProfilePreferenceController.java
+@@ -52,25 +52,24 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
+ 
+     private Preference mPreference;
+ 
+-    public VisiblePatternProfilePreferenceController(Context context, int profileChallengeUserId) {
+-        this(context, null /* lifecycle */, profileChallengeUserId);
++    public VisiblePatternProfilePreferenceController(Context context) {
++        this(context, null /* lifecycle */);
+     }
+ 
+-    public VisiblePatternProfilePreferenceController(
+-            Context context, Lifecycle lifecycle, int profileChallengeUserId) {
+-        this(context, lifecycle, KEY_VISIBLE_PATTERN_PROFILE, profileChallengeUserId);
++    public VisiblePatternProfilePreferenceController(Context context, Lifecycle lifecycle) {
++        this(context, lifecycle, KEY_VISIBLE_PATTERN_PROFILE);
+     }
+ 
+ 
+     // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
+     public VisiblePatternProfilePreferenceController(
+-            Context context, Lifecycle lifecycle, String key, int profileChallengeUserId) {
++            Context context, Lifecycle lifecycle, String key) {
+         super(context, key);
+         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+         mLockPatternUtils = FeatureFactory.getFactory(context)
+                 .getSecurityFeatureProvider()
+                 .getLockPatternUtils(context);
+-        mProfileChallengeUserId = profileChallengeUserId;
++        mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+         if (lifecycle != null) {
+             lifecycle.addObserver(this);
+         }
+diff --git a/tests/robotests/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceControllerTest.java b/tests/robotests/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceControllerTest.java
+index 446ea0aff2..efcba9d958 100644
+--- a/tests/robotests/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceControllerTest.java
++++ b/tests/robotests/src/com/android/settings/biometrics/fingerprint/FingerprintProfileStatusPreferenceControllerTest.java
+@@ -72,8 +72,7 @@ public class FingerprintProfileStatusPreferenceControllerTest {
+         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                 .thenReturn(mLockPatternUtils);
+         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
+-        mController = new FingerprintProfileStatusPreferenceController(
+-                mContext, TEST_PREF_KEY, FAKE_PROFILE_USER_ID);
++        mController = new FingerprintProfileStatusPreferenceController(mContext, TEST_PREF_KEY);
+     }
+ 
+     @Test
+@@ -83,16 +82,14 @@ public class FingerprintProfileStatusPreferenceControllerTest {
+ 
+     @Test
+     public void getPreferenceKey_byDefault_returnsDefaultValue() {
+-        mController = new FingerprintProfileStatusPreferenceController(
+-                mContext, FAKE_PROFILE_USER_ID);
++        mController = new FingerprintProfileStatusPreferenceController(mContext);
+ 
+         assertThat(mController.getPreferenceKey()).isEqualTo("fingerprint_settings_profile");
+     }
+ 
+     @Test
+     public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+-        mController = new FingerprintProfileStatusPreferenceController(
+-                mContext, "key", FAKE_PROFILE_USER_ID);
++        mController = new FingerprintProfileStatusPreferenceController(mContext, "key");
+ 
+         assertThat(mController.getPreferenceKey()).isEqualTo("key");
+     }
+diff --git a/tests/robotests/src/com/android/settings/security/LockUnificationPreferenceControllerTest.java b/tests/robotests/src/com/android/settings/security/LockUnificationPreferenceControllerTest.java
+index 4ed18e5e4b..123bf34657 100644
+--- a/tests/robotests/src/com/android/settings/security/LockUnificationPreferenceControllerTest.java
++++ b/tests/robotests/src/com/android/settings/security/LockUnificationPreferenceControllerTest.java
+@@ -70,8 +70,7 @@ public class LockUnificationPreferenceControllerTest {
+     }
+ 
+     private void init() {
+-        mController = new LockUnificationPreferenceController(
+-                mContext, mHost, FAKE_PROFILE_USER_ID);
++        mController = new LockUnificationPreferenceController(mContext, mHost);
+         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+         mPreference = new Preference(mContext);
+     }
+@@ -93,8 +92,7 @@ public class LockUnificationPreferenceControllerTest {
+ 
+     @Test
+     public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+-        mController = new LockUnificationPreferenceController(
+-                mContext, mHost, "key", FAKE_PROFILE_USER_ID);
++        mController = new LockUnificationPreferenceController(mContext, mHost, "key");
+ 
+         assertThat(mController.getPreferenceKey()).isEqualTo("key");
+     }
+diff --git a/tests/robotests/src/com/android/settings/security/VisiblePatternProfilePreferenceControllerTest.java b/tests/robotests/src/com/android/settings/security/VisiblePatternProfilePreferenceControllerTest.java
+index 374e20aeb6..11d7016579 100644
+--- a/tests/robotests/src/com/android/settings/security/VisiblePatternProfilePreferenceControllerTest.java
++++ b/tests/robotests/src/com/android/settings/security/VisiblePatternProfilePreferenceControllerTest.java
+@@ -86,8 +86,7 @@ public class VisiblePatternProfilePreferenceControllerTest {
+ 
+         mLifecycleOwner = () -> mLifecycle;
+         mLifecycle = new Lifecycle(mLifecycleOwner);
+-        mController = new VisiblePatternProfilePreferenceController(
+-                mContext, mLifecycle, FAKE_PROFILE_USER_ID);
++        mController = new VisiblePatternProfilePreferenceController(mContext, mLifecycle);
+     }
+ 
+     @Test
+@@ -124,8 +123,7 @@ public class VisiblePatternProfilePreferenceControllerTest {
+ 
+     @Test
+     public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+-        mController = new VisiblePatternProfilePreferenceController(
+-                mContext, mLifecycle, "key", FAKE_PROFILE_USER_ID);
++        mController = new VisiblePatternProfilePreferenceController(mContext, mLifecycle, "key");
+ 
+         assertThat(mController.getPreferenceKey()).isEqualTo("key");
+     }

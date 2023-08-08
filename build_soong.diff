@@ -1,5 +1,5 @@
 diff --git a/ui/build/dumpvars.go b/ui/build/dumpvars.go
-index 7da60a3ca..73d89afe3 100644
+index 5a104480a..18ca15966 100644
 --- a/ui/build/dumpvars.go
 +++ b/ui/build/dumpvars.go
 @@ -139,7 +139,7 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
@@ -8,6 +8,6 @@ index 7da60a3ca..73d89afe3 100644
  	"PLATFORM_VERSION",
 -	"CR_VERSION",
 +	"FLOKO_VERSION",
+ 	"PRODUCT_INCLUDE_TAGS",
  	"TARGET_DEVICE",
  	"TARGET_BUILD_VARIANT",
- 	"TARGET_BUILD_TYPE",
