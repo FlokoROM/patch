@@ -350,7 +350,7 @@ index 2b3cdd7b..00000000
 -if __name__ == "__main__":
 -    main()
 diff --git a/config/common.mk b/config/common.mk
-index 63586c98..0d84ad5a 100644
+index 5daece13..7390728d 100644
 --- a/config/common.mk
 +++ b/config/common.mk
 @@ -2,9 +2,8 @@
@@ -373,7 +373,7 @@ index 63586c98..0d84ad5a 100644
  # Disable ADB authentication
  PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=0
  else
-@@ -116,8 +115,7 @@ PRODUCT_PACKAGES += \
+@@ -124,8 +123,7 @@ PRODUCT_PACKAGES += \
  PRODUCT_PACKAGES += \
      LineageParts \
      LineageSettingsProvider \
@@ -383,7 +383,7 @@ index 63586c98..0d84ad5a 100644
  
  PRODUCT_COPY_FILES += \
      vendor/lineage/prebuilt/common/etc/init/init.lineage-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.lineage-updater.rc
-@@ -218,9 +216,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
+@@ -227,9 +225,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
  PRODUCT_EXTRA_RECOVERY_KEYS += \
      vendor/lineage/build/target/product/security/lineage
  
@@ -395,10 +395,10 @@ index 63586c98..0d84ad5a 100644
  -include $(WORKSPACE)/build_env/image-auto-bits.mk
  -include vendor/lineage/config/partner_gms.mk
 diff --git a/config/crdroid.mk b/config/crdroid.mk
-index 21324451..4e6db133 100644
+index b841de7c..66299fbc 100644
 --- a/config/crdroid.mk
 +++ b/config/crdroid.mk
-@@ -30,13 +30,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
+@@ -31,13 +31,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
      ro.input.video_enabled=false
  
  # Blurs
@@ -434,7 +434,7 @@ index 00000000..66221945
 +LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
 diff --git a/config/version.mk b/config/version.mk
 deleted file mode 100644
-index cf1905e2..00000000
+index b505cffb..00000000
 --- a/config/version.mk
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -442,13 +442,28 @@ index cf1905e2..00000000
 -PRODUCT_VERSION_MINOR = 0
 -
 -# Increase CR Version with each major release.
--CR_VERSION := 9.7
+-CR_VERSION := 9.8
 -
 -# Internal version
 -LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
 -
 -# Display version
 -LINEAGE_DISPLAY_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(LINEAGE_BUILD)-v$(CR_VERSION)
+diff --git a/overlay/common/packages/apps/Settings/res/values/config.xml b/overlay/common/packages/apps/Settings/res/values/config.xml
+index 635d6c19..05d0eebf 100644
+--- a/overlay/common/packages/apps/Settings/res/values/config.xml
++++ b/overlay/common/packages/apps/Settings/res/values/config.xml
+@@ -32,10 +32,6 @@
+     <string name="config_wallpaper_picker_class" translatable="false">com.android.customization.picker.CustomizationPickerActivity</string>
+     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
+     <string name="config_styles_and_wallpaper_picker_class" translatable="false">com.android.customization.picker.CustomizationPickerActivity</string>
+-    <!-- Action name for the wallpaper picker activity. -->
+-    <string name="config_wallpaper_picker_action" translatable="false">android.intent.action.MAIN</string>
+-    <!-- Action name for the styles & wallpaper picker activity. -->
+-    <string name="config_styles_and_wallpaper_picker_action" translatable="false">android.intent.action.MAIN</string>
+ 
+     <!-- Whether memory from app_info_settings is available or not. -->
+     <bool name="config_show_app_info_settings_memory">true</bool>
 diff --git a/prebuilt/common/bin/backuptool.sh b/prebuilt/common/bin/backuptool.sh
 index 9c3dbbbe..9b86b623 100755
 --- a/prebuilt/common/bin/backuptool.sh
@@ -476,10 +491,10 @@ index 16ceab39..bb3f894a 100755
    return 2
  fi
 diff --git a/prebuilt/common/etc/apns-conf.xml b/prebuilt/common/etc/apns-conf.xml
-index cfe5044d..4473bd18 100644
+index 7b31ea55..51c0b970 100644
 --- a/prebuilt/common/etc/apns-conf.xml
 +++ b/prebuilt/common/etc/apns-conf.xml
-@@ -2892,6 +2892,9 @@
+@@ -2894,6 +2894,9 @@
    <apn carrier="NifMo LTE" mcc="440" mnc="10" apn="mda.nifty.com" user="mda@nifty" password="nifty" authtype="3" type="default,supl" />
    <apn carrier="OCN 3G" mcc="440" mnc="10" apn="3g-d-2.ocn.ne.jp" user="mobileid@ocn" password="mobile" authtype="2" type="default,supl" />
    <apn carrier="OCN LTE" mcc="440" mnc="10" apn="lte-d.ocn.ne.jp" user="mobileid@ocn" password="mobile" authtype="2" type="default,supl" />
@@ -489,7 +504,7 @@ index cfe5044d..4473bd18 100644
    <apn carrier="So-net" mcc="440" mnc="10" apn="so-net.jp" user="nuro" password="nuro" authtype="2" type="default,supl" />
    <apn carrier="U-mobile" mcc="440" mnc="10" apn="umobile.jp" user="umobile@umobile.jp" password="umobile" authtype="3" type="default,supl" />
    <apn carrier="U-mobile Max" mcc="440" mnc="10" apn="dm.jplat.net" user="umobile@umobile.jp" password="umobile" authtype="3" type="default,supl" />
-@@ -2920,6 +2923,7 @@
+@@ -2922,6 +2925,7 @@
    <apn carrier="楽天モバイル" mcc="440" mnc="10" apn="rmobile.jp" user="rm" password="0000" authtype="3" type="default,supl" />
    <apn carrier="楽天モバイル" mcc="440" mnc="10" apn="vdm.jp" user="rakuten@vdm" password="vrkt" authtype="3" type="default,supl" />
    <apn carrier="IMS" mcc="440" mnc="10" apn="ims" type="ims" protocol="IPV6" />
@@ -497,7 +512,7 @@ index cfe5044d..4473bd18 100644
    <apn carrier="Y!mobile" mcc="440" mnc="20" apn="plus.acs.jp" user="ym" password="ym" mmsc="http://mms-s" mmsproxy="andmms.plusacs.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
    <apn carrier="andoworld" mcc="440" mnc="20" apn="andoworld.softbank.ne.jp" mmsc="http://mms/" mmsproxy="andmms.softbank.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
    <apn carrier="fourgsmartphone" mcc="440" mnc="20" apn="fourgsmartphone" user="" password="" mmsc="http://mms/" mmsproxy="andmms.softbank.ne.jp" mmsport="8080" authtype="2" type="default,supl,mms" />
-@@ -2932,8 +2936,15 @@
+@@ -2934,8 +2938,15 @@
    <apn carrier="smile.world" mcc="440" mnc="20" apn="smile.world" user="dna1trop" password="so2t3k3m2a" mmsc="http://mms/" mmsproxy="smilemms.softbank.ne.jp" mmsport="8080" authtype="1" type="default,supl,mms" />
    <apn carrier="IMS" mcc="440" mnc="20" apn="IMS" type="ims" protocol="IPV6" />
    <apn carrier="U-mobile Super" mcc="440" mnc="20" apn="plus.acs.jp" user="ym" password="ym" authtype="2" type="default,supl" />
