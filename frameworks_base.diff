@@ -97,7 +97,7 @@ index e0622fa96e12..bdba41c1fccb 100644
 -        if (Arrays.asList(featuresPixelOthers).contains(name)) return true;
          return mHasSystemFeatureCache.query(new HasSystemFeatureQuery(name, version));
      }
-
+ 
 diff --git a/core/java/android/app/Instrumentation.java b/core/java/android/app/Instrumentation.java
 index 44cbcd62bcb6..2fa3a7ecb7dd 100644
 --- a/core/java/android/app/Instrumentation.java
@@ -148,7 +148,7 @@ index fc2c416343c0..719fa719a420 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index d6008a2762b4..000000000000
+index bc2ae012510e..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
 @@ -1,423 +0,0 @@
@@ -334,8 +334,8 @@ index d6008a2762b4..000000000000
 -        propsToChangePixel7Pro.put("PRODUCT", "cheetah");
 -        propsToChangePixel7Pro.put("HARDWARE", "cheetah");
 -        propsToChangePixel7Pro.put("MODEL", "Pixel 7 Pro");
--        propsToChangePixel7Pro.put("ID", "TQ3A.230805.001");
--        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ3A.230805.001/10316531:user/release-keys");
+-        propsToChangePixel7Pro.put("ID", "TQ3A.230901.001");
+-        propsToChangePixel7Pro.put("FINGERPRINT", "google/cheetah/cheetah:13/TQ3A.230901.001/10750268:user/release-keys");
 -        propsToChangePixel5 = new HashMap<>();
 -        propsToChangePixel5.put("BRAND", "google");
 -        propsToChangePixel5.put("MANUFACTURER", "Google");
@@ -343,8 +343,8 @@ index d6008a2762b4..000000000000
 -        propsToChangePixel5.put("PRODUCT", "redfin");
 -        propsToChangePixel5.put("HARDWARE", "redfin");
 -        propsToChangePixel5.put("MODEL", "Pixel 5");
--        propsToChangePixel5.put("ID", "TQ3A.230805.001");
--        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ3A.230805.001/10316531:user/release-keys");
+-        propsToChangePixel5.put("ID", "TQ3A.230901.001");
+-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ3A.230901.001/10750268:user/release-keys");
 -        propsToChangePixelXL = new HashMap<>();
 -        propsToChangePixelXL.put("BRAND", "google");
 -        propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -2457,7 +2457,7 @@ index 034964cec5f3..7c8d0d68eb21 100644
      <string name="parallel_space_badge_label" translatable="false">%1$s</string>
  
 diff --git a/core/res/res/values/cr_symbols.xml b/core/res/res/values/cr_symbols.xml
-index 90e0a7b815ee..50b21fac1fd5 100644
+index a3936d175499..327edfba2937 100644
 --- a/core/res/res/values/cr_symbols.xml
 +++ b/core/res/res/values/cr_symbols.xml
 @@ -93,9 +93,6 @@
