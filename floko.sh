@@ -2,10 +2,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 if [ $# = 1 ]; then
-	build_home=$1
+    if [ $(echo $1 | sed -e 's/ //g' | rev | cut -c 1 ) == "/" ]; then
+        build_home=$(echo $1 | rev | sed -e 's@/@@' | rev )
+    else
+        build_home=$1
+    fi
+elif [ -f $ANDROID_BUILD_TOP/.repo/manifests/snippets/crdroid.xml ]; then
+	build_home=$ANDROID_BUILD_TOP
 else
 	build_home="${HOME}/android/floko"
 fi
+echo $build_home
 patch_dir="$(pwd)"
 
 apply_patch() {
