@@ -1,25 +1,25 @@
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 2d51611..cb1b5dc 100644
+index a4dbfaa..a322962 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
-@@ -225,7 +225,7 @@
+@@ -257,7 +257,7 @@
                  android:resource="@string/summary_empty" />
          </activity-alias> -->
  
 -        <!-- Anonymous Statistics -->
 +        <!-- Anonymous Statistics
-         <receiver android:name=".lineagestats.ReportingServiceManager"
+         <receiver
+             android:name=".lineagestats.ReportingServiceManager"
              android:enabled="true"
-             android:exported="false"
-@@ -234,7 +234,7 @@
+@@ -267,7 +267,7 @@
                  <action android:name="android.intent.action.BOOT_COMPLETED" />
                  <action android:name="org.lineageos.lineageparts.action.TRIGGER_REPORT_METRICS" />
              </intent-filter>
 -        </receiver>
 +        </receiver> -->
  
-         <service android:label="ReportingService"
-             android:enabled="true"
+         <service
+             android:name=".lineagestats.ReportingService"
 diff --git a/res/drawable/ic_counter.xml b/res/drawable/ic_counter.xml
 deleted file mode 100644
 index fd8f0b5..0000000
@@ -80,10 +80,10 @@ index 04d576c..b0b8668 100644
      <Preference
          android:title="@string/preview_data_title"
 diff --git a/res/xml/parts_catalog.xml b/res/xml/parts_catalog.xml
-index aaacb17..9f53245 100644
+index ad6781f..1070cb1 100644
 --- a/res/xml/parts_catalog.xml
 +++ b/res/xml/parts_catalog.xml
-@@ -70,10 +70,10 @@
+@@ -75,10 +75,10 @@
            android:fragment="org.lineageos.lineageparts.statusbar.StatusBarSettings"
            lineage:xmlRes="@xml/status_bar_settings" />-->
  
