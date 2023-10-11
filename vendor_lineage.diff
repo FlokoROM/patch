@@ -350,7 +350,7 @@ index 2b3cdd7b..00000000
 -if __name__ == "__main__":
 -    main()
 diff --git a/config/common.mk b/config/common.mk
-index 5daece13..7390728d 100644
+index a797c010..611c3b08 100644
 --- a/config/common.mk
 +++ b/config/common.mk
 @@ -2,9 +2,8 @@
@@ -383,7 +383,7 @@ index 5daece13..7390728d 100644
  
  PRODUCT_COPY_FILES += \
      vendor/lineage/prebuilt/common/etc/init/init.lineage-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.lineage-updater.rc
-@@ -227,9 +225,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
+@@ -232,9 +230,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
  PRODUCT_EXTRA_RECOVERY_KEYS += \
      vendor/lineage/build/target/product/security/lineage
  
@@ -434,7 +434,7 @@ index 00000000..66221945
 +LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
 diff --git a/config/version.mk b/config/version.mk
 deleted file mode 100644
-index b505cffb..00000000
+index bd895733..00000000
 --- a/config/version.mk
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -442,7 +442,7 @@ index b505cffb..00000000
 -PRODUCT_VERSION_MINOR = 0
 -
 -# Increase CR Version with each major release.
--CR_VERSION := 9.9
+-CR_VERSION := 9.10
 -
 -# Internal version
 -LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
