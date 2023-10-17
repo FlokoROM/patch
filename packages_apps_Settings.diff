@@ -3364,7 +3364,7 @@ index defeffbfba..d85d65b386 100644
          } else {
              final String title = mContext.getString(R.string.unlock_set_unlock_launch_picker_title);
 diff --git a/src/com/android/settings/security/SecurityAdvancedSettings.java b/src/com/android/settings/security/SecurityAdvancedSettings.java
-index ca10f6df57..f716064a6a 100644
+index 61b013b141..66da69d84a 100644
 --- a/src/com/android/settings/security/SecurityAdvancedSettings.java
 +++ b/src/com/android/settings/security/SecurityAdvancedSettings.java
 @@ -27,8 +27,6 @@ import android.app.settings.SettingsEnums;
@@ -3376,15 +3376,15 @@ index ca10f6df57..f716064a6a 100644
  
  import com.android.settings.R;
  import com.android.settings.biometrics.combination.CombinedBiometricProfileStatusPreferenceController;
-@@ -40,7 +38,6 @@ import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
- import com.android.settings.search.BaseSearchIndexProvider;
+@@ -41,7 +39,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
+ import com.android.settings.security.applock.AppLockSettingsPreferenceController;
  import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
  import com.android.settings.widget.PreferenceCategoryController;
 -import com.android.settings.Utils;
  import com.android.settingslib.core.AbstractPreferenceController;
  import com.android.settingslib.core.lifecycle.Lifecycle;
  import com.android.settingslib.drawer.CategoryKey;
-@@ -146,31 +143,18 @@ public class SecurityAdvancedSettings extends DashboardFragment {
+@@ -149,31 +146,18 @@ public class SecurityAdvancedSettings extends DashboardFragment {
          final List<AbstractPreferenceController> controllers = new ArrayList<>();
          controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
  
