@@ -148,10 +148,10 @@ index fc2c416343c0..719fa719a420 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index b4ae17016362..000000000000
+index 4fca66d96be0..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,408 +0,0 @@
+@@ -1,409 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2023 crDroid Android Project
@@ -426,6 +426,7 @@ index b4ae17016362..000000000000
 -                setPropValue(key, value);
 -            }
 -            if (packageName.equals("com.google.android.gms")) {
+-                setPropValue("TIME", System.currentTimeMillis());
 -                final String processName = Application.getProcessName();
 -                if (processName.toLowerCase().contains("unstable")
 -                    || processName.toLowerCase().contains("instrumentation")) {
