@@ -277,10 +277,10 @@ index 1363554..6faeb89 100644
      public static final String ACTION_LAUNCH_SERVICE =
              "org.lineageos.lineageparts.action.TRIGGER_REPORT_METRICS";
 diff --git a/src/org/lineageos/lineageparts/lineagestats/StatsUploadJobService.java b/src/org/lineageos/lineageparts/lineagestats/StatsUploadJobService.java
-index aa73abd..96a5924 100644
+index 02e20f5..e19c2e5 100644
 --- a/src/org/lineageos/lineageparts/lineagestats/StatsUploadJobService.java
 +++ b/src/org/lineageos/lineageparts/lineagestats/StatsUploadJobService.java
-@@ -42,18 +42,15 @@ import java.util.Map;
+@@ -34,18 +34,15 @@ import java.util.concurrent.Executors;
  
  public class StatsUploadJobService extends JobService {
  
@@ -303,50 +303,36 @@ index aa73abd..96a5924 100644
      public static final String KEY_COUNTRY = "country";
      public static final String KEY_CARRIER = "carrier";
      public static final String KEY_CARRIER_ID = "carrierId";
-@@ -104,15 +101,12 @@ public class StatsUploadJobService extends JobService {
+@@ -103,10 +100,7 @@ public class StatsUploadJobService extends JobService {
  
-         @Override
-         protected Boolean doInBackground(Void... params) {
--
-+/*
-             PersistableBundle extras = mJobParams.getExtras();
- 
-             String deviceId = extras.getString(KEY_UNIQUE_ID);
-             String deviceName = extras.getString(KEY_DEVICE_NAME);
--            String deviceCrVersion = extras.getString(KEY_CR_VERSION);
--            String deviceBuildDate = extras.getString(KEY_BUILD_DATE);
--            String deviceAndroidVersion = extras.getString(KEY_ANDROID_VERSION);
--            String deviceTag = extras.getString(KEY_TAG);
-+            String deviceVersion = extras.getString(KEY_VERSION);
-             String deviceCountry = extras.getString(KEY_COUNTRY);
-             String deviceCarrier = extras.getString(KEY_CARRIER);
-             String deviceCarrierId = extras.getString(KEY_CARRIER_ID);
-@@ -121,12 +115,11 @@ public class StatsUploadJobService extends JobService {
-             int jobType = extras.getInt(KEY_JOB_TYPE, -1);
-             if (!isCancelled()) {
-                 switch (jobType) {
--                    case JOB_TYPE_CRDROID:
-+                    case JOB_TYPE_LINEAGEORG:
-                         try {
-                             JSONObject json = buildStatsRequest(deviceId, deviceName,
--                                    deviceCrVersion, deviceBuildDate, deviceAndroidVersion, deviceTag,
--                                    deviceCountry, deviceCarrier, deviceCarrierId);
--                            success = uploadToCrdroid(json);
-+                                    deviceVersion, deviceCountry, deviceCarrier, deviceCarrierId);
-+                            success = uploadToLineage(json);
-                         } catch (IOException | JSONException e) {
-                             Log.e(TAG, "Could not upload stats checkin to community server", e);
-                             success = false;
-@@ -138,6 +131,8 @@ public class StatsUploadJobService extends JobService {
-                 Log.d(TAG, "job id " + mJobParams.getJobId() + ", has finished with success="
-                         + success);
-             return success;
-+*/
-+            return true;
-         }
- 
-         @Override
-@@ -147,25 +142,21 @@ public class StatsUploadJobService extends JobService {
+                 String deviceId = extras.getString(KEY_UNIQUE_ID);
+                 String deviceName = extras.getString(KEY_DEVICE_NAME);
+-                String deviceCrVersion = extras.getString(KEY_CR_VERSION);
+-                String deviceBuildDate = extras.getString(KEY_BUILD_DATE);
+-                String deviceAndroidVersion = extras.getString(KEY_ANDROID_VERSION);
+-                String deviceTag = extras.getString(KEY_TAG);
++                String deviceVersion = extras.getString(KEY_VERSION);
+                 String deviceCountry = extras.getString(KEY_COUNTRY);
+                 String deviceCarrier = extras.getString(KEY_CARRIER);
+                 String deviceCarrierId = extras.getString(KEY_CARRIER_ID);
+@@ -115,12 +109,12 @@ public class StatsUploadJobService extends JobService {
+                 int jobType = extras.getInt(KEY_JOB_TYPE, -1);
+                 if (!mCancelled) {
+                     switch (jobType) {
+-                        case JOB_TYPE_CRDROID:
++                        case JOB_TYPE_LINEAGEORG:
+                             try {
+                                 JSONObject json = buildStatsRequest(deviceId, deviceName,
+-                                        deviceCrVersion, deviceBuildDate, deviceAndroidVersion,
+-                                        deviceTag, deviceCountry, deviceCarrier, deviceCarrierId);
+-                                success = uploadToCrdroid(json);
++                                        deviceVersion, deviceCountry, deviceCarrier,
++                                        deviceCarrierId);
++                                success = uploadToLineage(json);
+                             } catch (IOException | JSONException e) {
+                                 Log.e(TAG, "Could not upload stats checkin to community server", e);
+                             }
+@@ -146,25 +140,21 @@ public class StatsUploadJobService extends JobService {
          }
      }
  
@@ -376,7 +362,7 @@ index aa73abd..96a5924 100644
          URL url = new URL(uri.toString());
          HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
          try {
-@@ -175,12 +166,11 @@ public class StatsUploadJobService extends JobService {
+@@ -174,12 +164,11 @@ public class StatsUploadJobService extends JobService {
              urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
  
              OutputStream os = urlConnection.getOutputStream();
