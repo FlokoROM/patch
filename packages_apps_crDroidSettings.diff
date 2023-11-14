@@ -50,7 +50,7 @@ index f78775a6..a4b17b4b 100644
      <string name="crdroid_settings_title">crDroid の設定</string>
      <string name="crdroid_settings_summary">高度な設定</string>
 diff --git a/res/values/cr_strings.xml b/res/values/cr_strings.xml
-index e83cb0c2..63c0acb1 100644
+index 557412b..dbd8676 100644
 --- a/res/values/cr_strings.xml
 +++ b/res/values/cr_strings.xml
 @@ -17,10 +17,10 @@
@@ -90,15 +90,15 @@ index e83cb0c2..63c0acb1 100644
      <!-- Sites crDroid -->
      <string name="crdroid_source_title">GitHub</string>
      <string name="crdroid_source_summary">We love open source, check us out</string>
-@@ -634,6 +640,7 @@
+@@ -635,6 +641,7 @@
  
      <!-- Device Info screen. crDroid legal. -->
      <string name="crdroid_license_title">crDroid legal</string>
 +    <string name="floko_license_title">FlokoROM legal</string>
  
      <!-- Quick Settings brightness slider -->
-     <string name="qs_show_brightness_slider_title">Brightness slider</string>
-@@ -1194,10 +1201,6 @@
+     <string name="qs_brightness_slider_category">Brightness slider</string>
+@@ -1200,10 +1207,6 @@
      <string name="floating_rotation_button_title">Floating rotate button</string>
      <string name="floating_rotation_button_summary">Show a floating rotate button when device is rotated</string>
  
@@ -109,7 +109,7 @@ index e83cb0c2..63c0acb1 100644
      <!-- Captive portal -->
      <string name="captive_portal_title">Connectivity check</string>
      <string name="captive_portal_summary">Determine if the device can connect to the internet, by contacting Google. Also used to detect captive portals.</string>
-@@ -1215,11 +1218,6 @@
+@@ -1221,11 +1224,6 @@
      <string name="wifi_standard_icon_title">WiFi standard</string>
      <string name="wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
  
