@@ -20,14 +20,14 @@ index d0318770..01b2f448 100644
  # LineageOS Platform SDK Version
  ADDITIONAL_SYSTEM_PROPERTIES += \
 diff --git a/build/tools/changelog.sh b/build/tools/changelog.sh
-index 888f5a05..ff5b07bd 100755
+index 46ccb87e..ff5b07bd 100755
 --- a/build/tools/changelog.sh
 +++ b/build/tools/changelog.sh
 @@ -37,7 +37,7 @@ else
  	fi
  fi
- 
--REPO_LIST="$(repo list --path | sed 's|^vendor/crDroidOTA$||')"
+
+-REPO_LIST="$(cat .repo/project.list | sed '\?^vendor/crDroidOTA?d')"
 +REPO_LIST="$(repo list --path)"
  for i in $(seq $changelog_days); do
      After_Date=`date --date="$i days ago" +%m-%d-%Y`
