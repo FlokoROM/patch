@@ -148,7 +148,7 @@ index fc2c416343c0..719fa719a420 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index 652b48a02b0a..000000000000
+index 2c9329a2319a..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
 @@ -1,405 +0,0 @@
@@ -535,13 +535,13 @@ index 652b48a02b0a..000000000000
 -
 -    private static void spoofBuildGms() {
 -        // Alter build parameters to Nexus 6P for avoiding hardware attestation enforcement
--        setPropValue("DEVICE", "bullhead");
--        setPropValue("ID", "OPR6.170623.013");
--        setPropValue("FINGERPRINT", "google/bullhead/bullhead:8.0.0/OPR6.170623.013/4283548:user/release-keys");
--        setPropValue("MODEL", "Nexus 5X");
--        setPropValue("PRODUCT", "bullhead");
--        setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.N);
--        setVersionFieldString("SECURITY_PATCH", "2017-08-05");
+-        setPropValue("BRAND", "Xiaomi");
+-        setPropValue("MANUFACTURER", "Xiaomi");
+-        setPropValue("DEVICE", "ferrari");
+-        setPropValue("FINGERPRINT", "Xiaomi/ferrari/ferrari:5.0.2/LRX22G/V6.4.10.0.LXIMICB:user/release-keys");
+-        setPropValue("MODEL", "Mi 4i");
+-        setPropValue("PRODUCT", "ferrari");
+-        setVersionFieldString("SECURITY_PATCH", "2019-08-05");
 -    }
 -
 -    private static boolean isCallerSafetyNet() {
