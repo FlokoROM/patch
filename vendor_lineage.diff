@@ -434,7 +434,7 @@ index 00000000..66221945
 +LINEAGE_DISPLAY_VERSION := Floko-v$(FLOKO_VERSION)-$(LINEAGE_BUILD)
 diff --git a/config/version.mk b/config/version.mk
 deleted file mode 100644
-index e31d5cef..00000000
+index ec1eb875..00000000
 --- a/config/version.mk
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -442,7 +442,7 @@ index e31d5cef..00000000
 -PRODUCT_VERSION_MINOR = 0
 -
 -# Increase CR Version with each major release.
--CR_VERSION := 9.11
+-CR_VERSION := 9.12
 -
 -# Internal version
 -LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
