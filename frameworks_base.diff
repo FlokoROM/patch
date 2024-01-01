@@ -3239,17 +3239,17 @@ index 83def7645c13..d03148cee335 100644
  
      @Override
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index a29865214e6d..9d5ebef691b4 100644
+index 18a8b7c77a33..faf7da35813a 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -177,7 +177,6 @@ java_library_static {
+@@ -174,7 +174,6 @@ java_library_static {
          "motorola.hardware.health-V1.0-java",
          "overlayable_policy_aidl-java",
          "com.android.sysprop.watchdog",
 -        "faceunlock_framework",
-         "kotlin-stdlib",
-         "kotlinx_coroutines_android",
-         "kotlinx_coroutines",
+     ],
+     javac_shard_size: 50,
+ }
 diff --git a/services/core/java/com/android/server/biometrics/AuthSession.java b/services/core/java/com/android/server/biometrics/AuthSession.java
 index 2af0af945d3c..41ca13f5d5f5 100644
 --- a/services/core/java/com/android/server/biometrics/AuthSession.java
