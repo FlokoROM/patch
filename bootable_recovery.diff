@@ -1,16 +1,16 @@
 diff --git a/recovery.cpp b/recovery.cpp
-index 79ff35d5..a96e4c09 100644
+index e5cdd0ab..a5afde87 100644
 --- a/recovery.cpp
 +++ b/recovery.cpp
-@@ -880,7 +880,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
+@@ -886,7 +886,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
    std::string ver = android::base::GetProperty("ro.modversion", "");
  
    std::vector<std::string> title_lines = {
 -    "Version " + android::base::GetProperty("ro.crdroid.build.version", "(unknown)"),
 +    "Version " + android::base::GetProperty("ro.floko.build.version", "(unknown)"),
    };
+   title_lines.push_back("Product name - " + android::base::GetProperty("ro.product.device", ""));
    if (android::base::GetBoolProperty("ro.build.ab_update", false)) {
-     std::string slot = android::base::GetProperty("ro.boot.slot_suffix", "");
 diff --git a/recovery_ui/include/recovery_ui/screen_ui.h b/recovery_ui/include/recovery_ui/screen_ui.h
 index 0e7420f6..8fb94949 100644
 --- a/recovery_ui/include/recovery_ui/screen_ui.h
