@@ -148,10 +148,10 @@ index fc2c416343c0..719fa719a420 100644
           * @hide
 diff --git a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java b/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 deleted file mode 100644
-index e0e36b2d4e16..000000000000
+index a709985d1a2d..000000000000
 --- a/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 +++ /dev/null
-@@ -1,427 +0,0 @@
+@@ -1,431 +0,0 @@
 -/*
 - * Copyright (C) 2020 The Pixel Experience Project
 - *               2021-2024 crDroid Android Project
@@ -216,7 +216,6 @@ index e0e36b2d4e16..000000000000
 -            "com.google.android.apps.customization.pixel",
 -            "com.google.android.apps.emojiwallpaper",
 -            "com.google.android.apps.privacy.wildlife",
--            "com.google.android.apps.subscriptions.red",
 -            "com.google.android.apps.wallpaper",
 -            "com.google.android.apps.wallpaper.pixel",
 -            "com.google.android.googlequicksearchbox",
@@ -239,12 +238,15 @@ index e0e36b2d4e16..000000000000
 -            "com.google.android.apps.pixelmigrate",
 -            "com.google.android.apps.recorder",
 -            "com.google.android.apps.restore",
+-            "com.google.android.apps.subscriptions.red",
 -            "com.google.android.apps.tachyon",
 -            "com.google.android.apps.tycho",
 -            "com.google.android.apps.wearables.maestro.companion",
 -            "com.google.android.apps.youtube.kids",
 -            "com.google.android.apps.youtube.music",
 -            "com.google.android.as",
+-            "com.google.android.backup",
+-            "com.google.android.backuptransport",
 -            "com.google.android.dialer",
 -            "com.google.android.euicc",
 -            "com.google.android.setupwizard",
@@ -323,6 +325,7 @@ index e0e36b2d4e16..000000000000
 -
 -    private static volatile boolean sIsGms = false;
 -    private static volatile boolean sIsFinsky = false;
+-    private static volatile boolean sIsExcluded = false;
 -
 -    static {
 -        propsToKeep = new HashMap<>();
@@ -337,8 +340,8 @@ index e0e36b2d4e16..000000000000
 -        propsToChangePixel8Pro.put("PRODUCT", "husky");
 -        propsToChangePixel8Pro.put("HARDWARE", "husky");
 -        propsToChangePixel8Pro.put("MODEL", "Pixel 8 Pro");
--        propsToChangePixel8Pro.put("ID", "UQ1A.240205.004");
--        propsToChangePixel8Pro.put("FINGERPRINT", "google/husky/husky:14/UQ1A.240205.004/11269751:user/release-keys");
+-        propsToChangePixel8Pro.put("ID", "AP1A.240305.019.A1");
+-        propsToChangePixel8Pro.put("FINGERPRINT", "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys");
 -        propsToChangePixel5a = new HashMap<>();
 -        propsToChangePixel5a.put("BRAND", "google");
 -        propsToChangePixel5a.put("MANUFACTURER", "Google");
@@ -346,8 +349,8 @@ index e0e36b2d4e16..000000000000
 -        propsToChangePixel5a.put("PRODUCT", "barbet");
 -        propsToChangePixel5a.put("HARDWARE", "barbet");
 -        propsToChangePixel5a.put("MODEL", "Pixel 5a");
--        propsToChangePixel5a.put("ID", "UQ1A.240205.002");
--        propsToChangePixel5a.put("FINGERPRINT", "google/barbet/barbet:14/UQ1A.240205.002/11224170:user/release-keys");
+-        propsToChangePixel5a.put("ID", "AP1A.240305.019.A1");
+-        propsToChangePixel5a.put("FINGERPRINT", "google/barbet/barbet:14/AP1A.240305.019.A1/11445699:user/release-keys");
 -        propsToChangePixelXL = new HashMap<>();
 -        propsToChangePixelXL.put("BRAND", "google");
 -        propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -402,6 +405,7 @@ index e0e36b2d4e16..000000000000
 -
 -            if (Arrays.asList(packagesToKeep).contains(packageName) ||
 -                    packageName.startsWith("com.google.android.GoogleCamera")) {
+-                sIsExcluded = true;
 -                return;
 -            }
 -
@@ -556,14 +560,14 @@ index e0e36b2d4e16..000000000000
 -
 -    private static void spoofBuildGms() {
 -        // Alter build parameters to avoid hardware attestation enforcement
--        setPropValue("BRAND", "Hisense");
--        setPropValue("MANUFACTURER", "Hisense");
--        setPropValue("DEVICE", "HS6735MT");
--        setPropValue("ID", "MRA58K");
--        setPropValue("FINGERPRINT", "Hisense/F30/HS6735MT:6.0/MRA58K/L1228.6.01.01:user/release-keys");
--        setPropValue("MODEL", "Hisense F30");
--        setPropValue("PRODUCT", "F30");
--        setVersionFieldString("SECURITY_PATCH", "2016-02-01");
+-        setPropValue("BRAND", "motorola");
+-        setPropValue("MANUFACTURER", "motorola");
+-        setPropValue("DEVICE", "griffin");
+-        setPropValue("ID", "MCC24.246-37");
+-        setPropValue("FINGERPRINT", "motorola/griffin_retcn/griffin:6.0.1/MCC24.246-37/42:user/release-keys");
+-        setPropValue("MODEL", "XT1650-05");
+-        setPropValue("PRODUCT", "griffin_retcn");
+-        setVersionFieldString("SECURITY_PATCH", "2016-07-01");
 -    }
 -
 -    private static boolean isCallerSafetyNet() {
@@ -573,7 +577,7 @@ index e0e36b2d4e16..000000000000
 -
 -    public static void onEngineGetCertificateChain() {
 -        // Check stack for SafetyNet or Play Integrity
--        if (isCallerSafetyNet() || sIsFinsky) {
+-        if ((isCallerSafetyNet() || sIsFinsky) && !sIsExcluded) {
 -            Log.i(TAG, "Blocked key attestation sIsGms=" + sIsGms + " sIsFinsky=" + sIsFinsky);
 -            throw new UnsupportedOperationException();
 -        }
